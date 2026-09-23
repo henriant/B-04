@@ -1,6 +1,11 @@
 # B-04
 Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
+Introduksjon til prosjektet:
+
+/// Kort forklaring av hva prosjektet gjør samt hvordan man installerer og kjører det.
+
+
 KI avtale:
 
 Vi har lyst til å lære noe fra dette faget, så vi kommer til å bruke KI som er verktøy til å hjelpe oss når vi sitter fast

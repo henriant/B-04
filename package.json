@@ -1,0 +1,17 @@
+{
+  "name": "backlog-defeater",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Monorepo for BacklogDefeater: webapp (RedwoodSDK/pnpm) + mobilapp (Expo/npm)",
+  "scripts": {
+    "web:install": "pnpm --dir Web install",
+    "web:dev": "pnpm --dir Web dev",
+    "web:build": "pnpm --dir Web build",
+    "web:release": "pnpm --dir Web release",
+    "mobile:install": "npm --prefix Mobile install",
+    "mobile:start": "npm --prefix Mobile run start",
+    "mobile:android": "npm --prefix Mobile run android",
+    "mobile:ios": "npm --prefix Mobile run ios",
+    "install:all": "npm run web:install && npm run mobile:install"
+  }
+}
