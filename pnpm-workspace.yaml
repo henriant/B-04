@@ -3,6 +3,7 @@
 # carry their own build-script approvals.
 packages:
   - Web
+  - Mobile
 
 allowBuilds:
   esbuild: true
