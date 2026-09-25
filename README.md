@@ -5,6 +5,18 @@ Introduksjon til prosjektet:
 
 /// Kort forklaring av hva prosjektet gjør samt hvordan man installerer og kjører det.
 
+For å sette opp prosjektene må du kjøre:
+- pnpm install i rot mappen (B-04)
+
+For å kjøre webappen må du:
+- cd inn i ./Web/
+- pnpm run dev
+For å slutte den må du:
+- CTRL+C i terminalen
+
+For å kjøre mobilappen må du:
+- cd inn i ./Mobile/
+- npx expo start (--android eller --IOS for å velge emulator)
 
 KI avtale:
 
