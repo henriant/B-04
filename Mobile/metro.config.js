@@ -2,7 +2,7 @@ const { getDefaultConfig } = require("expo/metro-config");
 const path = require("path");
 
 // Finne mobile-mappen og roten av monorepo
-const projectRoot = _dirname;
+const projectRoot = __dirname;
 const workspaceRoot = path.resolve(projectRoot, "..");
 
 const config = getDefaultConfig(projectRoot);
