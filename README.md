@@ -2,10 +2,11 @@
 Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
+
 Dokument:
 https://docs.google.com/document/d/1xPGiPMfXj1Dv0fjIMI9oQ7GuXVQfSy6UwPikrsie6rE/edit?usp=sharing
 
-/// Kort forklaring av hva prosjektet gjør samt hvordan man installerer og kjører det.
+/// Kort forklaring av hva prosjektet gjør
 
 For å sette opp prosjektene må du kjøre:
 - pnpm install i rot mappen (B-04)
@@ -29,6 +30,7 @@ Hvis vi ikke vet hvordan å gjøre noe, spør vi KI om å forklare det til oss, 
 Vi kommer ikke til å spørre KI om å gjøre ting for oss, siden det kan hende den tar med ting som blir for avansert for oss eller som ikke er del av pensum
 
 --------------------------- Kravspekk ---------------------------
+
 BACKLOG DEFEATER
 
 Frontend:
