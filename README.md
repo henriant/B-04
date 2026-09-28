@@ -62,9 +62,7 @@ Backend:
         - UserID, brukernavn, hashet passord, liste med spill med egen statistikk, en lagret kopi av alle spillene en bruker har i biblioteket for å få dette tilknyttet brukerens liste (kan være vi finner en bedre løsning på dette senere)
 
 
-<<<<<<< HEAD
-
-Pages
+--------------------------- Pages ---------------------------
 -LogIn.tsx 
     vannlig logg in skjema
 
@@ -89,8 +87,7 @@ Pages
     Viser en spill som brukeren trykket på: står bilde av spill med informasjon om spill
 
 
-
-Components
+--------------------------- Components ---------------------------
 -Layout.tsx -> en ramme for nettsdie (header og footer), alle komponenter blir sendt til App.tsx som barn til Layout.tsx
     vi kan bruke Outlet for å vise komponenter uten å oppdatere hele nettside???
 
@@ -107,20 +104,9 @@ Components
     når noen hover over viser gamecard av spill og når brukeren skal trykke på så blir send til GameInfo.jsx
 
 
-
-
-
-
-
-
-
-
-
-=======
 --------------------------- Ikke Med ---------------------------
 
 - Live progress tracker i spillet
 - Chat funksjon for å snakke med andre
->>>>>>> 65774a202e2a0626a3e2fcb9eadb16e7dd2e6234
 
 
