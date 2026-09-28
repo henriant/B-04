@@ -60,6 +60,7 @@ Backend:
         - UserID, brukernavn, hashet passord, liste med spill med egen statistikk, en lagret kopi av alle spillene en bruker har i biblioteket for å få dette tilknyttet brukerens liste (kan være vi finner en bedre løsning på dette senere)
 
 
+<<<<<<< HEAD
 
 Pages
 -LogIn.tsx 
