@@ -13,5 +13,14 @@
     "mobile:android": "npm --prefix Mobile run android",
     "mobile:ios": "npm --prefix Mobile run ios",
     "install:all": "npm run web:install && npm run mobile:install"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.18.0",
+    "dotenv": "^18.0.4",
+    "drizzle-orm": "1.0.0-rc.4"
+  },
+  "devDependencies": {
+    "drizzle-kit": "1.0.0-rc.4",
+    "tsx": "^4.23.15"
   }
 }
