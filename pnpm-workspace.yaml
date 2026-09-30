@@ -4,6 +4,7 @@
 packages:
   - Web
   - Mobile
+  - backend
 
 allowBuilds:
   esbuild: true

@@ -75,3 +75,4 @@ app.get("/api/top-games", async (req : Request, res : Response, next) => {
 app.listen(5000, () => {
     console.log("Server is running on http://localhost:5000");
 });
+
