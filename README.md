@@ -23,6 +23,11 @@ For å kjøre mobilappen må du:
 For å slutte den må du:
 - CTRL+C i terminalen
 
+For å kjøre lokal server i backend:
+- cd inn i .\backend\
+- npx pnpm dev
+- For å kjøre testen: Åpne http://localhost:5000/api/top-games i browser
+
 KI avtale:
 
 Vi har lyst til å lære noe fra dette faget, så vi kommer til å bruke KI som er verktøy til å hjelpe oss når vi sitter fast
