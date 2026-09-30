@@ -72,45 +72,45 @@ Backend:
 
 --------------------------- Pages ---------------------------
 
--LogIn.tsx 
+- LogIn.tsx 
     vannlig logg in skjema
 
--SignUp.tsx
+- SignUp.tsx
     opprete brukeren
 
--Index.tsx 
+- Index.tsx 
     Når du er ikke logget inn:
         intro til nettsdie
         en knapp for logge inn og en for registrere 
         forskjellig kategorier med forskjellig spill ??
 
--Library.tsx 
+- Library.tsx 
     Når du er logget inn
         Velkom tekst "Hei ..."
         viser liste av alle spill brukeren eier
 
--SearchResults.tsx
+- SearchResults.tsx
     viser alle  resultate som brukeren skrevet i søke felte
 
--GameInfo.tsx
+- GameInfo.tsx
     Viser en spill som brukeren trykket på: står bilde av spill med informasjon om spill
 
 
 --------------------------- Components ---------------------------
 
--Layout.tsx -> en ramme for nettsdie (header og footer), alle komponenter blir sendt til App.tsx som barn til Layout.tsx
+- Layout.tsx -> en ramme for nettsdie (header og footer), alle komponenter blir sendt til App.tsx som barn til Layout.tsx
     vi kan bruke Outlet for å vise komponenter uten å oppdatere hele nettside???
 
--Search.tsx 
+- Search.tsx 
     søk felte
 
--LibraryList.tsx
+- LibraryList.tsx
     liste av spill som brukeren eier
 
--EditLibrary.tsx 
+- EditLibrary.tsx 
     Add/Move knapp for å legge til spill til liste eller slette fra liste
 
--GameCard.tsx
+- GameCard.tsx
     når noen hover over viser gamecard av spill og når brukeren skal trykke på så blir send til GameInfo.jsx
 
 
