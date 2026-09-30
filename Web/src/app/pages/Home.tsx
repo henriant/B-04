@@ -5,7 +5,6 @@ import { Layout } from "../../components/Layout"
 export function Home() {
     return (
         <main>
-            <Layout></Layout>
             <h1>Backlog Defeater</h1>
             <section>
                 <h2>The best place to defeat your video game backlog!</h2>

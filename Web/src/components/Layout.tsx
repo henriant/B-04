@@ -1,30 +1,33 @@
+import type { LayoutProps } from 'rwsdk/router'
+
 // holder på nav-bar og footer som skal gjenbrukes i alle pages
-export function Layout() {
+export function Layout({ children } : LayoutProps) {
     return(
         <div>
             <header>
                 <nav>
                     <ul>
                         <li>
-                            <a href="http://localhost:5173">LOGO</a>
+                            <a href="/">LOGO</a>
                         </li>
                         <li>
-                            <a href="http://localhost:5173">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li>
-                            <a href="./pages/Library.tsx">Library</a>
+                            <a href="/Library">Library</a>
 
                         </li>
                         <li>
-                            <a href="./pages/LogIn.tsx">Log in</a>
+                            <a href="/LogIn">Log in</a>
                         </li>
                         <li>
-                            <a href="./pages/SignUp.tsx">Sign up</a>
+                            <a href="/SignUp">Sign up</a>
                         </li>
                     </ul>
                 </nav>
                 <input placeholder="Search..."></input>
             </header>
+            <main>{children}</main>
             <footer>
                 <p>TEKST</p>
             </footer>
