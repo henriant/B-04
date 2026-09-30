@@ -1,0 +1,1 @@
+// holder på nav-bar og footer som skal gjenbrukes i alle pages
