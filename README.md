@@ -26,7 +26,10 @@ For å slutte den må du:
 For å kjøre lokal server i backend:
 - cd inn i .\backend\
 - npx pnpm dev
-- For å kjøre testen: Åpne http://localhost:5000/api/top-games i browser
+For å kjøre testen: 
+- Åpne http://localhost:5000/api/top-games i browser
+For å slutte den må du:
+- CTRL+C i terminalen
 
 KI avtale:
 
@@ -68,6 +71,7 @@ Backend:
 
 
 --------------------------- Pages ---------------------------
+
 -LogIn.tsx 
     vannlig logg in skjema
 
@@ -93,6 +97,7 @@ Backend:
 
 
 --------------------------- Components ---------------------------
+
 -Layout.tsx -> en ramme for nettsdie (header og footer), alle komponenter blir sendt til App.tsx som barn til Layout.tsx
     vi kan bruke Outlet for å vise komponenter uten å oppdatere hele nettside???
 
