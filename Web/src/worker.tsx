@@ -1,6 +1,6 @@
 import { layout, render, route } from "rwsdk/router";
 import { defineApp } from "rwsdk/worker";
-import { Layout } from "./components/Layout"
+import { Layout } from "./components/pageComponents/Layout"
 
 import { Document } from "@/app/document";
 import { setCommonHeaders } from "@/app/headers";
