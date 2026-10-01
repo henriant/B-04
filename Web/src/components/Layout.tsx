@@ -29,7 +29,32 @@ export function Layout({ children } : LayoutProps) {
             </header>
             <main>{children}</main>
             <footer>
-                <p>TEKST</p>
+                <a href="/">LOGO</a>
+                
+                <section>
+                    <h2>About us</h2>
+                    <ul>
+                        <li>Backlog  Defeater</li>
+                        <li>We use the <a href="https://www.igdb.com/api">IGDB API</a> for game data</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Contact us</h2>
+                        <ul>
+                            <li>E-mail: backlogdefeater@gmail.com</li>
+                        </ul>
+                </section>
+
+                <section>
+                    <h2>Sosial media</h2>
+                    <ul>
+                        <li>Instagram</li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */}
+                        <li>Facebook</li>
+                        <li>TikTok</li>
+                    </ul>
+                </section>
+                
             </footer>
         </div>
     )

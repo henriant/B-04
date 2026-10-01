@@ -2,6 +2,17 @@
 
 export function LogIn() {
     return(
-        <h1>Her kan du logge inn</h1>
+        <>
+            <section>
+                <a href="/LogIn">LOGO</a>
+                <h2>The best place to defeat your video game backlog!</h2>
+                <p>Don't have an account yet? Sign up <a href="/SignUp">here</a></p>
+            </section>
+
+            <form>
+                <input placeholder="Username..."/>
+                <input placeholder="Password"/>
+            </form>
+        </>
     )
 }
