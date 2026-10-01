@@ -2,6 +2,6 @@
 
 export function Library() {
     return(
-        <h1>HEI</h1>
+        <h1>Your owned games</h1>
     )
 }

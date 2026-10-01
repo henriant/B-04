@@ -47,9 +47,9 @@ export function Layout({ children } : LayoutProps) {
                 </section>
 
                 <section>
-                    <h2>Sosial media</h2>
+                    <h2>Social media</h2>
                     <ul>
-                        <li>Instagram</li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */}
+                        <li>Instagram</li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
                         <li>Facebook</li>
                         <li>TikTok</li>
                     </ul>

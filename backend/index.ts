@@ -4,9 +4,8 @@ import cors from "cors";
 
 dotenv.config();
 
-console.log("Initializing server...");
-console.log("Cliend ID exists: ", !!process.env.TWITCH_CLIENT_ID);
-console.log("Client Secret exists: ", !!process.env.TWITCH_CLIENT_SECRET);  
+console.log("Client ID found: ", !!process.env.TWITCH_CLIENT_ID);
+console.log("Client Secret found: ", !!process.env.TWITCH_CLIENT_SECRET);  
 
 
 const app = express();
@@ -43,7 +42,6 @@ async function getTwitchAccessToken() : Promise<string> {
 // Test for å sjekke om serveren svarer i det heletatt
 app.get("/api/top-games", async (req : Request, res : Response, next) => {
     try {
-        console.log("Recieved request at /api/top-games. Fetching token...")
         const accessToken = await getTwitchAccessToken();
         console.log("Token successfully fetched. Connecting to IGDB...")
 
@@ -63,16 +61,16 @@ app.get("/api/top-games", async (req : Request, res : Response, next) => {
         }
 
         const games = await igdbResponse.json();
-        console.log("Data recieved from IGDB. Sending to browser.");
+        console.log("Response from IGDB: OK");
         res.json(games);
 
     }   catch (error: any) {
-        console.error("ERROR IN ROUTE: ", error.message);
+        console.error("ERROR: ", error.message);
         res.status(500).json({ error: error.message });
     }
 });
 
 app.listen(5000, () => {
-    console.log("Server is running on http://localhost:5000");
+    console.log("The 5 top rated games from IGDB: http://localhost:5000/api/top-games");
 });
 

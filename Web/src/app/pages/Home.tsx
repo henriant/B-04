@@ -1,5 +1,3 @@
-import { Layout } from "../../components/Layout"
-
 // Hovedsiden, en introduksjon til nettsiden vår, samt en oppfordring til å opprette bruker eller logge inn.
 
 export function Home() {
@@ -13,8 +11,12 @@ export function Home() {
             <section>
                 <article>
                     <p>Log in to get started!</p>
-                    <button>Log in</button>
-                    <button>Sign up</button>
+                    <form action="/LogIn">
+                        <button>Log in</button>
+                    </form>
+                    <form action="/SignUp">
+                        <button>Sign up</button>
+                    </form>
                 </article>
             </section>
             <section>
