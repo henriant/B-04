@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 24
           cache: "pnpm"
-          cache-dependency-path: Web/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm --dir Web install --frozen-lockfile
