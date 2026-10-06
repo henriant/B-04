@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 type GameCardProps = {
   game: {
-    id: string;
+    id: number;
     name: string;
     total_rating: number;
   };
