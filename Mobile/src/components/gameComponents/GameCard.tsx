@@ -1,12 +1,23 @@
 //     når brukeren hovrer over et spill i search-results eller library vises et gamecard av spillet. og når brukeren trykker på dette, blir dem sendt til GameInfo.tsx
 
+import { View, Text, StyleSheet } from "react-native";
 
-function GameCard({ game }) {
-  return (
-    <div className="game-card">
-      <h3>{game.name}</h3>
-      <p>{game.description}</p>
-      <button onClick={() => window.location.href = `/gameInfo/${game.id}`}>View Details</button>
-    </div>
-  )
+
+type GameCardProps = {
+  game: {
+    id: string;
+    name: string;
+    total_rating: number;
+  };
+};
+
+const GameCard = ({ game }: GameCardProps) => {
+    return(
+        <View>
+            <Text>Title: {game.name}</Text>
+            <Text>Rating: {game.total_rating}</Text>
+        </View>
+    )
 }
+
+export default GameCard;
