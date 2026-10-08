@@ -31,12 +31,6 @@ For å kjøre testen:
 For å slutte den må du:
 - CTRL+C i terminalen
 
-KI avtale:
-
-Vi har lyst til å lære noe fra dette faget, så vi kommer til å bruke KI som er verktøy til å hjelpe oss når vi sitter fast
-Hvis vi ikke vet hvordan å gjøre noe, spør vi KI om å forklare det til oss, så legger vi det inn i prosjektet med en sitering til hva vi spurte
-Vi kommer ikke til å spørre KI om å gjøre ting for oss, siden det kan hende den tar med ting som blir for avansert for oss eller som ikke er del av pensum
-
 --------------------------- Kravspekk ---------------------------
 
 BACKLOG DEFEATER
