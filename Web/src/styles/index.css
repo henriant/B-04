@@ -1,0 +1,28 @@
+/* Importere alle css */
+
+/* Gjennombruk variabler og bakgrunn */
+@import "./base.css"; 
+
+/* Header */
+@import "./layout/header.css"; 
+
+/* Skjema */
+@import "./form.css";
+
+/* Knapper */
+@import "./button.css";
+
+/* Spill kort */
+@import "./gameCard.css";
+
+/* Mkini spill kort */
+@import "./hoverGameCard.css";
+
+/* Søkefelte */
+@import "./search.css";
+
+/* Tekst */
+@import "./text.css";
+
+/* Footer */
+@import "./layout/footer.css"

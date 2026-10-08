@@ -1,0 +1,12 @@
+/* Styling for bakgrunn for appen og for variabler som vi kan gjennombruke*/
+
+:root{
+    --white: #ffffff;
+    --black: #000000;
+    --wineRed: #800020;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}

@@ -4,12 +4,11 @@ import type { LayoutProps } from 'rwsdk/router'
 export function Layout({ children } : LayoutProps) {
     return(
         <div>
-            <header>
+            {/* Header */}
+            <header className='meny'>
+                    <a href="/"><img src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <nav>
                     <ul>
-                        <li>
-                            <a href="/">LOGO</a>
-                        </li>
                         <li>
                             <a href="/">Home</a>
                         </li>
@@ -17,6 +16,14 @@ export function Layout({ children } : LayoutProps) {
                             <a href="/Library">Library</a>
 
                         </li>
+                    </ul>
+                </nav>
+
+                {/* SØKEFELTE */}
+                <input placeholder="Search..." />
+
+                <nav>
+                    <ul className='user-header-section'>
                         <li>
                             <a href="/LogIn">Log in</a>
                         </li>
@@ -25,9 +32,11 @@ export function Layout({ children } : LayoutProps) {
                         </li>
                     </ul>
                 </nav>
-                <input placeholder="Search..."></input>
             </header>
+            {/* Barnelementer */}
             <main>{children}</main>
+
+            {/* Footer */}
             <footer>
                 <a href="/">LOGO</a>
                 

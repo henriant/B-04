@@ -1,0 +1,50 @@
+/* Styling for header */
+
+.meny {
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    height: 120px;
+    margin: 0;
+    padding: 0;
+    justify-content:space-around;
+}
+
+.meny a img{
+    height: 100px;
+    width: 100px;
+}
+
+.meny nav ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.meny nav ul li{
+    list-style: none;
+    padding: 3rem;
+    :hover{
+        color: var(--white);
+    }
+}
+        
+.meny nav ul li a{
+    color: var(--wineRed);
+
+}
+
+.meny input{
+    height: 40px;
+    width: 400px;
+    border-radius: 15px;
+    border: var(--black);
+    padding: 0.5rem;
+}
+
+.user-header-section li{
+    list-style: none;
+}
+.user-header-section li a{
+    color: var(--white);
+}
