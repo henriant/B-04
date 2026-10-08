@@ -1,0 +1,1 @@
+// Selve søkefeltet. Ved et søk, blir brukeren sendt til SearchResults.tsx, hvor spillene som matcher søkekriteriene vises.
