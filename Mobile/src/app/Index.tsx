@@ -1,8 +1,9 @@
 // Hovedsiden, en introduksjon til appen vår, samt en oppfordring til å opprette bruker eller logge inn.
 
-import { View, Text, StyleSheet, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native'
 import React from 'react'
 import { Link } from 'expo-router'
+import GameCard from '@/components/gameComponents/GameCard'
 
 const styles = StyleSheet.create({
     container: {
@@ -33,6 +34,12 @@ const styles = StyleSheet.create({
     },
 })
 
+const fakeGames = [
+    { id: 1, name: 'The Witcher 3', total_rating: 93.5 },
+    { id: 2, name: 'Hades', total_rating: 90.1 },
+    { id: 3, name: 'Celeste', total_rating: 85.7 }
+]
+
 const Index = () => {
     return (
         <View style={styles.container}>
@@ -51,6 +58,15 @@ const Index = () => {
                     <Text style={styles.buttonText}>Sign Up</Text>
                 </Pressable>
             </Link>
+
+            <FlatList style={{ flexGrow: 0}}
+                data={fakeGames}
+                horizontal
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => <GameCard game={item} />}
+            />
+
+
         </View>
     )
 }
