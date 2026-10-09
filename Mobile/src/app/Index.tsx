@@ -58,15 +58,18 @@ const Index = () => {
     const [error, setError] = useState<string | null>(null)
 
     const loadGames = async () => {
+        setLoading(true)
+        setError(null)
+
         try {
+
             const response = await fetch(`${API_URL}/api/top-games`)
-            setLoading(true)
-            if (!response.ok) {{
+            
+            if (!response.ok) {
                 throw new Error("Failed to fetch games: " + response.status)
-            }}
+            }
                 
             const data = await response.json()
-            console.log(data)
             setGames(data)
         }
 
