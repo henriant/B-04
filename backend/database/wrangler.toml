@@ -5,6 +5,6 @@ nodejs_compat = true
 
 [[ d1_databases ]]
 binding = "DB"
-database_name = "YOUR DB NAME"
+database_name = "backlog-defeater-d1"
 database_id = "YOUR DB ID"
 migrations_dir = "drizzle"

@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "d1-tutorial",
+	"name": "backlog-defeater-d1",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-10-06",
 	"observability": {
