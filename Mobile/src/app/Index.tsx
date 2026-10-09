@@ -55,10 +55,23 @@ const Index = () => {
 
     useEffect(() => {
         const loadGames = async () => {
-            const response = await fetch(`${API_URL}/api/top-games`)
-            const data = await response.json()
-            console.log(data)
-            setGames(data)
+            try {
+                const response = await fetch(`${API_URL}/api/top-games`)
+                
+                if (!response.ok) {{
+                    throw new Error("Failed to fetch games")
+                }}
+                
+                const data = await response.json()
+                console.log(data)
+                setGames(data)
+            }
+
+            catch (error) {
+                console.error("Error fetching games:", error)
+            }
+
+
         }
 
         loadGames() 
