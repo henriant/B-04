@@ -57,34 +57,36 @@ const Index = () => {
 
     const [error, setError] = useState<string | null>(null)
 
-    useEffect(() => {
-        const loadGames = async () => {
-            try {
-                const response = await fetch(`${API_URL}/api/top-games`)
-                setLoading(true)
-                if (!response.ok) {{
-                    throw new Error("Failed to fetch games: " + response.status)
-                }}
+    const loadGames = async () => {
+        try {
+            const response = await fetch(`${API_URL}/api/top-games`)
+            setLoading(true)
+            if (!response.ok) {{
+                throw new Error("Failed to fetch games: " + response.status)
+            }}
                 
-                const data = await response.json()
-                console.log(data)
-                setGames(data)
-            }
-
-            catch (error) {
-                console.error("Error fetching games:", error)
-                setError("Failed to fetch games")
-            }
-
-            // kjører uansett om det er en feil eller ikke, for å stoppe loading state
-            finally {
-                setLoading(false)
-            }
-
-
+            const data = await response.json()
+            console.log(data)
+            setGames(data)
         }
 
-        loadGames() 
+        catch (error) {
+            console.error("Error fetching games:", error)
+            setError("Failed to fetch games")
+        }
+            
+        // kjører uansett om det er en feil eller ikke, for å stoppe loading state
+        finally {
+            setLoading(false)
+        }
+
+
+    }
+
+    useEffect(() => {
+
+        loadGames()
+
     }, [])
 
     return (
