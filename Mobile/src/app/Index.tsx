@@ -53,13 +53,17 @@ const Index = () => {
 
     const [games, setGames] = useState<Game[]>([])
 
+    const [loading, setLoading] = useState<boolean>(true)
+
+    const [error, setError] = useState<string | null>(null)
+
     useEffect(() => {
         const loadGames = async () => {
             try {
                 const response = await fetch(`${API_URL}/api/top-games`)
-                
+                setLoading(true)
                 if (!response.ok) {{
-                    throw new Error("Failed to fetch games")
+                    throw new Error("Failed to fetch games: " + response.status)
                 }}
                 
                 const data = await response.json()
@@ -69,6 +73,12 @@ const Index = () => {
 
             catch (error) {
                 console.error("Error fetching games:", error)
+                setError("Failed to fetch games")
+            }
+
+            // kjører uansett om det er en feil eller ikke, for å stoppe loading state
+            finally {
+                setLoading(false)
             }
 
 
@@ -95,13 +105,21 @@ const Index = () => {
                 </Pressable>
             </Link>
 
-            <FlatList style={{ flexGrow: 0}}
-                data={games}
-                horizontal
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <GameCard game={item} />}
-            />
+            {/* Rendrer loading state mens spillene lastes inn. */}
+            {loading && <Text>Loading games...</Text>}
 
+            {/* Rendrer feilmelding dersom det er en feil ved henting av spill. */} 
+            {error && <Text>{error}</Text>}
+
+            {/* Rendrer spillene dersom alt er ok. */}  
+            {!loading && !error && (
+                <FlatList style={{ flexGrow: 0}}
+                    data={games}
+                    horizontal
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => <GameCard game={item} />}
+                />
+            )}
 
         </View>
     )
