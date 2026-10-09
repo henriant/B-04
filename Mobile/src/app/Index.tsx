@@ -1,9 +1,10 @@
 // Hovedsiden, en introduksjon til appen vår, samt en oppfordring til å opprette bruker eller logge inn.
 
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'expo-router'
 import GameCard from '@/components/gameComponents/GameCard'
+import { API_URL } from '@/config'
 
 const styles = StyleSheet.create({
     container: {
@@ -34,13 +35,35 @@ const styles = StyleSheet.create({
     },
 })
 
-const fakeGames = [
+// Fake data for demonstration purposes
+/*const fakeGames = [
     { id: 1, name: 'The Witcher 3', total_rating: 93.5 },
     { id: 2, name: 'Hades', total_rating: 90.1 },
     { id: 3, name: 'Celeste', total_rating: 85.7 }
 ]
+*/
+
+type Game = {
+    id: number
+    name: string
+    total_rating: number
+}
 
 const Index = () => {
+
+    const [games, setGames] = useState<Game[]>([])
+
+    useEffect(() => {
+        const loadGames = async () => {
+            const response = await fetch(`${API_URL}/api/top-games`)
+            const data = await response.json()
+            console.log(data)
+            setGames(data)
+        }
+
+        loadGames() 
+    }, [])
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Backlog Defeater</Text>
@@ -60,7 +83,7 @@ const Index = () => {
             </Link>
 
             <FlatList style={{ flexGrow: 0}}
-                data={fakeGames}
+                data={games}
                 horizontal
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => <GameCard game={item} />}
