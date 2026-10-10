@@ -1,14 +1,12 @@
 //     når brukeren trykker på dette, blir dem sendt til GameInfo.tsx
 
+import type { Game } from "@/types/game";
 import { View, Text, StyleSheet } from "react-native";
 
 
+
 type GameCardProps = {
-  game: {
-    id: number;
-    name: string;
-    total_rating: number;
-  };
+  game: Game
 };
 
 const styles = StyleSheet.create({

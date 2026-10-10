@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'expo-router'
 import GameCard from '@/components/gameComponents/GameCard'
 import { API_URL } from '@/config'
+import type { Game } from '@/types/game'
 
 const styles = StyleSheet.create({
     container: {
@@ -42,12 +43,6 @@ const styles = StyleSheet.create({
     { id: 3, name: 'Celeste', total_rating: 85.7 }
 ]
 */
-
-type Game = {
-    id: number
-    name: string
-    total_rating: number
-}
 
 const Index = () => {
 
