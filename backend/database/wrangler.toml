@@ -4,7 +4,7 @@ compatibility_date = "2022-11-07"
 nodejs_compat = true
 
 [[ d1_databases ]]
-binding = "DB"
+binding = "backlog-defeater-d1"
 database_name = "backlog-defeater-d1"
-database_id = "YOUR DB ID"
+database_id = "bbbe32bd-116d-4dca-b334-ab25e62dda2b"
 migrations_dir = "drizzle"
