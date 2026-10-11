@@ -1,15 +1,16 @@
 // Hovedsiden, en introduksjon til appen vår, samt en oppfordring til å opprette bruker eller logge inn.
 
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native'
+import { View, Text, StyleSheet, Pressable, FlatList, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'expo-router'
 import GameCard from '@/components/gameComponents/GameCard'
 import { API_URL } from '@/config'
 import type { Game } from '@/types/game'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    safeArea: {
+        flex: 1,
     },
 })
 
@@ -59,11 +63,11 @@ const Index = () => {
         try {
 
             const response = await fetch(`${API_URL}/api/top-games`)
-            
+
             if (!response.ok) {
                 throw new Error("Failed to fetch games: " + response.status)
             }
-                
+
             const data = await response.json()
             setGames(data)
         }
@@ -72,7 +76,7 @@ const Index = () => {
             console.error("Error fetching games:", error)
             setError("Failed to fetch games")
         }
-            
+
         // kjører uansett om det er en feil eller ikke, for å stoppe loading state
         finally {
             setLoading(false)
@@ -88,40 +92,42 @@ const Index = () => {
     }, [])
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Backlog Defeater</Text>
-            <Text style={styles.subtitle}>Track your games.</Text>
-            <Text style={styles.subtitle}>Discover new worlds!</Text>
+        <SafeAreaView style={styles.safeArea}>
+            <ScrollView contentContainerStyle={styles.container}>
+                <Text style={styles.title}>Backlog Defeater</Text>
+                <Text style={styles.subtitle}>Track your games.</Text>
+                <Text style={styles.subtitle}>Discover new worlds!</Text>
 
-            <Link href="/logIn" asChild>
-                <Pressable style={styles.button}>
-                    <Text style={styles.buttonText}>Log In</Text>
-                </Pressable>
-            </Link>
+                <Link href="/logIn" asChild>
+                    <Pressable style={styles.button}>
+                        <Text style={styles.buttonText}>Log In</Text>
+                    </Pressable>
+                </Link>
 
-            <Link href="/signUp" asChild>
-                <Pressable style={styles.button}>
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </Pressable>
-            </Link>
+                <Link href="/signUp" asChild>
+                    <Pressable style={styles.button}>
+                        <Text style={styles.buttonText}>Sign Up</Text>
+                    </Pressable>
+                </Link>
 
-            {/* Rendrer loading state mens spillene lastes inn. */}
-            {loading && <Text>Loading games...</Text>}
+                {/* Rendrer loading state mens spillene lastes inn. */}
+                {loading && <Text>Loading games...</Text>}
 
-            {/* Rendrer feilmelding dersom det er en feil ved henting av spill. */} 
-            {error && <Text>{error}</Text>}
+                {/* Rendrer feilmelding dersom det er en feil ved henting av spill. */}
+                {error && <Text>{error}</Text>}
 
-            {/* Rendrer spillene dersom alt er ok. */}  
-            {!loading && !error && (
-                <FlatList style={{ flexGrow: 0}}
-                    data={games}
-                    horizontal
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => <GameCard game={item} />}
-                />
-            )}
-
-        </View>
+                {/* Rendrer spillene dersom alt er ok. */}
+                {!loading && !error && (
+                    <FlatList style={{ flexGrow: 0 }}
+                        data={games}
+                        horizontal
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => <GameCard game={item} />}
+                    />
+                )}
+                
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
