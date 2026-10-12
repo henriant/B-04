@@ -1,6 +1,6 @@
 // Farger for appen. Disse fargene brukes i hele appen for å sikre konsistens og et enhetlig utseende.
 const colors = {
-// primærfarger:
+  // primærfarger:
   navyBlue: '#001F3F',
   black: '#000000',
 
