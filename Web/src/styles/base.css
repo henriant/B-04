@@ -9,7 +9,10 @@
 body{
     margin: 0;
     padding: 0;
+    background-image: url('public/bakgrunn.jpg');
+    background-size: contain;
 }
+
 
 .logoNav{
     height: 100px;

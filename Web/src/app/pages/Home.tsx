@@ -21,15 +21,16 @@ export function Home() {
                     </form>
                 </article>
             </section>
-            <section>
-                <h2>Games</h2>
-                <article>
+
+            <section id="game-suggestions">
+                <h2>Game suggestions</h2>
+                <article className="gameSugestion">
                     <p>Game image</p> {/*Spillets forsidebilde */}
                 </article>
-                <article>
+                <article className="gameSugestion">
                     <p>Game image</p> {/*Spillets forsidebilde */}
                 </article>
-                <article>
+                <article className="gameSugestion">
                     <p>Game image</p> {/*Spillets forsidebilde */}
                 </article>
             </section>
