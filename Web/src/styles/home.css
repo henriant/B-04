@@ -26,16 +26,16 @@
     border-color: var(--black);
     border-radius: 10px;
     padding: 2rem;
-    gap: 2rem;
-
-    
+    gap: 2rem; 
 }
+
 
 #game-suggestions h2{
     width: 100%;
     display: inline;
     text-align: center;
     margin: 0;
+    color: var(--white);
 }
 
 .gameSugestion{
