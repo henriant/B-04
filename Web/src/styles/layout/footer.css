@@ -1,17 +1,37 @@
 /* Styling for footer */
 
 #bottom{
+    background-color: var(--black);
     display: flex;
-    gap: 5rem;
-    justify-content: start;
+    justify-content: space-between;
+    padding: 0 50px;
 }
+
+#bottom section{
+    width: 250px;
+}
+
+
 
 #bottom ul{
     padding: 0;
+    
 }
 
 
 #bottom ul li{
     list-style: none;
     align-items: start;
+    color: var(--wineRed);
+
+    a{
+        color: var(--wineRed);
+        :hover{
+            color: var(--white);
+        }
+    }
+}
+
+#bottom h2{
+    color: var(--wineRed);
 }
