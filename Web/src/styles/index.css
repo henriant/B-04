@@ -6,6 +6,11 @@
 /* Header */
 @import "./layout/header.css"; 
 
+/* Home */
+@import "./home.css"; 
+
+
+
 /* Skjema */
 @import "./form.css";
 

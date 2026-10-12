@@ -3,19 +3,21 @@
 export function Home() {
     return (
         <main>
-            <h1>Backlog Defeater</h1>
-            <section>
+            <section id="intro">
+                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h1>Backlog Defeater</h1>
                 <h2>The best place to defeat your video game backlog!</h2>
-                <p>lorem ipsum lorem ipsum lorem imsum lorem ipsum</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
             </section>
+
             <section>
-                <article>
+                <article id="get-startet-form">
                     <p>Log in to get started!</p>
                     <form action="/LogIn">
-                        <button>Log in</button>
+                        <button className="form-button">Log in</button>
                     </form>
                     <form action="/SignUp">
-                        <button>Sign up</button>
+                        <button className="form-button">Sign up</button>
                     </form>
                 </article>
             </section>
