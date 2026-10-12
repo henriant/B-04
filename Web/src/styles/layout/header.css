@@ -10,10 +10,7 @@
     justify-content:space-around;
 }
 
-.meny a img{
-    height: 100px;
-    width: 100px;
-}
+
 
 .meny nav ul{
     display: flex;

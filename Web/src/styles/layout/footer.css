@@ -1,1 +1,17 @@
 /* Styling for footer */
+
+#bottom{
+    display: flex;
+    gap: 5rem;
+    justify-content: start;
+}
+
+#bottom ul{
+    padding: 0;
+}
+
+
+#bottom ul li{
+    list-style: none;
+    align-items: start;
+}

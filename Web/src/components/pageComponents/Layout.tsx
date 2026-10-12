@@ -6,7 +6,7 @@ export function Layout({ children } : LayoutProps) {
         <div>
             {/* Header */}
             <header className='meny'>
-                    <a href="/"><img src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <nav>
                     <ul>
                         <li>
@@ -37,8 +37,8 @@ export function Layout({ children } : LayoutProps) {
             <main>{children}</main>
 
             {/* Footer */}
-            <footer>
-                <a href="/">LOGO</a>
+            <footer id='bottom'>
+                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 
                 <section>
                     <h2>About us</h2>
