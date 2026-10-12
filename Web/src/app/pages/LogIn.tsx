@@ -10,11 +10,11 @@ export function LogIn() {
             </section>
 
             <form className="get-startet">
-                <label htmlFor="username" className="label-section">Username</label>
-                <input id="username" className="input-felte" name="username" type="text" min={1} max={20} placeholder="Username..."/>
+                <label htmlFor="usernameLogIn" className="label-section">Username</label>
+                <input id="usernameLogIn" className="input-felte" name="username" type="text" min={1} max={20} placeholder="Username..." required/>
 
-                <label htmlFor="password" className="label-section">Password</label>
-                <input id="password" className="input-felte" name="password" type="password" min={1} max={20} placeholder="Password"/>
+                <label htmlFor="passwordLogIn" className="label-section">Password</label>
+                <input id="passwordLogIn" className="input-felte" name="password" type="password" min={1} max={20} placeholder="Password" required/>
             </form>
         </>
     )

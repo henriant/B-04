@@ -24,13 +24,6 @@
     list-style: none;
     align-items: start;
     color: var(--wineRed);
-
-    a{
-        color: var(--wineRed);
-        :hover{
-            color: var(--white);
-        }
-    }
 }
 
 #bottom h2{
