@@ -8,3 +8,5 @@ const colors = {
   wineRed: '#8B0000',
   white: '#FFFFFF',
 }
+
+export default colors
