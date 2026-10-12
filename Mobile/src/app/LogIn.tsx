@@ -5,10 +5,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Mail, Lock } from 'lucide-react-native'
 import { Image } from 'expo-image'
 import { Link } from 'expo-router'
+import colors from '@/theme'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -16,57 +17,83 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: colors.white
+  },
+  text: {
+    color: colors.white
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: colors.wineRed,
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
+    width: '80%',
+    alignItems: 'center'
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.black,
+  },
+  inputIcon: {
+    marginRight: 15,
+    color: colors.white,
+  },
+  inputText: {
+    color: colors.white,
+    flex: 1,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 5,
+    padding: 10,
+    width: '80%',
+    marginBottom: 10,
+    backgroundColor: colors.navyBlue,
   },
 })
 
 const LogIn = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
 
         <Image
           source={require('../assets/logo.jpeg')}
           style={{ width: 100, height: 100, marginBottom: 20 }}
         />
-
         <Text style={styles.title}>Backlog Defeater</Text>
 
-        <Text>Welcome back! Log in to keep tracking your games.</Text>
+        <Text style={styles.title}>Log in</Text>
 
-        <View style={{ flexDirection: 'row' }}>
-          <Mail />
-          <TextInput
+        <Text style={[styles.text, {marginBottom: 20}]}>Welcome back! Log in to keep tracking your games.</Text>
+
+        <View style={styles.inputContainer}>
+          <Mail style={styles.inputIcon} />
+          <TextInput style={styles.inputText}
             placeholder="Email"
-            style={{ borderWidth: 1, borderColor: 'gray', padding: 10, width: '80%', marginBottom: 10 }}
+            keyboardType='email-address'
+            autoCapitalize='none'
+            placeholderTextColor='white'
           />
         </View>
 
-        <View style={{ flexDirection: 'row' }}>
-          <Lock />
-          <TextInput
+        <View style={styles.inputContainer}>
+          <Lock style={styles.inputIcon} />
+          <TextInput style={styles.inputText}
             placeholder="Password"
+            placeholderTextColor='white'
             secureTextEntry
-            style={{ borderWidth: 1, borderColor: 'gray', padding: 10, width: '80%', marginBottom: 10 }}
           />
         </View>
 
         <Pressable style={styles.button}>
-          <Text>Log in</Text>
+          <Text style={styles.text}>Log in</Text>
         </Pressable>
 
         <View style={{ flexDirection: 'row' }}>
-          <Text>Don't have an account? </Text>
-          <Link href="/SignUp" style={{ color: 'blue' }}>
-            <Pressable>
-              <Text style={{ color: 'blue' }}>Sign up</Text>
-            </Pressable>
-          </Link>
+          <Text style={styles.text}>Don't have an account? </Text>
+          <Link href="/SignUp" style={[ { color: colors.wineRed }]}>Sign up</Link>
         </View>
 
       </ScrollView>
