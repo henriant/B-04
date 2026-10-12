@@ -1,6 +1,6 @@
 /* Styling for Home.tsx */
 
-#intro{
+.intro{
     display: flex;
     flex-direction: column;
     width: 100%;

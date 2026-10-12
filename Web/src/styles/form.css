@@ -1,7 +1,6 @@
 /* Styling for skjema -> pages -> Login.tsx og SignUp.tsx */
 
-/*Home.tsx*/
-#get-startet-form{
+.get-startet-form{
     background-color: var(--wineRed);
     display: flex;
     flex-wrap: wrap;
@@ -13,9 +12,34 @@
     height: 150px;
 }
 
-#get-startet-form p{
+.get-startet-form p{
     color: var(--white);
     width: 100%;
     text-align: center;
     margin: 1rem;
+}
+
+.get-startet{
+    background-color: var(--wineRed);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+    height: 200px;
+    padding: 1rem;
+}
+
+.label-section{
+    width: 100%;
+    margin: 1rem;
+    color: var(--white);
+}
+
+
+.input-felte{
+    justify-content: start;
+    margin-left: 1rem;
 }

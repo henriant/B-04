@@ -3,7 +3,7 @@
 export function Home() {
     return (
         <main>
-            <section id="intro">
+            <section className="intro">
                 <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <h1>Backlog Defeater</h1>
                 <h2>The best place to defeat your video game backlog!</h2>
@@ -11,7 +11,7 @@ export function Home() {
             </section>
 
             <section>
-                <article id="get-startet-form">
+                <article className="get-startet-form">
                     <p>Log in to get started!</p>
                     <form action="/LogIn">
                         <button className="form-button">Log in</button>
