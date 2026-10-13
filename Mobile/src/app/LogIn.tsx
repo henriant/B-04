@@ -80,12 +80,10 @@ const LogIn = () => {
             keyboardType='email-address'
             autoCapitalize='none'
             placeholderTextColor='white'
-            value='email'
+            value={email}
             onChangeText={setEmail}
           />
         </View>
-
-        <Text style={styles.text}>{email}</Text>
 
         <View style={styles.inputContainer}>
           <Lock style={styles.inputIcon} />
