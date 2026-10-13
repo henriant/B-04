@@ -1,0 +1,13 @@
+/* Stiling for Libraray.tsx */
+
+#my-games-title{
+    color: var(--white);
+}
+
+#find-my-game-felte{
+    height: 40px;
+    width: 300px;
+    border-radius: 15px;
+    border: var(--black);
+    padding: 0.3rem;
+}

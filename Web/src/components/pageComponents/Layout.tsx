@@ -20,7 +20,7 @@ export function Layout({ children } : LayoutProps) {
                 </nav>
 
                 {/* SØKEFELTE */}
-                <input placeholder="Search..." />
+                <input placeholder="Search..." max={40}/>
 
                 <nav>
                     <ul className='user-header-section'>
