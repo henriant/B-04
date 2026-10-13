@@ -17,6 +17,7 @@ export function SignUp() {
 
                 <label htmlFor="passwordSignUp" className="label-section">Password</label>
                 <input id="passwordSignUp" className="input-felte" name="passwordSignUp" type="password" min={1} max={20} placeholder="Password" required/>
+                <button className="form-button get-startet-button">Sign up</button>
             </form>
         </>
     )

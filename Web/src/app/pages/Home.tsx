@@ -13,7 +13,7 @@ export function Home() {
             <section>
                 <article className="get-startet-form">
                     <p>Log in to get started!</p>
-                    <form action="/LogIn">
+                    <form>
                         <button className="form-button">Log in</button>
                     </form>
                     <form action="/SignUp">

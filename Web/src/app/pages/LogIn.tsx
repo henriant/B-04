@@ -15,6 +15,7 @@ export function LogIn() {
 
                 <label htmlFor="passwordLogIn" className="label-section">Password</label>
                 <input id="passwordLogIn" className="input-felte" name="password" type="password" min={1} max={20} placeholder="Password" required/>
+                <button className="form-button get-startet-button">Log in</button>
             </form>
         </>
     )
