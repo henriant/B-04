@@ -18,7 +18,12 @@
 }
 
 .get-startet-button{
-    width: 100%;
-    min-width: 50px;
-    margin: 2rem;
+    background-color: var(--white);
+    color: var(--wineRed);
+    padding: 1rem;
+    border: solid;
+    border-radius: 80px;
+    margin: 1rem auto;
+    cursor: pointer;
+    width: 30%;
 }
