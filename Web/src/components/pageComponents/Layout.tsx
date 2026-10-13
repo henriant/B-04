@@ -41,7 +41,7 @@ export function Layout({ children } : LayoutProps) {
                 <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 
                 <section>
-                    <h2>About us</h2>
+                    <h4>About us</h4>
                     <ul>
                         <li>Backlog  Defeater</li>
                         <li>We use the <a href="https://www.igdb.com/api">IGDB API</a> for game data</li>
@@ -49,14 +49,14 @@ export function Layout({ children } : LayoutProps) {
                 </section>
 
                 <section>
-                    <h2>Contact us</h2>
+                    <h4>Contact us</h4>
                         <ul>
                             <li>E-mail: backlogdefeater@gmail.com</li>
                         </ul>
                 </section>
 
                 <section>
-                    <h2>Social media</h2>
+                    <h4>Social media</h4>
                     <ul>
                         <li>Instagram</li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
                         <li>Facebook</li>
