@@ -6,6 +6,7 @@ import { Mail, Lock } from 'lucide-react-native'
 import { Image } from 'expo-image'
 import { Link } from 'expo-router'
 import colors from '@/theme'
+import { useState } from 'react'
 
 const styles = StyleSheet.create({
   container: {
@@ -54,6 +55,10 @@ const styles = StyleSheet.create({
 })
 
 const LogIn = () => {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -75,8 +80,12 @@ const LogIn = () => {
             keyboardType='email-address'
             autoCapitalize='none'
             placeholderTextColor='white'
+            value='email'
+            onChangeText={setEmail}
           />
         </View>
+
+        <Text style={styles.text}>{email}</Text>
 
         <View style={styles.inputContainer}>
           <Lock style={styles.inputIcon} />
@@ -84,6 +93,8 @@ const LogIn = () => {
             placeholder="Password"
             placeholderTextColor='white'
             secureTextEntry
+            value={password}
+            onChangeText={setPassword}
           />
         </View>
 
