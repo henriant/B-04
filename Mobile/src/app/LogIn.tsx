@@ -7,6 +7,7 @@ import { Image } from 'expo-image'
 import { Link } from 'expo-router'
 import colors from '@/theme'
 import { useState } from 'react'
+import { logInSchema } from '@/schemas/auth'
 
 const styles = StyleSheet.create({
   container: {
@@ -59,6 +60,40 @@ const LogIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+
+  //Tilsdand for feil
+  const [errors, setErrors] = useState<{
+    email?: string
+    password?: string
+  }>({})
+
+  const handleLogIn = () => {
+    const result = logInSchema.safeParse({ email, password })
+
+    if (!result.success) {
+      const newErrors: { email?: string
+        password?: string
+      } = {}
+
+      for (const issue of result.error.issues) {
+        const field = issue.path[0]
+        if (field === 'email' || field === 'password') {
+          newErrors[field] = issue.message
+        }
+      }
+
+      //midlertidig for å rendre feilene
+      console.log(newErrors)
+
+      setErrors(newErrors)
+      return
+    }
+
+    setErrors({})
+
+  }
+
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -71,7 +106,7 @@ const LogIn = () => {
 
         <Text style={styles.title}>Log in</Text>
 
-        <Text style={[styles.text, {marginBottom: 20}]}>Welcome back! Log in to keep tracking your games.</Text>
+        <Text style={[styles.text, { marginBottom: 20 }]}>Welcome back! Log in to keep tracking your games.</Text>
 
         <View style={styles.inputContainer}>
           <Mail style={styles.inputIcon} />
@@ -96,13 +131,13 @@ const LogIn = () => {
           />
         </View>
 
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={handleLogIn}>
           <Text style={styles.text}>Log in</Text>
         </Pressable>
 
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.text}>Don't have an account? </Text>
-          <Link href="/SignUp" style={[ { color: colors.wineRed }]}>Sign up</Link>
+          <Link href="/SignUp" style={[{ color: colors.wineRed }]}>Sign up</Link>
         </View>
 
       </ScrollView>
