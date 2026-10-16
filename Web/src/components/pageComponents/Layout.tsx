@@ -4,12 +4,11 @@ import type { LayoutProps } from 'rwsdk/router'
 export function Layout({ children } : LayoutProps) {
     return(
         <div>
-            <header>
+            {/* Header */}
+            <header className='meny'>
+                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <nav>
                     <ul>
-                        <li>
-                            <a href="/">LOGO</a>
-                        </li>
                         <li>
                             <a href="/">Home</a>
                         </li>
@@ -17,6 +16,14 @@ export function Layout({ children } : LayoutProps) {
                             <a href="/Library">Library</a>
 
                         </li>
+                    </ul>
+                </nav>
+
+                {/* SØKEFELTE */}
+                <input placeholder="Search..." max={40}/>
+
+                <nav>
+                    <ul className='user-header-section'>
                         <li>
                             <a href="/LogIn">Log in</a>
                         </li>
@@ -25,14 +32,16 @@ export function Layout({ children } : LayoutProps) {
                         </li>
                     </ul>
                 </nav>
-                <input placeholder="Search..."></input>
             </header>
+            {/* Barnelementer */}
             <main>{children}</main>
-            <footer>
-                <a href="/">LOGO</a>
+
+            {/* Footer */}
+            <footer id='bottom'>
+                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 
                 <section>
-                    <h2>About us</h2>
+                    <h4>About us</h4>
                     <ul>
                         <li>Backlog  Defeater</li>
                         <li>We use the <a href="https://www.igdb.com/api">IGDB API</a> for game data</li>
@@ -40,14 +49,14 @@ export function Layout({ children } : LayoutProps) {
                 </section>
 
                 <section>
-                    <h2>Contact us</h2>
+                    <h4>Contact us</h4>
                         <ul>
                             <li>E-mail: backlogdefeater@gmail.com</li>
                         </ul>
                 </section>
 
                 <section>
-                    <h2>Social media</h2>
+                    <h4>Social media</h4>
                     <ul>
                         <li>Instagram</li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
                         <li>Facebook</li>
