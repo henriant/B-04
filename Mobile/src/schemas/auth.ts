@@ -1,7 +1,6 @@
 import { z } from 'zod'
 
 export const logInSchema = z.object({
-    email: z.email().min(1, 'email is required'),
+    email: z.email({error: 'Enter a valif email address'}),
     password: z.string().min(1, 'Password is required')
 })
-
