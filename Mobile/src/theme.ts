@@ -7,6 +7,9 @@ const colors = {
   // sekundærfarger:
   wineRed: '#800020',
   white: '#FFFFFF',
+
+  errorColor: '#ff6b6b'
+  
 }
 
 export default colors
