@@ -1,0 +1,47 @@
+/* Styling for Home.tsx */
+
+.intro{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 500px;
+    text-align: center;
+    color: var(--white);
+}
+
+
+.logoHome{
+    height: 200px;
+    width: 200px;
+}
+
+#game-suggestions{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--wineRed);
+    max-width: 1000px;
+    margin: 2rem auto;
+    border-color: var(--black);
+    border-radius: 10px;
+    padding: 2rem;
+    gap: 2rem; 
+}
+
+
+#game-suggestions h2{
+    width: 100%;
+    display: inline;
+    text-align: center;
+    margin: 0;
+    color: var(--white);
+}
+
+.gameSugestion{
+    background-color: var(--white);
+    padding: 4rem;
+    border-radius: 10px;
+    margin: 0 auto;
+
+}

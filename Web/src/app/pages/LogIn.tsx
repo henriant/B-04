@@ -3,15 +3,19 @@
 export function LogIn() {
     return(
         <>
-            <section>
-                <a href="/LogIn">LOGO</a>
+            <section className="intro">
+                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <h2>The best place to defeat your video game backlog!</h2>
                 <p>Don't have an account yet? Sign up <a href="/SignUp">here</a></p>
             </section>
 
-            <form>
-                <input placeholder="Username..."/>
-                <input placeholder="Password"/>
+            <form className="get-startet">
+                <label htmlFor="usernameLogIn" className="label-section">Username</label>
+                <input id="usernameLogIn" className="input-felte" name="username" type="text" min={1} max={20} placeholder="Username..." required/>
+
+                <label htmlFor="passwordLogIn" className="label-section">Password</label>
+                <input id="passwordLogIn" className="input-felte" name="password" type="password" min={1} max={20} placeholder="Password" required/>
+                <button className="form-button get-startet-button">Log in</button>
             </form>
         </>
     )
