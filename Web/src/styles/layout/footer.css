@@ -1,0 +1,31 @@
+/* Styling for footer */
+
+#bottom{
+    background-color: var(--black);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+    margin-top: 2rem;
+}
+
+#bottom section{
+    width: 250px;
+}
+
+
+
+#bottom ul{
+    padding: 0;
+    
+}
+
+
+#bottom ul li{
+    list-style: none;
+    align-items: start;
+    color: var(--wineRed);
+}
+
+#bottom h4{
+    color: var(--wineRed);
+}

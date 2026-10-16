@@ -1,0 +1,28 @@
+/* Styling for bakgrunn for appen og for variabler som vi kan gjennombruke*/
+
+:root{
+    --white: #ffffff;
+    --black: #000000;
+    --wineRed: #800020;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url('public/bakgrunn.jpg');
+    background-size: contain;
+}
+
+
+.logoNav{
+    height: 100px;
+    width: 100px;
+}
+
+a{
+    color: var(--wineRed);
+}
+
+a:hover{
+    color: var(--white);
+}
