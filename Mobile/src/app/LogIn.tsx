@@ -53,6 +53,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: colors.navyBlue,
   },
+  errorText: {
+    width: '80%',
+    marginBottom: 10,
+    color: colors.errorColor,
+  },
 })
 
 const LogIn = () => {
@@ -81,9 +86,6 @@ const LogIn = () => {
           newErrors[field] = issue.message
         }
       }
-
-      //midlertidig for å rendre feilene
-      console.log(newErrors)
 
       setErrors(newErrors)
       return
@@ -116,9 +118,13 @@ const LogIn = () => {
             autoCapitalize='none'
             placeholderTextColor='white'
             value={email}
-            onChangeText={setEmail}
+            onChangeText={(text) => {
+              setEmail(text)
+              setErrors((prev) => ({...prev, email: undefined}))
+            }}
           />
         </View>
+        {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
         <View style={styles.inputContainer}>
           <Lock style={styles.inputIcon} />
@@ -127,9 +133,14 @@ const LogIn = () => {
             placeholderTextColor='white'
             secureTextEntry
             value={password}
-            onChangeText={setPassword}
+            onChangeText={(text) => {
+              setPassword(text)
+              setErrors((prev) => ({...prev, password: undefined}))
+            }}
           />
         </View>
+          {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+
 
         <Pressable style={styles.button} onPress={handleLogIn}>
           <Text style={styles.text}>Log in</Text>
