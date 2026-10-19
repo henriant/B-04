@@ -23,9 +23,9 @@
 #bottom ul li{
     list-style: none;
     align-items: start;
-    color: var(--wineRed);
+    color: var(--white);
 }
 
 #bottom h4{
-    color: var(--wineRed);
+    color: var(--white);
 }

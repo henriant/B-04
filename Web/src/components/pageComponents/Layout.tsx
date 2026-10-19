@@ -9,10 +9,10 @@ export function Layout({ children } : LayoutProps) {
                 <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <nav>
                     <ul>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/">Home</a>
                         </li>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/Library">Library</a>
 
                         </li>
@@ -24,10 +24,10 @@ export function Layout({ children } : LayoutProps) {
 
                 <nav>
                     <ul className='user-header-section'>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/LogIn">Log in</a>
                         </li>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/SignUp">Sign up</a>
                         </li>
                     </ul>

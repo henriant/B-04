@@ -19,7 +19,7 @@
     padding: 0;
 }
 
-.meny nav ul li{
+.meny-text{
     list-style: none;
     padding: 3rem;
     :hover{
@@ -27,9 +27,31 @@
     }
 }
         
-.meny nav ul li a{
-    color: var(--wineRed);
+.meny-text a{
+    color: var(--white);
+    text-decoration: none;
+    position: relative;
 
+
+}
+
+
+.meny-text a::after{
+    content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	height: 4px;
+	width: 0;              /* linia na początku niewidoczna */
+	background-color: var(--wineRed);
+
+	transition-property: width, transform;
+	transition-duration: 200ms;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.meny-text a:hover::after{
+    width: 100%;
 }
 
 .meny input{
