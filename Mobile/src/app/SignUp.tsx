@@ -23,8 +23,7 @@ const SignUp = () => {
                     <TextInput style={styles.inputText}
                         placeholder='Name'
                         keyboardType='default'
-                        autoCapitalize='none'
-                        placeholderTextColor='white'
+                        placeholderTextColor='#fcfcfc58'
                     />
                 </View>
                 
@@ -34,7 +33,7 @@ const SignUp = () => {
                         placeholder='Email'
                         keyboardType='email-address'
                         autoCapitalize='none'
-                        placeholderTextColor='white'
+                        placeholderTextColor='#fcfcfc58'
                     />
                 </View>
 
@@ -45,7 +44,7 @@ const SignUp = () => {
                         autoCapitalize='none'
                         autoCorrect={false}
                         secureTextEntry
-                        placeholderTextColor='white'
+                        placeholderTextColor='#fcfcfc58'
                     />
                 </View>
 
@@ -56,7 +55,7 @@ const SignUp = () => {
                         autoCapitalize='none'
                         autoCorrect={false}
                         secureTextEntry
-                        placeholderTextColor='white'
+                        placeholderTextColor='#fcfcfc58'
                     />
                 </View>
 
@@ -121,6 +120,11 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
 })
+
+
+
+export default SignUp
+
 /*
 const styles = StyleSheet.create({
   inputIcon: {
@@ -136,7 +140,3 @@ const styles = StyleSheet.create({
   },
 })
 */
-
-
-
-export default SignUp
