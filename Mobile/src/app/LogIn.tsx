@@ -116,7 +116,7 @@ const LogIn = () => {
             placeholder="Email"
             keyboardType='email-address'
             autoCapitalize='none'
-            placeholderTextColor='white'
+            placeholderTextColor='#fcfcfc58'
             value={email}
             onChangeText={(text) => {
               setEmail(text)
@@ -130,7 +130,7 @@ const LogIn = () => {
           <Lock style={styles.inputIcon} />
           <TextInput style={styles.inputText}
             placeholder="Password"
-            placeholderTextColor='white'
+            placeholderTextColor='#fcfcfc58'
             secureTextEntry
             value={password}
             onChangeText={(text) => {
