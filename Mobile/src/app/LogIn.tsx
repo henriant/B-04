@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { logInSchema } from '@/schemas/auth'
 
 const styles = StyleSheet.create({
-  container: {
+  scrollViewContainer: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -98,7 +98,7 @@ const LogIn = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
 
         <Image
           source={require('../assets/logo.jpeg')}
@@ -148,7 +148,7 @@ const LogIn = () => {
 
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.text}>Don't have an account? </Text>
-          <Link href="/SignUp" style={[{ color: colors.wineRed }]}>Sign up</Link>
+          <Link href="/signUp" style={[{ color: colors.wineRed }]}>Sign up</Link>
         </View>
 
       </ScrollView>
