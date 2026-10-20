@@ -1,5 +1,10 @@
 // Hovedsiden, en introduksjon til nettsiden vår, samt en oppfordring til å opprette bruker eller logge inn.
 
+import { ChevronRight } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
+
+
+
 export function Home() {
     return (
         <main>
@@ -24,6 +29,7 @@ export function Home() {
 
             <section id="game-suggestions">
                 <h2>Game suggestions</h2>
+                <ChevronLeft id='left-arrow'/>
                 <article className="gameSugestion">
                     <p>Game image</p> {/*Spillets forsidebilde */}
                 </article>
@@ -33,6 +39,7 @@ export function Home() {
                 <article className="gameSugestion">
                     <p>Game image</p> {/*Spillets forsidebilde */}
                 </article>
+                <ChevronRight id='right-arrow'/>
             </section>
         </main>
     )
