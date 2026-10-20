@@ -17,10 +17,6 @@ export const signUpSchema = z.object({
     path: ['confirmPassword'],
 })
 
-console.log(signUpSchema.safeParse({
-  name: 'Ola', email: 'ola@test.no', password: '12345678', confirmPassword: 'annet'
-}))
-
 
 export type UserLogInInput = z.infer<typeof logInSchema>
 export type UserSignUpInput = z.infer<typeof signUpSchema>
