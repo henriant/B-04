@@ -6,8 +6,40 @@ import { Mail, Lock, UserRound } from 'lucide-react-native'
 import { Image } from 'expo-image'
 import { Link } from 'expo-router'
 import colors from '@/theme'
+import { useState } from 'react'
+import { signUpSchema, type UserSignUpInput } from '@/schemas/auth'
 
 const SignUp = () => {
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    //tilstand for feil
+    const [errors, setErrors] = useState<Partial<Record<keyof UserSignUpInput, string>>>({})
+
+    const handleSignUp = () => {
+        const result = signUpSchema.safeParse({ name, email, password, confirmPassword })
+
+        if(!result.success) {
+            const newErrors: Partial<Record<keyof UserSignUpInput, string>> = {}
+
+            for (const issue of result.error.issues){
+                const field = issue.path[0]
+                if (field === 'name' || field === 'email' || field === 'password' || field === 'confirmPassword'){
+                    newErrors[field] ??= issue.message
+                }
+            }
+
+            setErrors(newErrors)
+            return
+        }
+        
+        setErrors({})
+        
+    }
+    
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.scrollViewContainer}>
@@ -24,8 +56,11 @@ const SignUp = () => {
                         placeholder='Name'
                         keyboardType='default'
                         placeholderTextColor='#fcfcfc58'
+                        value={name}
+                        onChangeText={setName}
                     />
                 </View>
+                {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
                 
                 <View style={styles.inputContainer}>
                     <Mail style={styles.inputIcon} />
@@ -34,8 +69,12 @@ const SignUp = () => {
                         keyboardType='email-address'
                         autoCapitalize='none'
                         placeholderTextColor='#fcfcfc58'
+                        value={email}
+                        onChangeText={setEmail}
                     />
                 </View>
+                {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+                
 
                 <View style={styles.inputContainer}>
                     <Lock style={styles.inputIcon} />
@@ -45,8 +84,11 @@ const SignUp = () => {
                         autoCorrect={false}
                         secureTextEntry
                         placeholderTextColor='#fcfcfc58'
+                        value={password}
+                        onChangeText={setPassword}
                     />
                 </View>
+                {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
 
                 <View style={styles.inputContainer}>
                     <Lock style={styles.inputIcon} />
@@ -56,11 +98,14 @@ const SignUp = () => {
                         autoCorrect={false}
                         secureTextEntry
                         placeholderTextColor='#fcfcfc58'
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
                     />
                 </View>
+                {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword}</Text>}
 
-                <Pressable style={styles.button}>
-                    <Text style={styles.inputText}>Sign up</Text>
+                <Pressable style={styles.button} onPress={handleSignUp}>
+                    <Text style={styles.text}>Sign up</Text>
                 </Pressable>
 
                 <View style={{flexDirection: 'row'}}>
@@ -119,24 +164,13 @@ const styles = StyleSheet.create({
     marginRight: 15,
     color: colors.white,
   },
-})
-
-
-
-export default SignUp
-
-/*
-const styles = StyleSheet.create({
-  inputIcon: {
-    marginRight: 15,
-    color: colors.white,
-  },
-  
-  
   errorText: {
     width: '80%',
     marginBottom: 10,
     color: colors.errorColor,
   },
 })
-*/
+
+
+
+export default SignUp
