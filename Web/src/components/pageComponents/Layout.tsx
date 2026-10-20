@@ -59,7 +59,7 @@ export function Layout({ children } : LayoutProps) {
                 <section>
                     <h4>Contact us</h4>
                         <ul>
-                            <li>E-mail: backlogdefeater@gmail.com</li>
+                            <li>E-mail: <a href='mailto:backlogdefeater@gmail.com' target='_blank'>backlogdefeater@gmail.com</a></li>
                         </ul>
                 </section>
 
