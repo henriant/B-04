@@ -57,7 +57,11 @@ const SignUp = () => {
                         keyboardType='default'
                         placeholderTextColor='#fcfcfc58'
                         value={name}
-                        onChangeText={setName}
+                        onChangeText={(text) => {
+                            setName(text)
+                            setErrors((prev) => ({...prev, name: undefined}))
+                        }}
+                        
                     />
                 </View>
                 {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
@@ -70,7 +74,10 @@ const SignUp = () => {
                         autoCapitalize='none'
                         placeholderTextColor='#fcfcfc58'
                         value={email}
-                        onChangeText={setEmail}
+                        onChangeText={(text) => {
+                            setEmail(text)
+                            setErrors((prev) => ({...prev, email: undefined}))
+                        }}
                     />
                 </View>
                 {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
@@ -85,7 +92,10 @@ const SignUp = () => {
                         secureTextEntry
                         placeholderTextColor='#fcfcfc58'
                         value={password}
-                        onChangeText={setPassword}
+                        onChangeText={(text) => {
+                            setPassword(text)
+                            setErrors((prev) => ({...prev, password: undefined, confirmPassword: undefined}))
+                        }}
                     />
                 </View>
                 {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
@@ -99,7 +109,10 @@ const SignUp = () => {
                         secureTextEntry
                         placeholderTextColor='#fcfcfc58'
                         value={confirmPassword}
-                        onChangeText={setConfirmPassword}
+                        onChangeText={(text) => {
+                            setConfirmPassword(text)
+                            setErrors((prev) => ({...prev, confirmPassword: undefined}))
+                        }}
                     />
                 </View>
                 {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword}</Text>}
