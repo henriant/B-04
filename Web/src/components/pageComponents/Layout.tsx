@@ -1,4 +1,6 @@
 import type { LayoutProps } from 'rwsdk/router'
+import { Search } from 'lucide-react';
+
 
 // holder på nav-bar og footer som skal gjenbrukes i alle pages
 export function Layout({ children } : LayoutProps) {
@@ -19,8 +21,12 @@ export function Layout({ children } : LayoutProps) {
                     </ul>
                 </nav>
 
-                {/* SØKEFELTE */}
-                <input placeholder="Search..." max={40}/>
+                <section className='search-felte'>
+                    {/* SØKEFELTE */}
+                    <input id='search' name='search' placeholder="Search..." max={40}/>
+                    <Search id='search-ikon'/>
+                </section>
+
 
                 <nav>
                     <ul className='user-header-section'>
