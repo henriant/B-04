@@ -8,6 +8,7 @@ import { Home } from "@/app/pages/Home";
 import { Library } from "./app/pages/Library";
 import { LogIn } from "./app/pages/LogIn";
 import { SignUp } from "./app/pages/SignUp"
+import { GameInfo } from "./app/pages/GameInfo";
 
 export type AppContext = {};
 
@@ -17,7 +18,9 @@ export default defineApp([
       route("/", Home),
       route("/Library", Library),
       route("/LogIn", LogIn),
-      route("/SignUp", SignUp)
+      route("/SignUp", SignUp),
+      route("/GameInfo", GameInfo)
+      
     ])
   ])
 ])
