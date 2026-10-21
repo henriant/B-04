@@ -1,6 +1,6 @@
 // Logg inn-felt med brukernavn og passord. Disse sammenlignes med informasjonen som er lagret i databasen (passord hashes) og lar brukeren logge inn dersom de matcher
 
-import { View, Text, StyleSheet, ScrollView, TextInput, Pressable } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Mail, Lock } from 'lucide-react-native'
 import { Image } from 'expo-image'
@@ -8,57 +8,7 @@ import { Link } from 'expo-router'
 import colors from '@/theme'
 import { useState } from 'react'
 import { logInSchema } from '@/schemas/auth'
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: colors.white
-  },
-  text: {
-    color: colors.white
-  },
-  button: {
-    backgroundColor: colors.wineRed,
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-    width: '80%',
-    alignItems: 'center'
-  },
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.black,
-  },
-  inputIcon: {
-    marginRight: 15,
-    color: colors.white,
-  },
-  inputText: {
-    color: colors.white,
-    flex: 1,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 5,
-    padding: 10,
-    width: '80%',
-    marginBottom: 10,
-    backgroundColor: colors.navyBlue,
-  },
-  errorText: {
-    width: '80%',
-    marginBottom: 10,
-    color: colors.errorColor,
-  },
-})
+import { AuthInput } from '@/components/shared/AuthInput'
 
 const LogIn = () => {
 
@@ -98,7 +48,7 @@ const LogIn = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
 
         <Image
           source={require('../assets/logo.jpeg')}
@@ -110,37 +60,31 @@ const LogIn = () => {
 
         <Text style={[styles.text, { marginBottom: 20 }]}>Welcome back! Log in to keep tracking your games.</Text>
 
-        <View style={styles.inputContainer}>
-          <Mail style={styles.inputIcon} />
-          <TextInput style={styles.inputText}
-            placeholder="Email"
-            keyboardType='email-address'
-            autoCapitalize='none'
-            placeholderTextColor='white'
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text)
-              setErrors((prev) => ({...prev, email: undefined}))
-            }}
-          />
-        </View>
-        {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+        <AuthInput
+          icon={Mail}
+          placeholder='Email'
+          keyboardType='email-address'
+          autoCapitalize='none'
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text)
+            setErrors((prev) => ({...prev, email: undefined}))
+          }}
+          error={errors.email}
+        />
 
-        <View style={styles.inputContainer}>
-          <Lock style={styles.inputIcon} />
-          <TextInput style={styles.inputText}
-            placeholder="Password"
-            placeholderTextColor='white'
-            secureTextEntry
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text)
-              setErrors((prev) => ({...prev, password: undefined}))
-            }}
-          />
-        </View>
-          {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+        <AuthInput
+          icon={Lock}
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text)
+            setErrors((prev) => ({...prev, password: undefined}))
+          }}
+          error={errors.password}
 
+        />
 
         <Pressable style={styles.button} onPress={handleLogIn}>
           <Text style={styles.text}>Log in</Text>
@@ -148,12 +92,42 @@ const LogIn = () => {
 
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.text}>Don't have an account? </Text>
-          <Link href="/SignUp" style={[{ color: colors.wineRed }]}>Sign up</Link>
+          <Link href="/signUp" style={[{ color: colors.wineRed }]}>Sign up</Link>
         </View>
 
       </ScrollView>
     </SafeAreaView>
   )
 }
+
+
+const styles = StyleSheet.create({
+  scrollViewContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: colors.white
+  },
+  text: {
+    color: colors.white
+  },
+  button: {
+    backgroundColor: colors.wineRed,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    width: '80%',
+    alignItems: 'center'
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.black,
+  },
+})
 
 export default LogIn;
