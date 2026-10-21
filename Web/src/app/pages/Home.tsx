@@ -7,7 +7,7 @@ import { ChevronLeft } from 'lucide-react';
 
 export function Home() {
     return (
-        <main>
+        <>
             <section className="intro">
                 <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <h1>Backlog Defeater</h1>
@@ -41,6 +41,6 @@ export function Home() {
                 </article>
                 <ChevronRight id='right-arrow'/>
             </section>
-        </main>
+        </>
     )
 }
