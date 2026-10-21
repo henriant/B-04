@@ -24,8 +24,8 @@ export function Layout({ children } : LayoutProps) {
                 <section className='search-felte'>
                     {/* SØKEFELTE */}
                     <input id='search' name='search' placeholder="Search..." max={40}/>
-                    <label htmlFor='search' id='search-ikon-label'>
-                        <Search id='search-ikon'/>
+                    <label htmlFor='search' id='search-icon-label'>
+                        <Search id='search-icon'/>
                     </label>
                 </section>
 

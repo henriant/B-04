@@ -69,12 +69,12 @@
     position: relative;
 }
 
-#search-ikon-label{
+#search-icon-label{
     padding: 0;
     position: absolute;
 }
 
-#search-ikon{
+#search-icon{
     color: var(--black);
     width: 40px;
     height: 40px;

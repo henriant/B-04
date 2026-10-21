@@ -9,7 +9,7 @@
 body{
     margin: 0;
     padding: 0;
-    background-image: url('public/bakgrunn.jpg');
+    background-image: url('/bakgrunn.jpg');
     background-size: contain;
 }
 
