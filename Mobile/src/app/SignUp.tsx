@@ -111,7 +111,7 @@ const SignUp = () => {
 
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.text}>Already have an account? </Text>
-                    <Link href='/logIn' style={[{ color: colors.wineRed }]}>Log in</Link>
+                    <Link href='/LogIn' style={[{ color: colors.wineRed }]}>Log in</Link>
 
                 </View>
 
