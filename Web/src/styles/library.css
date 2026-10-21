@@ -19,7 +19,7 @@
 }
 
 
-#my-games{
+.my-games{
     display: flex;
     flex-wrap: wrap;
 }

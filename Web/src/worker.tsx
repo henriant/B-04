@@ -9,6 +9,7 @@ import { Library } from "./app/pages/Library";
 import { LogIn } from "./app/pages/LogIn";
 import { SignUp } from "./app/pages/SignUp"
 import { GameInfo } from "./app/pages/GameInfo";
+import { SearchResults } from "./app/pages/SearchResults";
 
 export type AppContext = {};
 
@@ -19,7 +20,11 @@ export default defineApp([
       route("/Library", Library),
       route("/LogIn", LogIn),
       route("/SignUp", SignUp),
-      route("/GameInfo", GameInfo)
+
+      /* Test for GameInfo og SearchResults pages*/
+      route("/GameInfo", GameInfo),
+      route("/SearchResults", SearchResults)
+      
       
     ])
   ])

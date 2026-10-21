@@ -1,1 +1,11 @@
-/* Stiling for søke felte */
+/* Stiling for søke resultater */
+
+#search-results{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#search-results-title{
+    color: var(--white);
+    width: 100%;
+}

@@ -8,7 +8,13 @@ import { ChevronLeft } from 'lucide-react';
 export function Home() {
     return (
         <>
+
+
+        { /* Test for GameInfo og SearchResults pages*/ }
         <a href="/GameInfo">GameInfo</a>
+        <a href="/SearchResults">SearchResults</a>
+
+
             <section className="intro">
                 <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
                 <h1>Backlog Defeater</h1>

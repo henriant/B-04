@@ -9,7 +9,8 @@ export function Library() {
             <input id="find-my-game-felte" placeholder="Search for my game..." max={40}/>
         </section>
 
-        <section id="my-games">
+        <section className="my-games">
+            
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
                 <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
