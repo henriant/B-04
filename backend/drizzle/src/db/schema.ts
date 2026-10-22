@@ -1,17 +1,18 @@
+import { defineRelations } from 'drizzle-orm';
 import * as t from "drizzle-orm/sqlite-core";
 
-export const usersTable = t.sqliteTable("user", {
+export const user = t.sqliteTable("user", {
   id: t.integer().primaryKey({ autoIncrement: true }),
   name: t.text().notNull(),
   email: t.text().notNull(),
-  library: t.int().references(() => libraryTable.id),
+  library: t.integer('library_id'),
 })
 
-export const libraryTable = t.sqliteTable("library", {
+export const library = t.sqliteTable("library", {
   id: t.integer().primaryKey({ autoIncrement: true }),
-  game: t.int().references(() => gameTable.id),
+  ownerId: t.int('owner_id'),
 })
 
-export const gameTable = t.sqliteTable("game", {
+export const game = t.sqliteTable("game", {
   id: t.integer().primaryKey({ autoIncrement: true }),
 })
