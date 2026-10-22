@@ -1,23 +1,39 @@
 // Hjemmeskjermen etter at en bruker har logget inn. Gir brukeren mulighet til å navigere andre steder i appen, som å se biblioteket sitt, se spillene de har lagt til i watchlist, og se spillene de har vurdert.
 
-import { Text, StyleSheet, ScrollView, FlatList } from 'react-native'
+import { Text, StyleSheet, ScrollView, FlatList, useWindowDimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import colors from '@/theme'
 import { TESTDATA } from '@/data/testGames'
 import GameCard from '@/components/gameComponents/GameCard'
+import GameBanner from '@/components/gameComponents/GameBanner'
 
 
 const Home = () => {
 
     //bare for test. 
-    const user1 = 'Ole'
+    const user1 = 'Ole';
+
+    // bredden til banneren. Destrukturerer og henter bredde 
+    const { width } = useWindowDimensions();
+    const bannerWidth = width - 20;
+
 
     return (
         <SafeAreaView style={styles.safeArea} edges={['top']}>
             <ScrollView contentContainerStyle={styles.container}>
+                
                 <Text style={styles.title}>Hi, {user1} 👋!</Text>
                 <Text style={styles.text}>Ready to continue playing? 🎮🚀</Text>
                 
+                <FlatList
+                    horizontal
+                    pagingEnabled
+                    showsHorizontalScrollIndicator={false}
+                    data={TESTDATA}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => <GameBanner game={item} width={bannerWidth}/>}
+                />
+
                 <Text style={styles.text}>Popular games</Text>
                 <FlatList
                     horizontal
@@ -31,7 +47,7 @@ const Home = () => {
 
             </ScrollView>
         </SafeAreaView>
-    )
+    );
 }
 
 
