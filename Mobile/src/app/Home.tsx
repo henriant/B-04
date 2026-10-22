@@ -25,6 +25,7 @@ const Home = () => {
                 <View style={styles.section}>
                     <Text style={styles.title}>Hi, {user1} 👋!</Text>
                     <Text style={styles.text}>Ready to continue playing? 🎮🚀</Text>
+
                 </View>
 
                 <FlatList
@@ -37,7 +38,12 @@ const Home = () => {
                 />
 
                 <View style={styles.section}>
-                    <Text style={styles.text}>Popular games</Text>
+                    <Text style={styles.sectionTitle}>Continue playing</Text>
+
+                </View>
+
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Popular games</Text>
                     <FlatList
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -73,7 +79,11 @@ const styles = StyleSheet.create({
         color: colors.white
     },
     section: {
-        marginTop: 24
+        marginTop: 24,
+    },
+    sectionTitle: {
+        fontSize: 18,
+        color: colors.white
     }
 })
 
