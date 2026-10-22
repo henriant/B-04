@@ -2,6 +2,7 @@
 
 import colors from "@/theme"
 import { type Game } from "@/types/game"
+import { Link } from "expo-router"
 import { View, Text, Pressable, StyleSheet } from "react-native"
 
 type GameBannerProps = {
@@ -16,9 +17,13 @@ const GameBanner = ({ game, width }: GameBannerProps) => {
             <View style={styles.bannerContainer}>
                 <Text style={styles.title}>Title: {game.name}</Text>
                 <Text style={styles.rating}>Total rating: {game.total_rating}</Text>
-                <Pressable>
-                    <Text>Mer info-knapp</Text>
-                </Pressable>
+
+                <Link href='/GameInfo' asChild>
+                    <Pressable>
+                        <Text>Mer info-knapp</Text>
+                    </Pressable>
+                </Link>
+
             </View>
         </View>
     )
