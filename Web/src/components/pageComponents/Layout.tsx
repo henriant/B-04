@@ -1,4 +1,6 @@
 import type { LayoutProps } from 'rwsdk/router'
+import { VscSearchCompact } from "react-icons/vsc";
+
 
 
 // holder på nav-bar og footer som skal gjenbrukes i alle pages
@@ -26,7 +28,7 @@ export function Layout({ children } : LayoutProps) {
                     <label htmlFor='search' id='search-icon-label'>
 
                         {/*seacrh ikon */}
-                        <div id='search-icon'></div>
+                        <VscSearchCompact id='search-icon'/>
                     </label>
                 </section>
 
