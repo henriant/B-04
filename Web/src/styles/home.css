@@ -49,8 +49,10 @@
 
 #left-arrow{
     color: var(--white);
+    cursor: pointer;
 }
 #right-arrow{
     color: var(--white);
+    cursor: pointer;
 }
 

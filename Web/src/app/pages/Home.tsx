@@ -1,5 +1,8 @@
 // Hovedsiden, en introduksjon til nettsiden vår, samt en oppfordring til å opprette bruker eller logge inn.
 
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+
 export function Home() {
     return (
         <>
@@ -31,7 +34,8 @@ export function Home() {
 
             <section id="game-suggestions">
                 <h2>Game suggestions</h2>
-                <div id='left-arrow'> </div>
+                <FaArrowLeft id='left-arrow'/>
+
                 <article className="gameSugestion">
                     <p>Game image</p> {/*Spillets forsidebilde */}
                 </article>
@@ -41,7 +45,7 @@ export function Home() {
                 <article className="gameSugestion">
                     <p>Game image</p> {/*Spillets forsidebilde */}
                 </article>
-                <div id='right-arrow'></div>
+                <FaArrowRight  id='right-arrow'/>
             </section>
         </>
     )
