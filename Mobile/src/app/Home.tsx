@@ -6,6 +6,7 @@ import colors from '@/theme'
 import { TESTDATA } from '@/data/testGames'
 import GameCard from '@/components/gameComponents/GameCard'
 import GameBanner from '@/components/gameComponents/GameBanner'
+import { igdbImageUrl, type IGDBGame, type LibraryEntry } from '@backlog-defeater/api-client'
 
 
 const Home = () => {
