@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@backlog-defeater/api-client": "workspace:*",
-    "lucide-react": "^1.59.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-server-dom-webpack": "19.2.8",
