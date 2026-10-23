@@ -12,7 +12,7 @@ export function LogIn() {
                 <p>Don't have an account yet? Sign up <a href="/SignUp">here</a></p>
             </section>
 
-            <form className="get-startet">
+            <form id="logIn">
                 <label htmlFor="userEmailLogIn" className="label-section">Email</label>
                 <div className="email">
                     <CiMail className="icons-form"/>

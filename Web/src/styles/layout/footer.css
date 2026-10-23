@@ -5,6 +5,7 @@
     justify-content: space-between;
     padding: 0 50px;
     margin-top: 5rem;
+    align-items: start;
 }
 
 #bottom section{
@@ -23,8 +24,13 @@
     list-style: none;
     align-items: start;
     color: var(--white);
+    padding: 0.5rem;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 #bottom h4{
     color: var(--white);
+    margin: 0;
+    padding-left: 0;
 }

@@ -54,7 +54,7 @@ export function Layout({ children } : LayoutProps) {
                 <section>
                     <h4>About us</h4>
                     <ul>
-                        <li>Backlog  Defeater</li>
+                        <li><a href="/">Backlog  Defeater</a></li>
                         <li>We use the <a href="https://www.igdb.com/api">IGDB API</a> for game data</li>
                     </ul>
                 </section>

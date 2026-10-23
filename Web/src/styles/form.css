@@ -4,12 +4,35 @@
     background-color: var(--wineRed);
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-
+    align-items: center;
+    justify-content: center;
     max-width: 500px;
     margin: 0 auto;
     border-radius: 15px;
     height: 150px;
+}
+#logIn{
+    background-color: var(--wineRed);
+    display: flex;
+    flex-wrap: wrap;
+
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+    height: 400px;
+    padding: 1rem;
+}
+
+#signUp{
+    background-color: var(--wineRed);
+    display: flex;
+    flex-wrap: wrap;
+
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+    height: 500px;
+    padding: 1rem;
 }
 
 .get-startet-form p{
