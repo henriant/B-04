@@ -4,8 +4,8 @@
     background-color: var(--wineRed);
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+
     max-width: 500px;
     margin: 0 auto;
     border-radius: 15px;
@@ -35,7 +35,6 @@
     width: 100%;
     min-width: 50px;
     margin: 1rem;
-    margin-left: 4rem;
     color: var(--white);
     text-align: start;
 }
@@ -60,6 +59,12 @@
     align-items: center;
     margin: 0 auto;
 }
+#name{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
 
 .icons-form{
     width: 40px;
