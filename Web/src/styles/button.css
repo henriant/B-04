@@ -1,13 +1,12 @@
 /* Styling for knapper */
 
-/*Home.tsx*/
 .form-button{
     background-color: var(--white);
     color: var(--wineRed);
     padding: 1rem;
     border: solid;
     border-radius: 80px;
-    margin: 1rem;
+    margin: 1rem auto;
     min-width: 200px;
     cursor: pointer;
 }

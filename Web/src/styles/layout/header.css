@@ -85,6 +85,8 @@
     width: 30px;
     height: 30px;
     padding: 0.5rem;
+    cursor: pointer;
+
 }
 
 .user-header-section li{

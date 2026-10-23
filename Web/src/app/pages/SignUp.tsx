@@ -9,11 +9,11 @@ export function SignUp() {
             </section>
 
             <form className="get-startet">
-                <label htmlFor="email" className="label-section">E-mail</label>
-                <input id="email" className="input-felte" name="email" type="email" placeholder="E-mail" required/>
+                <label htmlFor="email" className="label-section">Email</label>
+                <input id="email" className="input-felte" name="email" type="email" placeholder="Email" required/>
 
-                <label htmlFor="usernameSignUp" className="label-section">Username</label>
-                <input id="usernameSignUp" className="input-felte" name="usernameSignUp" type="text" min={1} max={20} placeholder="Username..." required/>
+                <label htmlFor="userNameSignUp" className="label-section">Name</label>
+                <input id="userNameSignUp" className="input-felte" name="userNameSignUp" type="text" min={1} max={20} placeholder="Name..." required/>
 
                 <label htmlFor="passwordSignUp" className="label-section">Password</label>
                 <input id="passwordSignUp" className="input-felte" name="passwordSignUp" type="password" min={1} max={20} placeholder="Password" required/>

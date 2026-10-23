@@ -1,4 +1,7 @@
 // Logg inn-felt med brukernavn og passord. Disse sammenlignes med informasjonen som er lagret i databasen (passord hashes) og lar brukeren logge inn dersom de matcher
+import { CiMail } from "react-icons/ci";
+import { IoLockClosedOutline } from "react-icons/io5";
+
 
 export function LogIn() {
     return(
@@ -10,11 +13,17 @@ export function LogIn() {
             </section>
 
             <form className="get-startet">
-                <label htmlFor="usernameLogIn" className="label-section">Username</label>
-                <input id="usernameLogIn" className="input-felte" name="username" type="text" min={1} max={20} placeholder="Username..." required/>
+                <label htmlFor="userEmailLogIn" className="label-section">Email</label>
+                <div className="email">
+                    <CiMail className="icons-form"/>
+                    <input id="userEmailLogIn" className="input-felte" name="email" type="mail" min={1} max={30} placeholder="Email..." required />
+                </div>
 
                 <label htmlFor="passwordLogIn" className="label-section">Password</label>
-                <input id="passwordLogIn" className="input-felte" name="password" type="password" min={1} max={20} placeholder="Password" required/>
+                <div className="password">
+                    <IoLockClosedOutline className="icons-form"/>
+                    <input id="passwordLogIn" className="input-felte" name="password" type="password" min={1} max={20} placeholder="Password" required/>
+                </div>
                 <button className="form-button get-startet-button">Log in</button>
             </form>
         </>
