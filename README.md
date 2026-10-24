@@ -31,6 +31,10 @@ For å kjøre testen:
 For å slutte den må du:
 - CTRL+C i terminalen
 
+For å oppdatere database schema:
+- cd inn i /backend/drizzle
+- npx drizzle-kit push
+
 KI avtale:
 
 Vi har lyst til å lære noe fra dette faget, så vi kommer til å bruke KI som er verktøy til å hjelpe oss når vi sitter fast
