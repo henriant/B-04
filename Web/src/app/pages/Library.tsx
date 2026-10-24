@@ -1,6 +1,7 @@
 // Selve base of operations for brukeren, hvor de får vist alle spillene de eier (spillene de har lagt til i library)
 
 import { VscSearchCompact } from "react-icons/vsc";
+import { LibraryList } from '@/components/userComponents/LibraryList';
 
 export function Library() {
     return(
@@ -21,119 +22,7 @@ export function Library() {
             </div>
             </section>
 
-        <section className="my-games">
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-                <div className="filtrer-buttons">
-                    <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-                </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-        </section>
+        <section className="my-games"><LibraryList></LibraryList></section>
         </>
 )
 }

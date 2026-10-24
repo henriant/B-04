@@ -1,4 +1,6 @@
 import type { LayoutProps } from 'rwsdk/router'
+
+{/* Ikoner  */}
 import { VscSearchCompact } from "react-icons/vsc";
 import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
 import { AiFillTikTok } from 'react-icons/ai';
