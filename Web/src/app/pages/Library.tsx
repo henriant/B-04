@@ -25,7 +25,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                 <div className="filtrer-buttons">
                     <button className="filtrer-button">Planned</button>
@@ -36,7 +36,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -47,7 +47,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -58,7 +58,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -69,7 +69,7 @@ export function Library() {
 
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -80,7 +80,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -91,7 +91,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -102,7 +102,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -113,7 +113,7 @@ export function Library() {
             
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
@@ -124,7 +124,7 @@ export function Library() {
 
             <article className="game">
                 {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
                 <h2><a href="/GameInfo">Name of game</a></h2>
                <div className="filtrer-buttons">
                 <button className="filtrer-button">Planned</button>
