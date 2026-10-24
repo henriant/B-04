@@ -8,8 +8,7 @@ export function Home() {
         <>
 
 
-        { /* Test for GameInfo og SearchResults pages*/ }
-        <a href="/GameInfo">GameInfo</a>
+        { /* Test for og SearchResults pages*/ }
         <a href="/SearchResults">SearchResults</a>
 
 

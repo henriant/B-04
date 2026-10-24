@@ -4,7 +4,8 @@
     display: flex;
     justify-content: space-between;
     padding: 0 50px;
-    margin-top: 5rem;
+    margin-top: 8rem;
+    margin-bottom: 1rem;
     align-items: start;
 }
 
@@ -33,4 +34,18 @@
     color: var(--white);
     margin: 0;
     padding-left: 0;
+}
+
+.sosialMedia-section{
+    display: flex;
+    flex-direction: column;
+}
+
+.sosialMedia-icons{
+    display: flex;
+}
+
+.sosialMedia-icons li{
+    margin-right: 1rem;
+
 }

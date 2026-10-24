@@ -20,9 +20,9 @@ export default defineApp([
       route("/Library", Library),
       route("/LogIn", LogIn),
       route("/SignUp", SignUp),
-
-      /* Test for GameInfo og SearchResults pages*/
       route("/GameInfo", GameInfo),
+
+      /* Test for SearchResults pages*/
       route("/SearchResults", SearchResults)
       
       

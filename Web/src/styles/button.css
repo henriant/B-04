@@ -26,3 +26,23 @@
     cursor: pointer;
     width: 30%;
 }
+
+/* GameInfo og Library*/
+.filtrer-buttons{
+    display: flex;
+}
+
+.filtrer-button{
+    color: var(--white);
+    background-color: var(--wineRed);
+    cursor: pointer;
+    padding: 1rem;
+    margin: 0.2rem;
+    border-radius: 10px;
+    border-color: var(--white);
+}
+
+.filtrer-button:hover{
+    color: var(--wineRed);
+    background-color: var(--white);
+}

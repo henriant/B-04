@@ -5,84 +5,114 @@ export function SearchResults() {
         <>
             <section id="search-results">
                 <h1 id="search-results-title">Games matching your search:</h1>
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                    <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
                 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
                 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
                 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
-                            <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
+                        <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
                 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
                 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
                 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
 
-                <article className="game">
-                    {/*Sette logo som bilde eksempel for spill så lenge*/}
-                    <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                    <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                    <p>From:</p>
-                </article>
+            <article className="game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <div className="filtrer-buttons">
+                    <button className="filtrer-button">Planned</button>
+                    <button className="filtrer-button">Playing</button>
+                    <button className="filtrer-button">Finished</button>
+                </div>
+            </article>
                 
             </section>
         </>

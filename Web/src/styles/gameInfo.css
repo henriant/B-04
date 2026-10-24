@@ -1,24 +1,24 @@
 /* Styling for side med valgt spill -> components -> gameComponents -> GameCard.tsx */
 
-#game-info{
+.game-info{
     color: var(--white);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    margin: 2rem;
+    margin: 2rem auto;
     padding: 0;
     width: 900px;
 }
 
-#game-info h1{
+.game-info-title{
     width: 100%;
-    justify-content: flex-start;
-    margin-bottom: 2rem;
+    margin: 2rem;
+    color: var(--white);
+
 }
 
-#game-info article{
-    flex-direction: column;
+.game-info article{
     width: 50%;
     margin: 0 auto;
 }

@@ -1,5 +1,7 @@
 import type { LayoutProps } from 'rwsdk/router'
 import { VscSearchCompact } from "react-icons/vsc";
+import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
+import { AiFillTikTok } from 'react-icons/ai';
 
 
 
@@ -25,7 +27,7 @@ export function Layout({ children } : LayoutProps) {
                 <section className='search-felte'>
                     {/* SØKEFELTE */}
                     <input id='search' name='search' placeholder="Search..." max={40}/>
-                    <label htmlFor='search' id='search-icon-label'>
+                    <label htmlFor='search' className='search-icon-label'>
 
                         {/*seacrh ikon */}
                         <VscSearchCompact id='search-icon'/>
@@ -66,12 +68,12 @@ export function Layout({ children } : LayoutProps) {
                         </ul>
                 </section>
 
-                <section>
+                <section className='sosialMedia-section'>
                     <h4>Social media</h4>
-                    <ul>
-                        <li>Instagram</li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
-                        <li>Facebook</li>
-                        <li>TikTok</li>
+                    <ul className='sosialMedia-icons'>
+                        <li><FaInstagram /></li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
+                        <li><FaFacebookSquare /></li>
+                        <li><AiFillTikTok /></li>
                     </ul>
                 </section>
                 
