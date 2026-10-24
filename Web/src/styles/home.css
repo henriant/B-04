@@ -20,7 +20,7 @@
 #game-suggestions{
     display: flex;
     flex-wrap: wrap;
-    background-color: var(--wineRed);
+    background-color: var(--black);
     max-width: 1000px;
     margin: 2rem auto;
     border-color: var(--black);

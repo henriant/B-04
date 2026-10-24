@@ -18,7 +18,7 @@ export function Library() {
                         <VscSearchCompact/>
                     </label>
                 </section>
-                <a href="/Filter">Filter</a>
+                <h2><a href="/Filter">Filter</a></h2>
             </div>
             </section>
 

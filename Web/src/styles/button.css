@@ -1,8 +1,9 @@
 /* Styling for knapper */
 
+/* For knapper i Home LogIn og SignUp*/
 .form-button{
     background-color: var(--white);
-    color: var(--wineRed);
+    color: var(--navyBlue);
     padding: 0rem;
     border: solid;
     border-radius: 80px;
@@ -10,16 +11,20 @@
     min-width: 200px;
     cursor: pointer;
     height: 70px;
+        font-size: 1.2rem;
+
 }
 
 .form-button:hover{
     color: var(--white);
-    background-color: var(--wineRed);
+    background-color: var(--navyBlue);
 }
 
+
+/* Home get started section */
 .get-startet-button{
     background-color: var(--white);
-    color: var(--wineRed);
+    color: var(--navyBlue);
     padding: 0rem;
     border: solid;
     border-radius: 80px;
@@ -35,7 +40,7 @@
 
 .filtrer-button{
     color: var(--white);
-    background-color: var(--wineRed);
+    background-color: var(--navyBlue);
     cursor: pointer;
     padding: 1rem;
     margin: 0.2rem;
@@ -44,6 +49,6 @@
 }
 
 .filtrer-button:hover{
-    color: var(--wineRed);
+    color: var(--navyBlue);
     background-color: var(--white);
 }

@@ -1,7 +1,8 @@
 /* Styling for skjema -> pages -> Login.tsx og SignUp.tsx */
 
+/* Home -get started-section */
 .get-startet-form{
-    background-color: var(--wineRed);
+    background-color: var(--black);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -11,12 +12,14 @@
     border-radius: 15px;
     height: 150px;
     padding: 1rem;
+    
 }
+
+/* Log in skjema*/
 #logIn{
-    background-color: var(--wineRed);
+    background-color: var(--black);
     display: flex;
     flex-wrap: wrap;
-
     max-width: 500px;
     margin: 0 auto;
     border-radius: 15px;
@@ -24,11 +27,11 @@
     padding: 1rem;
 }
 
+/* Sign up skjema */
 #signUp{
-    background-color: var(--wineRed);
+    background-color: var(--black);
     display: flex;
     flex-wrap: wrap;
-
     max-width: 500px;
     margin: 0 auto;
     border-radius: 15px;
@@ -36,6 +39,7 @@
     padding: 1rem;
 }
 
+/* Home -get started-section tekst */
 .get-startet-form p{
     color: var(--white);
     width: 100%;
@@ -43,22 +47,10 @@
     margin: 1rem;
 }
 
-.get-startet{
-    background-color: var(--wineRed);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 500px;
-    margin: 0 auto;
-    border-radius: 15px;
-    height: 200px auto;
-    padding: 1rem;
-}
 
 .label-section{
     min-width: 50px;
     margin: 1rem;
-    color: var(--white);
     text-align: start;
 }
 
@@ -67,8 +59,9 @@
     margin: 1rem;
     padding: 15px;
     border-radius: 10px;
-    border: var(--black);
     width: 300px;
+    background-color: var(--white);
+    color: var(--black);
 }
 
 .email{
@@ -90,7 +83,7 @@
 
 
 .icons-form{
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     color: var(--white);
 }

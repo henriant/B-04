@@ -26,13 +26,14 @@
 
 }
 
-/* label */
+/* label -> ikon*/
 .search-label-library{
     position: absolute;
     right: 100px;
-    top: 50%;
+    top: 36%;
     transform: translateY(-50%);
     cursor: pointer;
+    color: var(--black);
 }
 
 

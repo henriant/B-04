@@ -52,7 +52,7 @@ export function Layout({ children } : LayoutProps) {
 
             {/* Footer */}
             <footer id='bottom'>
-                <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white.png' alt='Backlog Defeater logo'/></a>
+                <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
                 
                 <section>
                     <h4>About us</h4>
