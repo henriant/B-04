@@ -1,5 +1,7 @@
 /* Stiling for Libraray.tsx */
-
+#top-library{
+    align-items: center;
+}
 
 #my-games-start{
     margin: 5rem;
