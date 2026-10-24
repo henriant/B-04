@@ -1,6 +1,5 @@
 import type { LayoutProps } from 'rwsdk/router'
-
-{/* Ikoner  */}
+{/* Ikoner */}
 import { VscSearchCompact } from "react-icons/vsc";
 import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
 import { AiFillTikTok } from 'react-icons/ai';
@@ -13,7 +12,7 @@ export function Layout({ children } : LayoutProps) {
         <div>
             {/* Header */}
             <header className='meny'>
-                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
                 <nav>
                     <ul>
                         <li className='meny-text'>
@@ -53,7 +52,7 @@ export function Layout({ children } : LayoutProps) {
 
             {/* Footer */}
             <footer id='bottom'>
-                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white.png' alt='Backlog Defeater logo'/></a>
                 
                 <section>
                     <h4>About us</h4>

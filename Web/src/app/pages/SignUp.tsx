@@ -7,7 +7,7 @@ export function SignUp() {
     return(
         <>
             <section className="intro">
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/"><img className='logoHome' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
                 <h2>The best place to defeat your video game backlog!</h2>
                 <p>Already have an account? Log in <a href="/LogIn">here</a></p>
             </section>
