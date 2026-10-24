@@ -10,6 +10,7 @@ import { LogIn } from "./app/pages/LogIn";
 import { SignUp } from "./app/pages/SignUp"
 import { GameInfo } from "./app/pages/GameInfo";
 import { SearchResults } from "./app/pages/SearchResults";
+import { Filter } from "./components/Filter";
 
 export type AppContext = {};
 
@@ -21,6 +22,7 @@ export default defineApp([
       route("/LogIn", LogIn),
       route("/SignUp", SignUp),
       route("/GameInfo", GameInfo),
+      route("/Filter", Filter),
 
       /* Test for SearchResults pages*/
       route("/SearchResults", SearchResults)
