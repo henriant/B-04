@@ -3,16 +3,22 @@
 import { View, Text, StyleSheet, ScrollView, FlatList, useWindowDimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import colors from '@/theme'
-import { TESTDATA } from '@/data/testGames'
+import { TESTDATA, TEST_LIBRARY } from '@/data/testGames'
 import GameCard from '@/components/gameComponents/GameCard'
 import GameBanner from '@/components/gameComponents/GameBanner'
-import { igdbImageUrl, type IGDBGame, type LibraryEntry } from '@backlog-defeater/api-client'
+import GameCoverCard from '@/components/gameComponents/GameCoverCard'
+import { LibraryEntry } from '@backlog-defeater/api-client'
 
 
 const Home = () => {
 
     //bare for test. 
     const user1 = 'Ole';
+
+    //TODO: byttes ut med ekte data fra getLibrary()
+    const library: LibraryEntry[] = TEST_LIBRARY;
+
+    const playing = library.filter((entry) => entry.status === 'playing');
 
     // bredden til banneren. Destrukturerer og henter bredde 
     const { width } = useWindowDimensions();
@@ -40,7 +46,14 @@ const Home = () => {
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Continue playing</Text>
-
+                    <FlatList
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        data={playing}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => item.game ? <GameCoverCard game={item.game} width={130} /> : null}
+                        contentContainerStyle={{ gap: 12 }}
+                    />
                 </View>
 
                 <View style={styles.section}>
