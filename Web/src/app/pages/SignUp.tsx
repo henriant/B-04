@@ -13,21 +13,18 @@ export function SignUp() {
             </section>
 
             <form id="signUp">
-                <label htmlFor="email" className="label-section">Email</label>
                 <div className="password">
-                <CiMail className="icons-form"/>
+                    <label htmlFor="email" className="label-section"><CiMail className="icons-form"/></label>
                     <input id="email" className="input-felte" name="email" type="email" placeholder="Email" required/>
                 </div>
 
-                <label htmlFor="userNameSignUp" className="label-section">Name</label>
                 <div id="name">
-                    <LuUserRound className="icons-form"/>
+                    <label htmlFor="userNameSignUp" className="label-section"><LuUserRound className="icons-form"/></label>
                     <input id="userNameSignUp" className="input-felte" name="userNameSignUp" type="text" min={1} max={20} placeholder="Name..." required/>
                 </div>
 
-                <label htmlFor="passwordSignUp" className="label-section">Password</label>
                 <div className="password">
-                    <IoLockClosedOutline className="icons-form"/>    
+                    <label htmlFor="passwordSignUp" className="label-section"><IoLockClosedOutline className="icons-form"/>    </label>
                     <input id="passwordSignUp" className="input-felte" name="passwordSignUp" type="password" min={1} max={20} placeholder="Password" required/>
                 </div>
                 <button className="form-button get-startet-button">Sign up</button>

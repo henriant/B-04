@@ -13,15 +13,13 @@ export function LogIn() {
             </section>
 
             <form id="logIn">
-                <label htmlFor="userEmailLogIn" className="label-section">Email</label>
                 <div className="email">
-                    <CiMail className="icons-form"/>
+                    <label htmlFor="userEmailLogIn" className="label-section"><CiMail className="icons-form"/></label>
                     <input id="userEmailLogIn" className="input-felte" name="email" type="mail" min={1} max={30} placeholder="Email..." required />
                 </div>
 
-                <label htmlFor="passwordLogIn" className="label-section">Password</label>
                 <div className="password">
-                    <IoLockClosedOutline className="icons-form"/>
+                    <label htmlFor="passwordLogIn" className="label-section"><IoLockClosedOutline className="icons-form"/></label>
                     <input id="passwordLogIn" className="input-felte" name="password" type="password" min={1} max={20} placeholder="Password" required/>
                 </div>
                 <button className="form-button get-startet-button">Log in</button>

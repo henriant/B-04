@@ -10,6 +10,7 @@
     margin: 0 auto;
     border-radius: 15px;
     height: 150px;
+    padding: 1rem;
 }
 #logIn{
     background-color: var(--wineRed);
@@ -55,7 +56,6 @@
 }
 
 .label-section{
-    width: 100%;
     min-width: 50px;
     margin: 1rem;
     color: var(--white);
