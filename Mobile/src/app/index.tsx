@@ -125,6 +125,8 @@ const Index = () => {
                         renderItem={({ item }) => <GameCard game={item} />}
                     />
                 )}
+
+                <Link href="/Home">Go to Home (test)</Link>
                 
             </ScrollView>
         </SafeAreaView>

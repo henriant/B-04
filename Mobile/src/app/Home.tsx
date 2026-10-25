@@ -8,6 +8,7 @@ import GameCard from '@/components/gameComponents/GameCard'
 import GameBanner from '@/components/gameComponents/GameBanner'
 import GameCoverCard from '@/components/gameComponents/GameCoverCard'
 import { LibraryEntry } from '@backlog-defeater/api-client'
+import { Link } from 'expo-router'
 
 
 const Home = () => {
@@ -66,6 +67,10 @@ const Home = () => {
                         renderItem={({ item }) => <GameCard game={item} />}
                         contentContainerStyle={{ gap: 12 }}
                     />
+                </View>
+
+                <View>
+                    <Link href="/index">Go to index (test)</Link>
                 </View>
 
 
