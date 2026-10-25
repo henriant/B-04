@@ -69,10 +69,6 @@ const Home = () => {
                     />
                 </View>
 
-                <View>
-                    <Link href="/index">Go to index (test)</Link>
-                </View>
-
 
             </ScrollView>
         </SafeAreaView>
