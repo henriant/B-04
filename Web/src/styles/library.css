@@ -33,7 +33,6 @@
     position: absolute;
     right: 100px;
     top: 36%;
-    transform: translateY(-50%);
     cursor: pointer;
     color: var(--black);
 }
