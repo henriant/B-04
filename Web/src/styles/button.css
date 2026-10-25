@@ -52,3 +52,25 @@
     color: var(--navyBlue);
     background-color: var(--white);
 }
+
+/* SearchResults */
+.add-button{
+    display: flex;
+    width: 50%;
+    position: absolute;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    bottom: 5px;
+    background-color: var(--white);
+    color: var(--navyBlue);
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+
+}
+
+.add-button:hover{
+    background-color: var(--navyBlue);
+    color: var(--white);
+}

@@ -9,3 +9,12 @@
     color: var(--white);
     width: 100%;
 }
+
+.seacrhResults-game{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: 2rem auto;
+    position: relative;
+    align-items: center;
+}
