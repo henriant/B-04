@@ -20,7 +20,7 @@ export const library = t.sqliteTable("library", {
     .default(sql`(current_timestamp)`),
 });
 
-export const games = t.sqliteTable("games", {
+export const game = t.sqliteTable("game", {
   // Universal details for a single game
   id: t.integer().primaryKey({ autoIncrement: true }),
   name: t.text().notNull(),
@@ -29,7 +29,7 @@ export const games = t.sqliteTable("games", {
 export const libraryGame = t.sqliteTable("library_game", {
   // Specific details for one game in one library
   libraryId: t.integer('library_id').notNull().references(() => library.id, { onDelete: 'cascade' }),
-  gameId: t.integer('game_id').notNull().references(() => games.id, { onDelete: 'cascade' }),
+  gameId: t.integer('game_id').notNull().references(() => game.id, { onDelete: 'cascade' }),
   status: t.text("status", { enum: ["planned", "playing", "finished"] })
       .notNull()
       .default("planned"),
@@ -46,7 +46,7 @@ export const libraryGame = t.sqliteTable("library_game", {
   ]
 );
 
-export const relations = defineRelations({ user, library, games, libraryGame }, (r) => ({
+export const relations = defineRelations({ user, library, game, libraryGame }, (r) => ({
   // Defining relations between everything
     user: {
       library: r.one.library({
@@ -60,14 +60,14 @@ export const relations = defineRelations({ user, library, games, libraryGame }, 
         to: r.user.libraryId,
         optional: false,
       }),
-      games: r.many.games({
+      games: r.many.game({
         from: r.library.id.through(r.libraryGame.libraryId),
-        to: r.games.id.through(r.libraryGame.gameId),
+        to: r.game.id.through(r.libraryGame.gameId),
       }),
     },
     game: {
       libraries: r.many.library({
-        from: r.games.id.through(r.libraryGame.gameId),
+        from: r.game.id.through(r.libraryGame.gameId),
         to: r.library.id.through(r.libraryGame.libraryId),
       }),
     },
