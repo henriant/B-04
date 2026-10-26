@@ -75,8 +75,6 @@ const SearchResults = () => {
         )
     }
 
-    console.log(results)
-
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={{ padding: 15 }}>
