@@ -62,6 +62,19 @@
         padding-right: 2rem;
     }
 
+    #bottom section{
+        width: 200px;
+    }
+
+    .sosialMedia{
+        margin: 1rem;
+    }
+
+    #bottom section ul{
+        width: 200px;
+        margin: 0.5rem;
+    }
+
 }
 
 @media (max-width: 900px) {
@@ -91,5 +104,6 @@
     .sosialMedia{
         align-items: center;
         margin: 0.5rem auto;
-}
+    }
+
 }
