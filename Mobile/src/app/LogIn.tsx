@@ -92,7 +92,8 @@ const LogIn = () => {
 
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.text}>Don't have an account? </Text>
-          <Link href="/signUp" style={[{ color: colors.wineRed }]}>Sign up</Link>
+          <Link href="/SignUp" style={[{ color: colors.wineRed }]}>Sign up</Link>
+          
         </View>
 
       </ScrollView>

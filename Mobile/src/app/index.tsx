@@ -98,13 +98,13 @@ const Index = () => {
                 <Text style={styles.subtitle}>Track your games.</Text>
                 <Text style={styles.subtitle}>Discover new worlds!</Text>
 
-                <Link href="/logIn" asChild>
+                <Link href="/LogIn" asChild>
                     <Pressable style={styles.button}>
                         <Text style={styles.buttonText}>Log In</Text>
                     </Pressable>
                 </Link>
 
-                <Link href="/signUp" asChild>
+                <Link href="/SignUp" asChild>
                     <Pressable style={styles.button}>
                         <Text style={styles.buttonText}>Sign Up</Text>
                     </Pressable>
