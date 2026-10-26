@@ -22,11 +22,12 @@
     "types": "tsc"
   },
   "dependencies": {
+    "@backlog-defeater/api-client": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-icons": "^5.7.0",
     "react-server-dom-webpack": "19.2.8",
-    "rwsdk": "1.7.3",
-    "@backlog-defeater/api-client": "workspace:*"
+    "rwsdk": "1.7.3"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.50.0",

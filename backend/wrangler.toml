@@ -1,5 +1,5 @@
 name = "backlog_defeater"
-main = "src/index.ts"
+main = "drizzle/src/index.ts"
 compatibility_date = "2022-11-07"
 nodejs_compat = true
 

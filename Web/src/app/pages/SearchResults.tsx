@@ -2,6 +2,79 @@
 
 export function SearchResults() {
     return(
-        <h1>Games matching your search:</h1>
+        <>
+            <section id="search-results">
+                <h1 id="search-results-title">Games matching your search:</h1>
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                        <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+
+            <article className="seacrhResults-game">
+                {/*Sette logo som bilde eksempel for spill så lenge*/}
+                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <h2><a href="/GameInfo">Name of game</a></h2>
+                <button className="add-button">Add</button>
+            </article>
+                
+            </section>
+        </>
     )
 }

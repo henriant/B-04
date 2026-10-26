@@ -1,95 +1,28 @@
 // Selve base of operations for brukeren, hvor de får vist alle spillene de eier (spillene de har lagt til i library)
 
+import { VscSearchCompact } from "react-icons/vsc";
+import { LibraryList } from '@/components/userComponents/LibraryList';
+
 export function Library() {
     return(
         <>
-        <section id="my-games-start">
-            <h1 id="my-games-title">My games</h1>
-            {/* SØKEFELTE */}
-            <input id="find-my-game-felte" placeholder="Search for my game..." max={40}/>
-        </section>
+            <section id="my-games-start">
+                <h1 id="my-games-title">My games</h1>
+                {/* SØKEFELTE */}
+                
+            <div id="top-library">
+                <section className='search-felte-library'>
+                    <input id="find-my-game-felte" name="search" placeholder="Search for my game..." max={40}/>
 
-        <section id="my-games">
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-                <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
+                    <label htmlFor='find-my-game-felte' className='search-label-library'>
+                        <VscSearchCompact/>
+                    </label>
+                </section>
+                <h2><a href="/Filter">Filter</a></h2>
+            </div>
+            </section>
 
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-                        <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/"><img className='logoHome' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
-                <h2>Name of game</h2>
-               <p>Progress: <span id="progress"><span id="my-progress"></span></span></p>
-                <p>From:</p>
-            </article>
-            
-        </section>
+        <section className="my-games"><LibraryList></LibraryList></section>
         </>
 )
 }

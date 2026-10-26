@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "d1-http",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-22",
+  "vars": {"API_KEY": ""},
+  "d1_databases": [
+    {
+      "binding": "DB", 
+      "database_name": "backlog-defeater-db",
+      "database_id": "75e16b6b-4ac1-4618-9dcd-f98c2b1a4eeb"
+    }
+  ]
+}

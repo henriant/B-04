@@ -6,7 +6,7 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Backlog Defeater</title>
-      <link rel="icon" href="./secondaryLogo.png"/>
+      <link rel="icon" href="./backlogDefeaterSecondaryLogo2_blue_white_fane.png"/>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
         rel="preconnect"
