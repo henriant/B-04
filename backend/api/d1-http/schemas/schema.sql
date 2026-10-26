@@ -1,3 +1,5 @@
+// Bare til testing, kan fjernes senere
+
 DROP TABLE IF EXISTS posts;
 CREATE TABLE IF NOT EXISTS posts (
 	id integer PRIMARY KEY AUTOINCREMENT,

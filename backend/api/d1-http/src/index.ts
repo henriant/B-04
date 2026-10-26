@@ -23,21 +23,57 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+
+
 app.use("*", prettyJSON(), logger(), async (c, next) => {
 	const auth = bearerAuth({ token: c.env.API_KEY as string}) as any;
 	return auth(c, next);
 });
 
 app.post("/api/all", async (c) => {
-	return c.text("/api/all endpoint");
+	try {
+		let { query, params } = await c.req.json();
+		let stmt = c.env.DB.prepare(query);
+		if (params) {
+			stmt = stmt.bind(params);
+		}
+
+		const result = await stmt.run();
+		return c.json(result);
+	} catch (err) {
+		return c.json({ error: `Failed to run query: ${err}` }, 500);
+	}
 });
 
 app.post("/api/exec", async (c) => {
-	return c.text("/api/exec endpoint");
+		try {
+		let { query } = await c.req.json();
+		let result = await c.env.DB.exec(query);
+		return c.json(result);
+	} catch (err) {
+		return c.json({ error: `Failed to run query: ${err}` }, 500);
+	}
 });
 
 app.post("/api/batch", async (c) => {
-	return c.text("/api/batch endpoint");
+	try {
+		let { batch } = await c.req.json();
+		let stmts = [];
+		for (let query of batch) {
+			let stmt = c.env.DB.prepare(query.query);
+			if (query.params) {
+				stmts.push(stmt.bind(query.params));
+			} else {
+				stmts.push(stmt);
+			}
+		}
+		const results = await c.env.DB.batch(stmts);
+		return c.json(results);
+	} catch (err) {
+		return c.json({ error: `Failed to run query: ${err}` }, 500);
+	}
 });
+
+
 
 export default app;
