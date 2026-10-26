@@ -4,7 +4,8 @@
 packages:
   - Web
   - Mobile
-  - backend
+  - backend/*
+  - backend/api/*
   - packages/*
 
 allowBuilds:
