@@ -50,3 +50,46 @@
     width: 40px;
     height: 40px;
 }
+
+/* Mindre skjerm */
+@media (max-width: 1200px) {
+    #bottom{
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .logoNav{
+        padding-right: 2rem;
+    }
+
+}
+
+@media (max-width: 900px) {
+    #bottom{
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logoNav{
+        margin: 0 auto;
+        padding-right: 0;
+    }
+
+    #bottom section{
+        width: 400px;
+        padding-left: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    #bottom h4{
+        color: var(--white);
+        text-align: center;
+    }
+
+    .sosialMedia{
+        align-items: center;
+        margin: 0.5rem auto;
+}
+}
