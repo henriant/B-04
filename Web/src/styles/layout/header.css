@@ -102,11 +102,12 @@
 /* Mindre skjerm */
 @media (max-width: 1300px) {
     
-    .meny{
+.meny{
             flex-wrap: wrap;
             display: flex;
             justify-content: center;
-        }
+}
+
 .meny nav ul{
     display: flex;
     flex-wrap: wrap;

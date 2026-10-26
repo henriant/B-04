@@ -36,16 +36,17 @@
     padding-left: 0;
 }
 
+
 .sosialMedia-section{
     display: flex;
     flex-direction: column;
 }
 
-.sosialMedia-icons{
+.sosialMedia{
     display: flex;
 }
 
-.sosialMedia-icons li{
-    margin-right: 1rem;
-
+.sosialMedia-icons{
+    width: 40px;
+    height: 40px;
 }
