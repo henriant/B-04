@@ -1,4 +1,4 @@
-import { defineRelations } from 'drizzle-orm';
+import { defineRelations, sql } from 'drizzle-orm';
 import * as t from "drizzle-orm/sqlite-core";
 
 export const user = t.sqliteTable("user", {
@@ -18,17 +18,23 @@ export const game = t.sqliteTable("game", {
   // Universal details for a single game
   id: t.integer().primaryKey({ autoIncrement: true }),
   name: t.text().notNull(),
-
 });
 
 export const libraryGame = t.sqliteTable("library_game", {
   // Specific details for one game in one library
   libraryId: t.integer('library_id').notNull().references(() => library.id, { onDelete: 'cascade' }),
   gameId: t.integer('game_id').notNull().references(() => game.id, { onDelete: 'cascade' }),
-  completed: t.integer({ mode: 'boolean' }).notNull().default(false),
-}, (table) => [
-  t.primaryKey({ columns: [table.libraryId, table.gameId] }),
-]);
+  status: t.text("status", { enum: ["planned", "playing", "finished"] })
+      .notNull()
+      .default("planned"),
+  }, (table) => [
+    t.check(
+      "status_check",
+      sql`${table.status} IN ('planned', 'playing', 'finished')`
+    ),
+    t.primaryKey({ columns: [table.libraryId, table.gameId] }),
+  ]
+);
 
 export const relations = defineRelations({ user, library, game, libraryGame }, (r) => ({
   // Defining relations between everything
