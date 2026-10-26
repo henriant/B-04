@@ -1,4 +1,10 @@
 import type { LayoutProps } from 'rwsdk/router'
+{/* Ikoner */}
+import { VscSearchCompact } from "react-icons/vsc";
+import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
+import { AiFillTikTok } from 'react-icons/ai';
+
+
 
 // holder på nav-bar og footer som skal gjenbrukes i alle pages
 export function Layout({ children } : LayoutProps) {
@@ -6,28 +12,36 @@ export function Layout({ children } : LayoutProps) {
         <div>
             {/* Header */}
             <header className='meny'>
-                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
                 <nav>
                     <ul>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/">Home</a>
                         </li>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/Library">Library</a>
 
                         </li>
                     </ul>
                 </nav>
 
-                {/* SØKEFELTE */}
-                <input placeholder="Search..." max={40}/>
+                <section className='search-felte'>
+                    {/* SØKEFELTE */}
+                    <input id='search' name='search' placeholder="Search..." max={40}/>
+                    <label htmlFor='search' className='search-icon-label'>
+
+                        {/*seacrh ikon */}
+                        <VscSearchCompact id='search-icon'/>
+                    </label>
+                </section>
+
 
                 <nav>
                     <ul className='user-header-section'>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/LogIn">Log in</a>
                         </li>
-                        <li>
+                        <li className='meny-text'>
                             <a href="/SignUp">Sign up</a>
                         </li>
                     </ul>
@@ -38,12 +52,12 @@ export function Layout({ children } : LayoutProps) {
 
             {/* Footer */}
             <footer id='bottom'>
-                <a href="/"><img className='logoNav' src='./secondaryLogo.png' alt='Backlog Defeater logo'/></a>
+                <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
                 
                 <section>
                     <h4>About us</h4>
                     <ul>
-                        <li>Backlog  Defeater</li>
+                        <li><a href="/">Backlog  Defeater</a></li>
                         <li>We use the <a href="https://www.igdb.com/api">IGDB API</a> for game data</li>
                     </ul>
                 </section>
@@ -51,16 +65,16 @@ export function Layout({ children } : LayoutProps) {
                 <section>
                     <h4>Contact us</h4>
                         <ul>
-                            <li>E-mail: backlogdefeater@gmail.com</li>
+                            <li>E-mail: <a href='mailto:backlogdefeater@gmail.com' target='_blank'>backlogdefeater@gmail.com</a></li>
                         </ul>
                 </section>
 
-                <section>
+                <section className='sosialMedia-section'>
                     <h4>Social media</h4>
-                    <ul>
-                        <li>Instagram</li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
-                        <li>Facebook</li>
-                        <li>TikTok</li>
+                    <ul className='sosialMedia'>
+                        <li><FaInstagram className='sosialMedia-icons'/></li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
+                        <li><FaFacebookSquare className='sosialMedia-icons'/></li>
+                        <li><AiFillTikTok className='sosialMedia-icons'/></li>
                     </ul>
                 </section>
                 

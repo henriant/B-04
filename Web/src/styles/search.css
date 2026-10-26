@@ -1,1 +1,21 @@
-/* Stiling for søke felte */
+/* Stiling for søke resultater */
+
+#search-results{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#search-results-title{
+    color: var(--white);
+    width: 100%;
+    margin: 2rem;
+}
+
+.seacrhResults-game{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: 2rem auto;
+    position: relative;
+    align-items: center;
+}

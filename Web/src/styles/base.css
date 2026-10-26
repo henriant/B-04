@@ -4,13 +4,15 @@
     --white: #ffffff;
     --black: #000000;
     --wineRed: #800020;
+    --navyBlue: #191f45;
 }
 
 body{
     margin: 0;
     padding: 0;
-    background-image: url('public/bakgrunn.jpg');
+    background-image: url('/bakgrunn.jpg');
     background-size: contain;
+    font-size: 20px;
 }
 
 
@@ -20,9 +22,11 @@ body{
 }
 
 a{
-    color: var(--wineRed);
+    color: var(--white);
+    text-decoration: underline;
 }
 
 a:hover{
     color: var(--white);
+    text-decoration: none;
 }

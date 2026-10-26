@@ -11,6 +11,8 @@
 
 /* Library */
 @import "./library.css"; 
+/* Filter */
+@import "./filter.css"; 
 
 
 
@@ -22,6 +24,10 @@
 
 /* Spill kort */
 @import "./gameCard.css";
+
+/* Spill info */
+@import "./gameInfo.css";
+
 
 /* Mkini spill kort */
 @import "./hoverGameCard.css";
