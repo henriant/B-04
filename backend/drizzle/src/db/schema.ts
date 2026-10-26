@@ -7,17 +7,26 @@ export const user = t.sqliteTable("user", {
   name: t.text().notNull(),
   email: t.text().notNull(),
   libraryId: t.integer('library_id').references(() => library.id),
+  createdAt: t.text('createdAt')
+    .notNull()
+    .default(sql`(current_timestamp)`),
 });
 
 export const library = t.sqliteTable("library", {
   // One library for one user
   id: t.integer().primaryKey({ autoIncrement: true }),
+  createdAt: t.text('createdAt')
+    .notNull()
+    .default(sql`(current_timestamp)`),
 });
 
 export const game = t.sqliteTable("game", {
   // Universal details for a single game
   id: t.integer().primaryKey({ autoIncrement: true }),
   name: t.text().notNull(),
+  addedAt: t.text('addedAt')
+    .notNull()
+    .default(sql`(current_timestamp)`),
 });
 
 export const libraryGame = t.sqliteTable("library_game", {
@@ -27,6 +36,9 @@ export const libraryGame = t.sqliteTable("library_game", {
   status: t.text("status", { enum: ["planned", "playing", "finished"] })
       .notNull()
       .default("planned"),
+  addedAt: t.text('addedAt')
+    .notNull()
+    .default(sql`(current_timestamp)`),
   }, (table) => [
     t.check(
       "status_check",
