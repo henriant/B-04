@@ -71,10 +71,10 @@ export function Layout({ children } : LayoutProps) {
 
                 <section className='sosialMedia-section'>
                     <h4>Social media</h4>
-                    <ul className='sosialMedia-icons'>
-                        <li><FaInstagram /></li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
-                        <li><FaFacebookSquare /></li>
-                        <li><AiFillTikTok /></li>
+                    <ul className='sosialMedia'>
+                        <li><FaInstagram className='sosialMedia-icons'/></li> {/*Skal vi hente hele mappe med ikoner fra Font Awesome? */} {/*Ja, det er en god idé!*/}
+                        <li><FaFacebookSquare className='sosialMedia-icons'/></li>
+                        <li><AiFillTikTok className='sosialMedia-icons'/></li>
                     </ul>
                 </section>
                 
