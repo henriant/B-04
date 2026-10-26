@@ -74,45 +74,54 @@ export const TEST_LIBRARY: LibraryEntry[] = [
 ];
 
 //test data for søkesiden
-/*
-export type IGDBGame = {
-    id: number;
-    name: string;
-    coverImageId?: string;
-    summary?: string;
-    firstReleaseDate?: number;
-};
-*/
+//funksjonen som tar imot søket TODO: erstattes med searchGames() fra packages>api-client>src>index
+export async function searchTestGames(query: string): Promise<IGDBGame[]> {
+
+    const q = query.trim().toLowerCase();
+
+    if (q === ''){
+        return(
+            []
+        )
+    }
+    
+    return(
+        TEST_SEARCH_GAMES.filter(game => 
+            game.name.toLowerCase().includes(q)
+        )
+    )
+}
+
 export const TEST_SEARCH_GAMES:  IGDBGame[] = [
     {
-        id: 1,
+        id: 119388,
         name: 'The Legend of Zelda',
         coverImageId: 'co3p2d',
         summary: 'An epic adventure across the land and skies of Hyrule awaits in The Legend of Zelda: Tears of the Kingdom for Nintendo Switch. The adventure is yours to create in a world fueled by your imagination.'
     },
     {
-    id: 2,
+    id: 1942,
     name: "The Witcher 3: Wild Hunt",
     coverImageId: 'coaarl',
     summary: "Play as Geralt, a monster hunter searching for Ciri.",
     firstReleaseDate: 1431993600,
   },
   {
-    id: 3,
+    id: 1877,
     name: "Cyberpunk 2077",
     coverImageId: 'coaih8',
     summary: "An open-world RPG set in the futuristic Night City.",
     firstReleaseDate: 1607558400,
   },
   {
-    id: 4,
+    id: 112875,
     name: "God of War Ragnarök",
     coverImageId: 'coba3d',
     summary: "Kratos and Atreus journey through the Nine Realms.",
     firstReleaseDate: 1667952000,
   },
   {
-    id: 5,
+    id: 14593,
     name: "Hollow Knight",
     coverImageId: 'cobfzp',
     summary: "Explore a mysterious underground kingdom.",
