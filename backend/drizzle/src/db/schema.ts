@@ -7,17 +7,14 @@ export const user = t.sqliteTable("user", {
   name: t.text().notNull(),
   email: t.text().notNull(),
   libraryId: t.integer('library_id').references(() => library.id),
-  createdAt: t.text('createdAt')
-    .notNull()
-    .default(sql`(current_timestamp)`),
+  createdAt: t.text('createdAt').notNull().default(sql`(current_timestamp)`),
+  userRole: t.text("role", { enum: ["user", "admin", "developer"] }).notNull().default("user"),
 });
 
 export const library = t.sqliteTable("library", {
   // One library for one user
   id: t.integer().primaryKey({ autoIncrement: true }),
-  createdAt: t.text('createdAt')
-    .notNull()
-    .default(sql`(current_timestamp)`),
+  createdAt: t.text('createdAt').notNull().default(sql`(current_timestamp)`),
 });
 
 export const game = t.sqliteTable("game", {
@@ -30,12 +27,8 @@ export const libraryGame = t.sqliteTable("library_game", {
   // Specific details for one game in one library
   libraryId: t.integer('library_id').notNull().references(() => library.id, { onDelete: 'cascade' }),
   gameId: t.integer('game_id').notNull().references(() => game.id, { onDelete: 'cascade' }),
-  status: t.text("status", { enum: ["planned", "playing", "finished"] })
-      .notNull()
-      .default("planned"),
-  addedAt: t.text('addedAt')
-    .notNull()
-    .default(sql`(current_timestamp)`),
+  status: t.text("status", { enum: ["planned", "playing", "finished"] }).notNull().default("planned"),
+  addedAt: t.text('addedAt').notNull().default(sql`(current_timestamp)`),
   playtime: t.integer().notNull().default(0)
   }, (table) => [
     t.check(
