@@ -1,12 +1,13 @@
 // Viser alle spillene som matcher søkefilter som brukeren skriver i søkefeltet Search.tsx. Disse kan klikkes på for å vise GameInfo.tsx for det spesifikke spillet.
 
 import { igdbImageUrl, type IGDBGame } from '@backlog-defeater/api-client'
-import { View, Text, TextInput, StyleSheet, FlatList } from 'react-native'
+import { View, Text, TextInput, StyleSheet, FlatList, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useState, useEffect } from 'react'
 import { searchTestGames } from '@/data/testGames'
 import colors from '@/theme'
 import { Image } from 'expo-image'
+import { Link } from 'expo-router'
 
 
 
@@ -62,14 +63,18 @@ const SearchResults = () => {
                 data={results}
                 keyExtractor={(item) => String(item.id)}
                 renderItem={({ item }) => (
-                    <View style={styles.row}>
-                        <Image
-                            source={igdbImageUrl(item.coverImageId)}
-                            style={styles.cover}
-                            contentFit='cover'
-                        />
-                        <Text style={styles.title}>{item.name}</Text>
-                    </View>
+                    <Link href={{ pathname: '/GameInfo', params: { id: item.id } }} asChild>
+                        <Pressable>
+                            <View style={styles.row}>
+                                <Image
+                                    source={igdbImageUrl(item.coverImageId)}
+                                    style={styles.cover}
+                                    contentFit='cover'
+                                />
+                                <Text style={styles.title}>{item.name}</Text>
+                            </View>
+                        </Pressable>
+                    </Link>
                 )}
             />
         )
@@ -85,9 +90,9 @@ const SearchResults = () => {
                     onChangeText={setQuery}
                 />
             </View>
-            
+
             {renderStatus()}
-            
+
 
         </SafeAreaView>
     )
@@ -111,21 +116,21 @@ const styles = StyleSheet.create({
         padding: 5
     },
     row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-},
-cover: {
-    width: 60,
-    aspectRatio: 3 / 4,
-    borderRadius: 6,
-},
-title: {
-    color: colors.white,
-    //flex: 1,
-},
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+    },
+    cover: {
+        width: 60,
+        aspectRatio: 3 / 4,
+        borderRadius: 6,
+    },
+    title: {
+        color: colors.white,
+        flex: 1,
+    },
 })
 
 
