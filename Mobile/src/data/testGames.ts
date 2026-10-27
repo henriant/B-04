@@ -62,7 +62,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
         IgdbGameId: 7346,
         status: 'completed',
         addedAt: '2026-10-05T12:00:00.000Z',
-        game: { id: 7346, name: 'The Legend of Zelda', coverImageId: 'co3p2d'}
+        game: { id: 7346, name: 'The Legend of Zelda: Tears of the Kingdom: Tears of the Kingdom', coverImageId: 'co3p2d'}
     },
     {
         id: 6,
@@ -95,9 +95,9 @@ export async function searchTestGames(query: string): Promise<IGDBGame[]> {
 export const TEST_SEARCH_GAMES:  IGDBGame[] = [
     {
         id: 119388,
-        name: 'The Legend of Zelda',
+        name: 'The Legend of Zelda: Tears of the Kingdom',
         coverImageId: 'co3p2d',
-        summary: 'An epic adventure across the land and skies of Hyrule awaits in The Legend of Zelda: Tears of the Kingdom for Nintendo Switch. The adventure is yours to create in a world fueled by your imagination.'
+        summary: 'An epic adventure across the land and skies of Hyrule awaits in The Legend of Zelda: Tears of the Kingdom: Tears of the Kingdom for Nintendo Switch. The adventure is yours to create in a world fueled by your imagination.'
     },
     {
     id: 1942,
