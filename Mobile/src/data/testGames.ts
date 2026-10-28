@@ -128,3 +128,16 @@ export const TEST_SEARCH_GAMES:  IGDBGame[] = [
     firstReleaseDate: 1487894400,
   },
 ];
+
+
+//funksjon for for henting av spillinfo på infosiden
+//TODO: en lignende funksjon må opprettes i api-client!!
+export async function getTestGameById(id: number): Promise<IGDBGame | null> {
+
+    const found = TEST_SEARCH_GAMES.find(game => game.id == id);
+
+    return(
+        found ?? null
+    )
+
+};
