@@ -1,8 +1,8 @@
 
-//for testing av top-game side-scoll card..
+//Testdataer for ulike komponenter og sider..
 
 import { Game } from "@/types/game";
-import type { LibraryEntry } from "@backlog-defeater/api-client";
+import type { IGDBGame, LibraryEntry } from "@backlog-defeater/api-client";
 
 export const TESTDATA: Game[] = [
     {
@@ -20,8 +20,9 @@ export const TESTDATA: Game[] = [
         name: 'FC27',
         total_rating: 79.8
     }
-]
+];
 
+//sjekk av continue playing karusellen på home siden
 export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 1,
@@ -61,7 +62,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
         IgdbGameId: 7346,
         status: 'completed',
         addedAt: '2026-10-05T12:00:00.000Z',
-        game: { id: 7346, name: 'The Legend of Zelda', coverImageId: 'co3p2d'}
+        game: { id: 7346, name: 'The Legend of Zelda: Tears of the Kingdom: Tears of the Kingdom', coverImageId: 'co3p2d'}
     },
     {
         id: 6,
@@ -70,4 +71,60 @@ export const TEST_LIBRARY: LibraryEntry[] = [
         status: 'playing',
         addedAt: '2026-10-06T12:00:00.000Z'
     }
-]
+];
+
+//test data for søkesiden
+//funksjonen som tar imot søket TODO: erstattes med searchGames() fra packages>api-client>src>index
+export async function searchTestGames(query: string): Promise<IGDBGame[]> {
+
+    const q = query.trim().toLowerCase();
+
+    if (q === ''){
+        return(
+            []
+        )
+    }
+    
+    return(
+        TEST_SEARCH_GAMES.filter(game => 
+            game.name.toLowerCase().includes(q)
+        )
+    )
+}
+
+export const TEST_SEARCH_GAMES:  IGDBGame[] = [
+    {
+        id: 119388,
+        name: 'The Legend of Zelda: Tears of the Kingdom',
+        coverImageId: 'co3p2d',
+        summary: 'An epic adventure across the land and skies of Hyrule awaits in The Legend of Zelda: Tears of the Kingdom: Tears of the Kingdom for Nintendo Switch. The adventure is yours to create in a world fueled by your imagination.'
+    },
+    {
+    id: 1942,
+    name: "The Witcher 3: Wild Hunt",
+    coverImageId: 'coaarl',
+    summary: "Play as Geralt, a monster hunter searching for Ciri.",
+    firstReleaseDate: 1431993600,
+  },
+  {
+    id: 1877,
+    name: "Cyberpunk 2077",
+    coverImageId: 'coaih8',
+    summary: "An open-world RPG set in the futuristic Night City.",
+    firstReleaseDate: 1607558400,
+  },
+  {
+    id: 112875,
+    name: "God of War Ragnarök",
+    coverImageId: 'coba3d',
+    summary: "Kratos and Atreus journey through the Nine Realms.",
+    firstReleaseDate: 1667952000,
+  },
+  {
+    id: 14593,
+    name: "Hollow Knight",
+    coverImageId: 'cobfzp',
+    summary: "Explore a mysterious underground kingdom.",
+    firstReleaseDate: 1487894400,
+  },
+];

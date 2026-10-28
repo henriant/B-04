@@ -3,6 +3,7 @@ import type { LayoutProps } from 'rwsdk/router'
 import { VscSearchCompact } from "react-icons/vsc";
 import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
 import { AiFillTikTok } from 'react-icons/ai';
+import { Search } from '../searchComponents/Search';
 
 
 
@@ -25,16 +26,8 @@ export function Layout({ children } : LayoutProps) {
                     </ul>
                 </nav>
 
-                <section className='search-felte'>
-                    {/* SØKEFELTE */}
-                    <input id='search' name='search' placeholder="Search..." max={40}/>
-                    <label htmlFor='search' className='search-icon-label'>
-
-                        {/*seacrh ikon */}
-                        <VscSearchCompact id='search-icon'/>
-                    </label>
-                </section>
-
+            // Søkefeltet
+                <Search />
 
                 <nav>
                     <ul className='user-header-section'>
