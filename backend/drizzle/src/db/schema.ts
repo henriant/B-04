@@ -1,6 +1,5 @@
 import { defineRelations, sql } from 'drizzle-orm';
 import * as t from "drizzle-orm/sqlite-core";
-import * as a from "../../../auth/src/auth-schema.js";
 
 export const user = t.sqliteTable("user", {
   // One user
