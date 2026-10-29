@@ -42,10 +42,23 @@ const GameInfo = () => {
         return () => { isCancelled = true }
     }, [id])
 
+    //Tilstandsmeldinger
+    const renderContent = () => {
+        if (loading) {
+            return <Text>Loading...</Text>
+        }
+        if (error) {
+            return <Text>{error}</Text>
+        }
+        if (game === null) {
+            return <Text>Game not found</Text>
+        }
+        return <Text>{game.name}</Text>
+    }
 
     return (
         <View>
-            <Text>GameInfo</Text>
+            {renderContent()}
         </View>
     )
 }
