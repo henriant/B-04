@@ -1,10 +1,13 @@
 // Viser full informasjon om ett spill, etter at brukeren klikker på spillet (enten i listen eller på et gameCard)
 
 import { getTestGameById } from '@/data/testGames'
-import { type IGDBGame } from '@backlog-defeater/api-client'
+import colors from '@/theme'
+import { igdbImageUrl, type IGDBGame } from '@backlog-defeater/api-client'
+import { Image } from 'expo-image'
 import { useLocalSearchParams } from 'expo-router'
 import { useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const GameInfo = () => {
 
@@ -45,22 +48,63 @@ const GameInfo = () => {
     //Tilstandsmeldinger
     const renderContent = () => {
         if (loading) {
-            return <Text>Loading...</Text>
+            return <Text style={styles.message}>Loading...</Text>
         }
         if (error) {
-            return <Text>{error}</Text>
+            return <Text style={styles.message}>{error}</Text>
         }
         if (game === null) {
-            return <Text>Game not found</Text>
+            return <Text style={styles.message}>Game not found</Text>
         }
-        return <Text>{game.name}</Text>
+        return (
+            <View style={styles.header}>
+                <Image
+                source={igdbImageUrl(game.coverImageId)}
+                style={styles.cover}
+                contentFit='cover'
+                />
+                <Text style={styles.title}>{game.name}</Text>
+            </View>
+        )
     }
 
     return (
-        <View>
-            {renderContent()}
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+            <View style={styles.container}>
+                {renderContent()}
+            </View>
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: colors.black
+    },
+    cover: {
+        width: 110,
+        aspectRatio: 3 / 4,
+        borderRadius: 6,
+    },
+    header: {
+        flexDirection: 'row',
+        gap: 12,
+    },
+    title: {
+        color: colors.white,
+        flex: 1,
+        fontSize: 18
+    },
+    message: {
+        color: colors.white,
+        textAlign: 'center',
+        padding: 5
+    },
+    container: {
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+    }
+})
 
 export default GameInfo
