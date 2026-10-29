@@ -134,7 +134,7 @@ export const TEST_SEARCH_GAMES:  IGDBGame[] = [
 //TODO: en lignende funksjon må opprettes i api-client!!
 export async function getTestGameById(id: number): Promise<IGDBGame | null> {
 
-    const found = TEST_SEARCH_GAMES.find(game => game.id == id);
+    const found = TEST_SEARCH_GAMES.find(game => game.id === id);
 
     return(
         found ?? null
