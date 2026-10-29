@@ -21,5 +21,28 @@ export const loginUserSchema = z.object ({
     password: z.string().min(1, "Password is required")
 });
 
+export const igdbGameSchema = z.object({
+    id: z.number(),
+    name: z.string(),
+    coverImageId: z.string().optional(),
+    summary: z.string().optional(),
+    firstReleaseDate: z.number().optional(),
+});
+
+export const libraryStatusSchema = z.enum([
+    "planned",
+    "playing",
+    "completed"
+]);
+
+export const libraryEntrySchema = z.object({
+    id: z.number(),
+    userId: z.number(),
+    igdbGameId: z.number(),
+    status: libraryStatusSchema,
+    addedAt: z.string(),
+    game: igdbGameSchema.optional()
+});
+
 export type UserSignupInput = z.infer<typeof registerUserSchema>;
 export type UserLoginInput = z.infer<typeof loginUserSchema>;

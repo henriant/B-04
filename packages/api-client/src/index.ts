@@ -1,13 +1,38 @@
 import { ApiError, IGDBGame, LibraryEntry, LibraryStatus } from "./types";
 import { UserLoginInput, UserSignupInput } from "./schemas";
+import { z } from "zod";
+import { registerUserSchema, loginUserSchema, igdbGameSchema, libraryEntrySchema, libraryStatusSchema } from "./schemas";
 export * from "./schemas";
 export * from "./types";
+
 
 export function igdbImageUrl(
     imageId?: string, size: 't_thumb' | 't_cover_small' | 't_cover_big' | 't_720p' | 't_1080p' = 't_cover_big'
 ): string {
     if (!imageId) return "";
     return `https://images.igdb.com/igdb/image/upload/${size}/${imageId}.jpg`; // Fallback bilde dersom imageId er undefined eller ikke eksisterer
+}
+
+function getErrorMessage(data: unknown, fallback: string): string {
+    if (typeof data === "object" && data !== null && "message" in data && typeof data.message === "string") {
+        return data.message;
+    }
+    return fallback;
+}
+
+async function parseResponse<T>(
+    response: Response,
+    schema: z.ZodType<T>,
+    fallbackMessage: string,
+): Promise<T> {
+    const data: unknown = await response.json().catch(() => null);
+    if (!response.ok) {
+        throw new ApiError(
+            response.status,
+            getErrorMessage(data, fallbackMessage)
+        )
+    }
+    return schema.parse(data);
 }
 
 export function createApiClient (
@@ -37,77 +62,103 @@ export function createApiClient (
                 headers: await getHeaders(),
                 body: JSON.stringify(input),
             });
-            const data = await res.json();
-            if (!res.ok)
-                throw new Error(data.message || "Error while signing up");
-            return data;
+
+            return parseResponse(
+                res,
+                z.unknown(),
+                "Error while signing up",
+            );
         },
 
         async login(input: UserLoginInput) {
-            const res = await fetch (`${baseUrl}/api/auth/login`, {
+            const res = await fetch(`${baseUrl}/api/auth/login`, {
                 method: "POST",
                 headers: await getHeaders(),
-                body: JSON.stringify(input)
+                body: JSON.stringify(input),
             });
-            const data = await res.json();
-            if (!res.ok)
-                throw new Error(data.message || "Error while logging in");
-            return data; 
+
+            return parseResponse(
+                res,
+                z.unknown(),
+                "Error while logging in",
+            );
         },
 
         async searchGames(query: string): Promise<IGDBGame[]> {
-            const res = await fetch(`${baseUrl}/api/games?search=${encodeURIComponent(query)}`, {
-                headers: await getHeaders()
-            });
-            const data = await res.json();
-            if (!res.ok)
-                throw new Error(data.message || "Game search failed");
-            return data; 
+            const res = await fetch(
+                `${baseUrl}/api/games?search=${encodeURIComponent(query)}`,
+                {
+                    headers: await getHeaders(),
+                },
+            );
+
+            return parseResponse(
+                res,
+                z.array(igdbGameSchema),
+                "Game search failed",
+            );
         },
 
         async getLibrary(): Promise<LibraryEntry[]> {
             const res = await fetch(`${baseUrl}/api/library`, {
                 headers: await getHeaders(),
             });
-            const data = await res.json();
-            if (!res.ok)
-                throw new Error(data.message || "Error while fetching your library");
-            return data; 
+
+            return parseResponse(
+                res,
+                z.array(libraryEntrySchema),
+                "Error while fetching your library",
+            );
         },
 
-        async addToLibrary(igdbGameId: number, status: LibraryStatus = "planned") : Promise<LibraryEntry> {
+        async addToLibrary(
+            igdbGameId: number,
+            status: LibraryStatus = "planned",
+        ): Promise<LibraryEntry> {
             const res = await fetch(`${baseUrl}/api/library`, {
-                method: 'POST',
+                method: "POST",
                 headers: await getHeaders(),
                 body: JSON.stringify({ igdbGameId, status }),
             });
-            const data = await res.json();
-            if (!res.ok)
-                throw new Error(data.message || "Could not add to library");
-            return data; 
+
+            return parseResponse(
+                res,
+                libraryEntrySchema,
+                "Could not add to library",
+            );
         },
 
-        async updateLibraryStatus(id: number, status: LibraryStatus): Promise<LibraryEntry> {
+        async updateLibraryStatus(
+            id: number,
+            status: LibraryStatus,
+        ): Promise<LibraryEntry> {
             const res = await fetch(`${baseUrl}/api/library/${id}`, {
                 method: "PATCH",
                 headers: await getHeaders(),
-                body: JSON.stringify({status}),
+                body: JSON.stringify({ status }),
             });
-            const data = await res.json();
-            if (!res.ok)
-                throw new Error(data.message || "Could not update status")
-            return data;
+
+            return parseResponse(
+                res,
+                libraryEntrySchema,
+                "Could not update status",
+            );
         },
 
         async removeFromLibrary(id: number): Promise<void> {
             const res = await fetch(`${baseUrl}/api/library/${id}`, {
                 method: "DELETE",
-                headers: await getHeaders()
+                headers: await getHeaders(),
             });
+
             if (!res.ok) {
-                const data = await res.json().catch(() => ({}));
-                throw new Error(data.message || "Could not delete from library")
+                const data: unknown = await res.json().catch(() => null);
+
+                throw new ApiError(
+                    res.status,
+                    getErrorMessage(data, "Could not delete from library"),
+                );
             }
-        }
+        },
     };
 };
