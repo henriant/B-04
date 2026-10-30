@@ -6,7 +6,7 @@ import { igdbImageUrl, type IGDBGame } from '@backlog-defeater/api-client'
 import { Image } from 'expo-image'
 import { useLocalSearchParams } from 'expo-router'
 import { useEffect, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const GameInfo = () => {
@@ -56,23 +56,45 @@ const GameInfo = () => {
         if (game === null) {
             return <Text style={styles.message}>Game not found</Text>
         }
+
+        const releaseDate = game.firstReleaseDate ? new Date(game.firstReleaseDate * 1000).toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            timeZone: 'UTC'
+        }) : null;
+
         return (
-            <View style={styles.header}>
-                <Image
-                source={igdbImageUrl(game.coverImageId)}
-                style={styles.cover}
-                contentFit='cover'
-                />
-                <Text style={styles.title}>{game.name}</Text>
+            <View>
+                <View style={styles.header}>
+                    <Image
+                        source={igdbImageUrl(game.coverImageId)}
+                        style={styles.cover}
+                        contentFit='cover'
+                    />
+                    <Text style={styles.title}>{game.name}</Text>
+                </View>
+                <Pressable style={styles.addButton}>
+                    <Text style={styles.addButtonText} >Add to library</Text>
+                </Pressable>
+                <View style={styles.row}>
+                    <Text style={styles.redTitle}>Release date:</Text>
+                    {releaseDate ? <Text style={styles.whiteText}>{releaseDate}</Text> : null}
+                </View>
+                <View>
+                    <Text style={styles.redTitle}>Summary:</Text>
+                    {game.summary ? <Text style={styles.whiteText}>{game.summary}</Text> : null}
+                </View>
             </View>
+
         )
     }
 
     return (
         <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container}>
                 {renderContent()}
-            </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
@@ -104,7 +126,37 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 15,
         paddingVertical: 8,
-    }
+    },
+    addButton: {
+        backgroundColor: colors.wineRed,
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginTop: 30,
+        marginBottom: 30,
+    },
+    addButtonText: {
+        color: colors.white,
+        fontSize: 18,
+        fontWeight: '600'
+
+    },
+    whiteText: {
+        color: colors.white,
+        fontSize: 16,
+        lineHeight: 22
+    },
+    redTitle: {
+        color: colors.wineRed,
+        fontSize: 18,
+        fontWeight: '600'
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems:'center',
+        gap: 10,
+        marginBottom: 15
+    } 
 })
 
 export default GameInfo
