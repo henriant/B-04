@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import colors from '@/theme'
 import { TESTDATA, TEST_LIBRARY } from '@/data/testGames'
 import GameCard from '@/components/gameComponents/GameCard'
-import GameBanner from '@/components/gameComponents/GameBanner'
+import GameBannerCard from '@/components/gameComponents/GameBanner'
 import GameCoverCard from '@/components/gameComponents/GameCoverCard'
 import { LibraryEntry } from '@backlog-defeater/api-client'
 import { Link } from 'expo-router'
@@ -42,7 +42,7 @@ const Home = () => {
                     showsHorizontalScrollIndicator={false}
                     data={TESTDATA}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => <GameBanner game={item} width={bannerWidth} />}
+                    renderItem={({ item }) => <GameBannerCard game={item} width={bannerWidth} />}
                 />
 
                 <View style={styles.section}>

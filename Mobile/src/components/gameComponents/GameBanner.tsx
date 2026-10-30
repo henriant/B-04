@@ -10,7 +10,7 @@ type GameBannerProps = {
     width: number
 }
 
-const GameBanner = ({ game, width }: GameBannerProps) => {
+const GameBannerCard = ({ game, width }: GameBannerProps) => {
     return (
 
         <View style={{ width, paddingHorizontal: 5 }}>
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default GameBanner;
+export default GameBannerCard;
