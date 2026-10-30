@@ -22,76 +22,7 @@ export const TESTDATA: Game[] = [
     }
 ];
 
-//sjekk av continue playing karusellen på home siden
-export const TEST_LIBRARY: LibraryEntry[] = [
-    {
-        id: 1,
-        userId: 1,
-        IgdbGameId: 1942,
-        status: 'playing',
-        addedAt: '2026-10-01T12:00:00.000Z',
-        game: { id: 1942, name: 'The Witcher 3: Wild Hunt', coverImageId: 'coaarl'}
-    },
-    {
-        id: 2,
-        userId: 1,
-        IgdbGameId: 119133,
-        status: 'playing',
-        addedAt: '2026-10-02T12:00:00.000Z',
-        game: { id: 119133, name: 'Elden Ring', coverImageId: 'co4jni'}
-    },
-    {
-        id: 3,
-        userId: 1,
-        IgdbGameId: 408819,
-        status: 'playing',
-        addedAt: '2026-10-03T12:00:00.000Z',
-        game: { id: 408819, name: 'EA Sports FC27', coverImageId: 'coclf3'}
-    },
-    {
-        id: 4,
-        userId: 1,
-        IgdbGameId: 52189,
-        status: 'planned',
-        addedAt: '2026-10-04T12:00:00.000Z',
-        game: { id: 52189, name: 'Grand Theft Auto VI', coverImageId: 'cocv1v'}
-    },
-    {
-        id: 5,
-        userId: 1,
-        IgdbGameId: 119388,
-        status: 'completed',
-        addedAt: '2026-10-05T12:00:00.000Z',
-        game: { id: 119388, name: 'The Legend of Zelda: Tears of the Kingdom', coverImageId: 'co3p2d'}
-    },
-    {
-        id: 6,
-        userId: 1,
-        IgdbGameId: 119171,
-        status: 'playing',
-        addedAt: '2026-10-06T12:00:00.000Z'
-    }
-];
-
-//test data for søkesiden
-//funksjonen som tar imot søket TODO: erstattes med searchGames() fra packages>api-client>src>index
-export async function searchTestGames(query: string): Promise<IGDBGame[]> {
-
-    const q = query.trim().toLowerCase();
-
-    if (q === ''){
-        return(
-            []
-        )
-    }
-    
-    return(
-        TEST_GAMES.filter(game => 
-            game.name.toLowerCase().includes(q)
-        )
-    )
-}
-
+//Én liste med testdata/spill som brukes av søkesiden (searchTestGames()) og infosiden (getTestGameById())
 export const TEST_GAMES:  IGDBGame[] = [
     {
         id: 119388,
@@ -192,6 +123,77 @@ export const TEST_GAMES:  IGDBGame[] = [
   },
 ];
 
+
+//testdata/ spill for sjekk av continue playing karusellen på home siden
+export const TEST_LIBRARY: LibraryEntry[] = [
+    {
+        id: 1,
+        userId: 1,
+        IgdbGameId: 1942,
+        status: 'playing',
+        addedAt: '2026-10-01T12:00:00.000Z',
+        game: TEST_GAMES.find(game => game.id === 1942)
+    },
+    {
+        id: 2,
+        userId: 1,
+        IgdbGameId: 119133,
+        status: 'playing',
+        addedAt: '2026-10-02T12:00:00.000Z',
+        game: TEST_GAMES.find(game => game.id === 119133)
+    },
+    {
+        id: 3,
+        userId: 1,
+        IgdbGameId: 408819,
+        status: 'playing',
+        addedAt: '2026-10-03T12:00:00.000Z',
+        game: TEST_GAMES.find(game => game.id === 408819)
+    },
+    {
+        id: 4,
+        userId: 1,
+        IgdbGameId: 52189,
+        status: 'planned',
+        addedAt: '2026-10-04T12:00:00.000Z',
+        game: TEST_GAMES.find(game => game.id === 52189)
+    },
+    {
+        id: 5,
+        userId: 1,
+        IgdbGameId: 119388,
+        status: 'completed',
+        addedAt: '2026-10-05T12:00:00.000Z',
+        game: TEST_GAMES.find(game => game.id === 119388)
+    },
+    {
+        id: 6,
+        userId: 1,
+        IgdbGameId: 119171,
+        status: 'playing',
+        addedAt: '2026-10-06T12:00:00.000Z',
+        game: TEST_GAMES.find(game => game.id === 119171)
+    }
+];
+
+//funksjon til søkesiden
+//funksjonen som tar imot søket TODO: erstattes med searchGames() fra packages>api-client>src>index
+export async function searchTestGames(query: string): Promise<IGDBGame[]> {
+
+    const q = query.trim().toLowerCase();
+
+    if (q === ''){
+        return(
+            []
+        )
+    }
+    
+    return(
+        TEST_GAMES.filter(game => 
+            game.name.toLowerCase().includes(q)
+        )
+    )
+}
 
 //funksjon for for henting av spillinfo på infosiden
 //TODO: en lignende funksjon må opprettes i api-client!!
