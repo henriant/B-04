@@ -1,12 +1,12 @@
 // Hovedsiden, en introduksjon til appen vår, samt en oppfordring til å opprette bruker eller logge inn.
 
-import { View, Text, StyleSheet, Pressable, FlatList, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { Text, StyleSheet, Pressable, FlatList, ScrollView } from 'react-native'
+import { useEffect, useState } from 'react'
 import { Link } from 'expo-router'
-import GameCard from '@/components/gameComponents/GameCard'
+import GameCoverCard from '@/components/gameComponents/GameCoverCard'
 import { API_URL } from '@/config'
-import type { Game } from '@/types/game'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { type IGDBGame } from '@backlog-defeater/api-client'
 
 const styles = StyleSheet.create({
     container: {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 
 const Index = () => {
 
-    const [games, setGames] = useState<Game[]>([])
+    const [games, setGames] = useState<IGDBGame[]>([])
 
     const [loading, setLoading] = useState<boolean>(true)
 
@@ -122,7 +122,7 @@ const Index = () => {
                         data={games}
                         horizontal
                         keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => <GameCard game={item} />}
+                        renderItem={({ item }) => <GameCoverCard game={item} width={130}/>}
                     />
                 )}
                 
