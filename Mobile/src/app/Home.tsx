@@ -1,14 +1,12 @@
 // Hjemmeskjermen etter at en bruker har logget inn. Gir brukeren mulighet til å navigere andre steder i appen, som å se biblioteket sitt, se spillene de har lagt til i watchlist, og se spillene de har vurdert.
 
-import { View, Text, StyleSheet, ScrollView, FlatList, useWindowDimensions } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import colors from '@/theme'
-import { TESTDATA, TEST_LIBRARY } from '@/data/testGames'
-import GameCard from '@/components/gameComponents/GameCard'
-import GameBannerCard from '@/components/gameComponents/GameBanner'
-import GameCoverCard from '@/components/gameComponents/GameCoverCard'
-import { LibraryEntry } from '@backlog-defeater/api-client'
-import { Link } from 'expo-router'
+import { View, Text, StyleSheet, ScrollView, FlatList, useWindowDimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import colors from '@/theme';
+import { TEST_GAMES, TEST_LIBRARY } from '@/data/testGames';
+import GameBannerCard from '@/components/gameComponents/GameBanner';
+import GameCoverCard from '@/components/gameComponents/GameCoverCard';
+import { type LibraryEntry } from '@backlog-defeater/api-client';
 
 
 const Home = () => {
@@ -25,6 +23,9 @@ const Home = () => {
     const { width } = useWindowDimensions();
     const bannerWidth = width - 20;
 
+    //TODO: byttes ut med ekte data (f.eks. getTopGames()) fra backend
+    const popular = TEST_GAMES.slice(0, 3)
+
 
     return (
         <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -40,7 +41,7 @@ const Home = () => {
                     horizontal
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
-                    data={TESTDATA}
+                    data={popular}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => <GameBannerCard game={item} width={bannerWidth} />}
                 />
@@ -62,9 +63,9 @@ const Home = () => {
                     <FlatList
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        data={TESTDATA}
+                        data={popular}
                         keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => <GameCard game={item} />}
+                        renderItem={({ item }) => <GameCoverCard game={item} width={130}/>}
                         contentContainerStyle={{ gap: 12 }}
                     />
                 </View>
