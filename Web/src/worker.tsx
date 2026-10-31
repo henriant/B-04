@@ -25,8 +25,12 @@ export default defineApp([
       route("/Filter", Filter),
 
       /* Test for SearchResults pages*/
-      route("/SearchResults", SearchResults)
-      
+      route("/SearchResults", ({ request }) => {
+        const url = new URL(request.url);
+        const query = url.searchParams.get("q") ?? "";
+
+        return <SearchResults query={query} />;
+      }),
       
     ])
   ])

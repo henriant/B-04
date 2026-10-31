@@ -16,7 +16,7 @@ export type IGDBGame = {
 export type LibraryEntry = {
     id: number;
     userId: number;
-    IgdbGameId: number;
+    igdbGameId: number;
     status: LibraryStatus;
     addedAt: string;
     game?: IGDBGame;
