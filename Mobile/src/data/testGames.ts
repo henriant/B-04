@@ -110,7 +110,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 1,
         userId: 1,
-        IgdbGameId: 1942,
+        igdbGameId: 1942,
         status: 'playing',
         addedAt: '2026-10-01T12:00:00.000Z',
         game: TEST_GAMES.find(game => game.id === 1942)
@@ -118,7 +118,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 2,
         userId: 1,
-        IgdbGameId: 119133,
+        igdbGameId: 119133,
         status: 'playing',
         addedAt: '2026-10-02T12:00:00.000Z',
         game: TEST_GAMES.find(game => game.id === 119133)
@@ -126,7 +126,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 3,
         userId: 1,
-        IgdbGameId: 408819,
+        igdbGameId: 408819,
         status: 'playing',
         addedAt: '2026-10-03T12:00:00.000Z',
         game: TEST_GAMES.find(game => game.id === 408819)
@@ -134,7 +134,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 4,
         userId: 1,
-        IgdbGameId: 52189,
+        igdbGameId: 52189,
         status: 'planned',
         addedAt: '2026-10-04T12:00:00.000Z',
         game: TEST_GAMES.find(game => game.id === 52189)
@@ -142,7 +142,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 5,
         userId: 1,
-        IgdbGameId: 119388,
+        igdbGameId: 119388,
         status: 'completed',
         addedAt: '2026-10-05T12:00:00.000Z',
         game: TEST_GAMES.find(game => game.id === 119388)
@@ -150,7 +150,7 @@ export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 6,
         userId: 1,
-        IgdbGameId: 119171,
+        igdbGameId: 119171,
         status: 'playing',
         addedAt: '2026-10-06T12:00:00.000Z',
         game: TEST_GAMES.find(game => game.id === 119171)
