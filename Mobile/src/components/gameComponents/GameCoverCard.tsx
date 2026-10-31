@@ -36,12 +36,12 @@ const styles = StyleSheet.create({
     card: {
         aspectRatio: 3 / 4,
         borderRadius: 12,
-        overflow: 'hidden',            // klipper bildet til de rundede hjørnene
+        overflow: 'hidden',
         backgroundColor: colors.navyBlue,
-        justifyContent: 'flex-end',    // legger tittelen nederst
+        justifyContent: 'flex-end',
     },
     titleContainer: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: '#191f4585',
         padding: 8,
     },
     title: {
