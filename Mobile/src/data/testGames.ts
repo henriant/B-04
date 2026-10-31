@@ -1,26 +1,7 @@
 
 //Testdataer for ulike komponenter og sider..
-
-import { Game } from "@/types/game";
 import type { IGDBGame, LibraryEntry } from "@backlog-defeater/api-client";
 
-export const TESTDATA: Game[] = [
-    {
-        id: 1,
-        name: 'Harry Potter Open World',
-        total_rating: 69.5
-    },
-    {
-        id: 2,
-        name: 'GTA 6',
-        total_rating: 88.5
-    },
-    {
-        id: 3,
-        name: 'FC27',
-        total_rating: 79.8
-    }
-];
 
 //Én liste med testdata/spill som brukes av søkesiden (searchTestGames()) og infosiden (getTestGameById())
 export const TEST_GAMES:  IGDBGame[] = [
