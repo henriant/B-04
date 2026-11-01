@@ -85,7 +85,7 @@ const SearchResults = () => {
             <View style={{ padding: 15 }}>
                 <TextInput style={styles.inputText}
                     placeholder='Search for a game..'
-                    placeholderTextColor='#fcfcfc58'
+                    placeholderTextColor={colors.muted}
                     value={query}
                     onChangeText={setQuery}
                 />

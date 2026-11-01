@@ -12,7 +12,7 @@ export default function TabsLayout() {
                 borderTopColor: colors.wineRed,
             },
             tabBarActiveTintColor: colors.wineRed,
-            tabBarInactiveTintColor: colors.white,
+            tabBarInactiveTintColor: colors.muted,
         }}>
             <Tabs.Screen name="Home" options={{ 
                 title: 'Home',
