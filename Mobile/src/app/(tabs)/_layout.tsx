@@ -1,5 +1,6 @@
 import colors from "@/theme";
 import { Tabs } from "expo-router";
+import { House, Library, Search } from "lucide-react-native";
 
 
 export default function TabsLayout() {
@@ -13,9 +14,16 @@ export default function TabsLayout() {
             tabBarActiveTintColor: colors.wineRed,
             tabBarInactiveTintColor: colors.white,
         }}>
-            <Tabs.Screen name="Home" options={{ title: 'Home' }} />
-            <Tabs.Screen name="SearchResults" options={{ title: 'Search' }} />
-            <Tabs.Screen name="Library" options={{ title: 'Library' }} />
+            <Tabs.Screen name="Home" options={{ 
+                title: 'Home',
+                tabBarIcon: ({ color, size }) => <House color={color} size={size} />
+            }}  />
+            <Tabs.Screen name="SearchResults" options={{ title: 'Search',
+                tabBarIcon: ({ color, size }) => <Search color={color} size={size} />,
+             }} />
+            <Tabs.Screen name="Library" options={{ title: 'Library',
+                tabBarIcon: ({ color, size }) => <Library color={color} size={size} />
+             }} />
         </Tabs>
     )
 }
