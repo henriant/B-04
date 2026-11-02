@@ -20,7 +20,7 @@ export default function Layout() {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.headerTop}>
-                        <Link href="/" asChild>
+                        <Link href="/Home" asChild>
                             <Pressable
                                 accessibilityLabel="Backlog Defeater home"
                                 style={styles.logoLink}
@@ -35,7 +35,7 @@ export default function Layout() {
                         </Link>
 
                         <View style={styles.navigation}>
-                            <Link href="/" asChild>
+                            <Link href="/Home" asChild>
                                 <Pressable style={styles.navButton}>
                                     <Text style={styles.navText}>Home</Text>
                                 </Pressable>
@@ -74,7 +74,7 @@ export default function Layout() {
                     style={styles.footer}
                     contentContainerStyle={styles.footerContent}
                 >
-                    <Link href="/" asChild>
+                    <Link href="/Home" asChild>
                         <Pressable
                             accessibilityLabel="Backlog Defeater home"
                             style={styles.footerLogoLink}
