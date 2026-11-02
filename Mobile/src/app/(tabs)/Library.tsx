@@ -3,7 +3,8 @@
 import { getTestLibrary } from '@/data/testGames';
 import { type LibraryEntry, type LibraryStatus } from '@backlog-defeater/api-client/src/types'
 import { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Library = () => {
@@ -43,12 +44,40 @@ const Library = () => {
 
     }, []);
 
+    const filteredEntries = entries.filter(entry => entry.status === status);
 
+    const renderContent = () => {
+
+        if (loading) {
+            return <Text>Loading...</Text>
+        }
+        if (error) {
+            return <Text>{error}</Text>
+        }
+        if (filteredEntries.length === 0) {
+            return <Text>No games here yet </Text>
+        }
+
+
+        return (
+            <FlatList
+                data={filteredEntries}
+                keyExtractor={(entry) => String(entry.id)}
+                renderItem={({ item }) => item.game ? (
+                    <Text>{item.game.name}</Text>
+                ) : null}
+            />
+        )
+    }
 
     return (
-        <View>
-            <Text>Library</Text>
-        </View>
+        <SafeAreaView>
+            <View>
+                <Text>Library</Text>
+                {renderContent()}
+            </View>
+        </SafeAreaView>
+
     )
 }
 
