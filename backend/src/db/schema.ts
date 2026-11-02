@@ -1,16 +1,60 @@
 import { defineRelations, sql } from 'drizzle-orm';
 import * as t from "drizzle-orm/sqlite-core";
-export * as a from "../auth-schema.js";
 
 export const user = t.sqliteTable("user", {
   // One user
-  id: t.integer().primaryKey({ autoIncrement: true }),
-  name: t.text().notNull(),
-  email: t.text().notNull(),
+  id: t.integer("id").primaryKey(),
+  name: t.text("name").notNull(),
+  email: t.text("email").notNull().unique(),
+  emailVerified: t.integer("email_verified", { mode: "boolean" }).default(false).notNull(),
+  image: t.text("image"),
   libraryId: t.integer('library_id').references(() => library.id),
-  createdAt: t.text('createdAt').notNull().default(sql`(current_timestamp)`),
+  createdAt: t.integer("created_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).notNull(),
+  updatedAt: t.integer("updated_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).$onUpdate(() => new Date()).notNull(),
   userRole: t.text("role", { enum: ["user", "admin", "developer"] }).notNull().default("user"),
 });
+
+export const session = t.sqliteTable("session", {
+    id: t.text("id").primaryKey(),
+    expiresAt: t.integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+    token: t.text("token").notNull().unique(),
+    createdAt: t.integer("created_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).notNull(),
+    updatedAt: t.integer("updated_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).$onUpdate(() => new Date()).notNull(),
+    ipAddress: t.text("ip_address"),
+    userAgent: t.text("user_agent"),
+    userId: t.text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  },
+  (table) => [t.index("session_userId_idx").on(table.userId)],
+);
+
+export const account = t.sqliteTable("account", {
+    id: t.text("id").primaryKey(),
+    accountId: t.text("account_id").notNull(),
+    providerId: t.text("provider_id").notNull(),
+    userId: t.text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    accessToken: t.text("access_token"),
+    refreshToken: t.text("refresh_token"),
+    idToken: t.text("id_token"),
+    accessTokenExpiresAt: t.integer("access_token_expires_at", {mode: "timestamp_ms",}),
+    refreshTokenExpiresAt: t.integer("refresh_token_expires_at", {mode: "timestamp_ms",}),
+    scope: t.text("scope"),
+    password: t.text("password"),
+    createdAt: t.integer("created_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).notNull(),
+    updatedAt: t.integer("updated_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).$onUpdate(() => new Date()).notNull(),
+  },
+  (table) => [t.index("account_userId_idx").on(table.userId)],
+);
+
+export const verification = t.sqliteTable("verification", {
+    id: t.text("id").primaryKey(),
+    identifier: t.text("identifier").notNull(),
+    value: t.text("value").notNull(),
+    expiresAt: t.integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+    createdAt: t.integer("created_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).notNull(),
+    updatedAt: t.integer("updated_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).$onUpdate(() => new Date()).notNull(),
+  },
+  (table) => [t.index("verification_identifier_idx").on(table.identifier)],
+);
 
 export const library = t.sqliteTable("library", {
   // One library for one user
@@ -67,3 +111,22 @@ export const relations = defineRelations({ user, library, game, libraryGame }, (
     },
   })
 );
+
+export const userRelations = defineRelations({ user, session, account }, ( r ) => ({
+  user: {
+    sessions: r.many.session(),
+    accounts: r.many.account(),
+  },
+  session: {
+    user: r.one.user({
+      from: r.session.userId,
+      to: r.user.id,
+    }), 
+  },
+  account: {
+    user: r.one.user({
+      from: r.account.userId,
+      to: r.user.id,
+    }), 
+  }
+}));
