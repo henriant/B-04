@@ -3,12 +3,12 @@ import * as t from "drizzle-orm/sqlite-core";
 
 export const user = t.sqliteTable("user", {
   // One user
-  id: t.integer("id").primaryKey(),
+  id: t.text("id").primaryKey(),
   name: t.text("name").notNull(),
   email: t.text("email").notNull().unique(),
   emailVerified: t.integer("email_verified", { mode: "boolean" }).default(false).notNull(),
   image: t.text("image"),
-  libraryId: t.integer('library_id').references(() => library.id),
+  libraryId: t.integer('library_id').references(() => library.id, { onDelete: "cascade" }),
   createdAt: t.integer("created_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).notNull(),
   updatedAt: t.integer("updated_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).$onUpdate(() => new Date()).notNull(),
   userRole: t.text("role", { enum: ["user", "admin", "developer"] }).notNull().default("user"),
