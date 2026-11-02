@@ -8,10 +8,7 @@ const colors = {
   wineRed: '#800020',
   white: '#FFFFFF',
 
-  errorColor: '#ff6b6b',
-
-  // placeholder farge:
-  muted: '#fcfcfc58'
+  errorColor: '#ff6b6b'
   
 }
 

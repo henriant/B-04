@@ -15,7 +15,7 @@ export function AuthInput({ icon: Icon, error, ...rest }: AuthInputProps) {
             <View style={styles.inputContainer}>
                 <Icon style={styles.inputIcon} />
                 <TextInput style={styles.inputText}
-                    placeholderTextColor={colors.muted}
+                    placeholderTextColor='#fcfcfc58'
                     {...rest}
                 />
             </View>
