@@ -3,7 +3,7 @@ main = "drizzle/src/index.ts"
 compatibility_date = "2022-11-07"
 
 [[ d1_databases ]]
-binding = "backlog-defeater-d1"
-database_name = "backlog-defeater-d1"
+binding = "backlog-defeater-db"
+database_name = "backlog-defeater-db"
 database_id = "bbbe32bd-116d-4dca-b334-ab25e62dda2b"
 migrations_dir = "./drizzle/output"

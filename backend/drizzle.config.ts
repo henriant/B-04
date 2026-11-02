@@ -8,7 +8,7 @@ dotenv.config({
 })
 
 export default defineConfig({
-    out: './output',
+    out: './drizzle/output',
     schema: './src/db/schema.ts',
     dialect: 'sqlite',
     driver: 'd1-http',
