@@ -110,6 +110,13 @@ const Index = () => {
                     </Pressable>
                 </Link>
 
+                
+                <Link href="/Home" asChild>
+                    <Pressable style={styles.button}>
+                        <Text style={styles.buttonText}>Home</Text>
+                    </Pressable>
+                </Link>
+
                 {/* Rendrer loading state mens spillene lastes inn. */}
                 {loading && <Text>Loading games...</Text>}
 
