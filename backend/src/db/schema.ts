@@ -64,7 +64,7 @@ export const library = t.sqliteTable("library", {
 
 export const game = t.sqliteTable("game", {
   // Universal details for a single game
-  id: t.integer().primaryKey({ autoIncrement: true }),
+  id: t.integer().primaryKey(),
   name: t.text().notNull(),
 });
 
@@ -72,13 +72,13 @@ export const libraryGame = t.sqliteTable("library_game", {
   // Specific details for one game in one library
   libraryId: t.integer('library_id').notNull().references(() => library.id, { onDelete: 'cascade' }),
   gameId: t.integer('game_id').notNull().references(() => game.id, { onDelete: 'cascade' }),
-  status: t.text("status", { enum: ["planned", "playing", "finished"] }).notNull().default("planned"),
+  status: t.text("status", { enum: ["planned", "playing", "completed"] }).notNull().default("planned"),
   addedAt: t.text('addedAt').notNull().default(sql`(current_timestamp)`),
   playtime: t.integer().notNull().default(0)
   }, (table) => [
     t.check(
       "status_check",
-      sql`${table.status} IN ('planned', 'playing', 'finished')`
+      sql`${table.status} IN ('planned', 'playing', 'completed')`
     ),
     t.primaryKey({ columns: [table.libraryId, table.gameId] }),
   ]
