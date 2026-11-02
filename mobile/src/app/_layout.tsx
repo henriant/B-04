@@ -1,7 +1,17 @@
-// legger til layout.tsx som root layout for appen, slik at alle sider i appen får samme layout. Dette gjør det enklere å endre layouten på tvers av appen.
+import { Stack } from 'expo-router'
 
-import Layout from "@/components/pageComponents/Layout";
+
+export const unstable_settings = {
+    anchor: "(tabs)",
+};
 
 export default function RootLayout() {
-    return <Layout />;
+    return (
+        <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index"/>
+            <Stack.Screen name="LogIn" options={{ headerShown: true, title: 'Log In' }}/>
+            <Stack.Screen name="SignUp" options={{ headerShown: true, title: 'Sign Up' }}/>
+            <Stack.Screen name="GameInfo" options={{ headerShown: true, title: 'Game' }} />
+        </Stack>
+    )
 }
