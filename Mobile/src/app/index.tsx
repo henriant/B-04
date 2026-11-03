@@ -1,24 +1,121 @@
 import { Link } from "expo-router";
-import { Pressable, ScrollView, Text } from "react-native";
+import {
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import GameCoverCard from "@/components/gameComponents/GameCoverCard";
+import { TEST_GAMES } from "@/data/testGames";
+import colors from "@/theme";
 
 export default function Index() {
     return (
-        <ScrollView>
-            <Text>Backlog Defeater</Text>
-            <Text>Track your games.</Text>
-            <Text>Discover new worlds!</Text>
+        <SafeAreaView style={styles.safeArea}>
+            <ScrollView contentContainerStyle={styles.content}>
+                <View style={styles.intro}>
+                    <Text style={styles.title}>Backlog Defeater</Text>
+                    <Text style={styles.subtitle}>Track your games.</Text>
+                    <Text style={styles.subtitle}>Discover new worlds!</Text>
+                </View>
 
-            <Link href="/LogIn" asChild>
-                <Pressable>
-                    <Text>Log In</Text>
-                </Pressable>
-            </Link>
+                <View style={styles.actions}>
+                    <Link href="/SearchResults" asChild>
+                        <Pressable style={styles.primaryButton}>
+                            <Text style={styles.primaryButtonText}>Search games</Text>
+                        </Pressable>
+                    </Link>
+                    <Link href="/LogIn" asChild>
+                        <Pressable style={styles.secondaryButton}>
+                            <Text style={styles.secondaryButtonText}>Log in</Text>
+                        </Pressable>
+                    </Link>
+                    <Link href="/SignUp" asChild>
+                        <Pressable style={styles.secondaryButton}>
+                            <Text style={styles.secondaryButtonText}>Sign up</Text>
+                        </Pressable>
+                    </Link>
+                </View>
 
-            <Link href="/SignUp" asChild>
-                <Pressable>
-                    <Text>Sign Up</Text>
-                </Pressable>
-            </Link>
-        </ScrollView>
+                <Text style={styles.sectionTitle}>Discover games</Text>
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.games}
+                >
+                    {TEST_GAMES.map((game) => (
+                        <GameCoverCard key={game.id} game={game} width={140} />
+                    ))}
+                </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: colors.black,
+    },
+    content: {
+        flexGrow: 1,
+        justifyContent: "center",
+        gap: 24,
+        paddingVertical: 24,
+    },
+    intro: {
+        alignItems: "center",
+        paddingHorizontal: 20,
+    },
+    title: {
+        color: colors.white,
+        fontSize: 28,
+        fontWeight: "bold",
+        marginBottom: 12,
+    },
+    subtitle: {
+        color: colors.white,
+        fontSize: 18,
+        marginBottom: 8,
+    },
+    actions: {
+        flexDirection: "row",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: 10,
+        paddingHorizontal: 16,
+    },
+    primaryButton: {
+        backgroundColor: colors.wineRed,
+        borderRadius: 8,
+        paddingHorizontal: 18,
+        paddingVertical: 12,
+    },
+    primaryButtonText: {
+        color: colors.white,
+        fontWeight: "bold",
+    },
+    secondaryButton: {
+        borderColor: colors.wineRed,
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: 18,
+        paddingVertical: 12,
+    },
+    secondaryButtonText: {
+        color: colors.white,
+        fontWeight: "600",
+    },
+    sectionTitle: {
+        color: colors.white,
+        fontSize: 20,
+        fontWeight: "bold",
+        paddingHorizontal: 16,
+    },
+    games: {
+        gap: 12,
+        paddingHorizontal: 16,
+    },
+});
