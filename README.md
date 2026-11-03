@@ -11,17 +11,22 @@ https://docs.google.com/document/d/1xPGiPMfXj1Dv0fjIMI9oQ7GuXVQfSy6UwPikrsie6rE/
 For å sette opp prosjektene må du kjøre:
 - pnpm install i rot mappen (B-04)
 
+For å kjøre worker må du:
+- pnpm dev
+For å slutte den må du:
+- CTRL+C
+
 For å kjøre webappen må du:
 - cd inn i ./Web/
 - pnpm run dev
 For å slutte den må du:
-- CTRL+C i terminalen
+- CTRL+C
 
 For å kjøre mobilappen må du:
 - cd inn i ./Mobile/
 - npx expo start (--android eller --IOS for å velge emulator)
 For å slutte den må du:
-- CTRL+C i terminalen
+- CTRL+C
 
 For å kjøre lokal server i backend:
 - cd inn i .\backend\
@@ -29,17 +34,11 @@ For å kjøre lokal server i backend:
 For å kjøre testen: 
 - Åpne http://localhost:5000/api/top-games i browser
 For å slutte den må du:
-- CTRL+C i terminalen
+- CTRL+C
 
 For å oppdatere database schema:
 - cd inn i /backend/drizzle
 - npx drizzle-kit push
-
-KI avtale:
-
-Vi har lyst til å lære noe fra dette faget, så vi kommer til å bruke KI som er verktøy til å hjelpe oss når vi sitter fast
-Hvis vi ikke vet hvordan å gjøre noe, spør vi KI om å forklare det til oss, så legger vi det inn i prosjektet med en sitering til hva vi spurte
-Vi kommer ikke til å spørre KI om å gjøre ting for oss, siden det kan hende den tar med ting som blir for avansert for oss eller som ikke er del av pensum
 
 --------------------------- Kravspekk ---------------------------
 
