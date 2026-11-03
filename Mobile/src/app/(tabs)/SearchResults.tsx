@@ -21,6 +21,20 @@ export default function SearchResults() {
     const { q } = useLocalSearchParams<{ q?: string }>();
     const query = typeof q === "string" ? q.trim() : "";
 
+import { type IGDBGame } from '@backlog-defeater/api-client';
+import { View, Text, TextInput, StyleSheet, FlatList, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState, useEffect } from 'react';
+import { searchTestGames } from '@/data/testGames';
+import colors from '@/theme';
+import GameRow from '@/components/gameComponents/GameRow';
+
+
+
+const SearchResults = () => {
+
+    const [query, setQuery] = useState('');
+    const [loading, setLoading] = useState<boolean>(false);
     const [results, setResults] = useState<IGDBGame[]>([]);
     const [loading, setLoading] = useState(Boolean(query));
     const [error, setError] = useState<string | null>(null);
@@ -63,10 +77,30 @@ export default function SearchResults() {
                 }
             });
 
-        return () => {
-            cancelled = true;
-        };
-    }, [query]);
+    const renderStatus = () => {
+        if (query.trim() === '') {
+            return <Text style={styles.message}>Search for a game</Text>
+        }
+        if (error) {
+            return <Text style={styles.message}>{error}</Text>
+        }
+        if (loading) {
+            return <Text style={styles.message}>Searching...</Text>
+        }
+        if (results.length === 0) {
+            return <Text style={styles.message}>No results</Text>
+        }
+        return (
+            <View style={{ paddingHorizontal: 15, gap: 5 }}>
+                <FlatList
+                data={results}
+                keyExtractor={(item) => String(item.id)}
+                renderItem={({ item }) => (<GameRow game={item} />
+                )}
+            />
+            </View>
+        )
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: colors.black }}>

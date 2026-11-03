@@ -105,7 +105,7 @@ export const TEST_GAMES:  IGDBGame[] = [
 ];
 
 
-//testdata/ spill for sjekk av continue playing karusellen på home siden
+//testdata/ spill for sjekk av continue playing karusellen på home siden og library-siden.
 export const TEST_LIBRARY: LibraryEntry[] = [
     {
         id: 1,
@@ -187,3 +187,8 @@ export async function getTestGameById(id: number): Promise<IGDBGame | null> {
     )
 
 };
+
+//funksjon for henting av library-spillene til en bruker. Simulerer getLibrary() fra packages>api-client>src>index
+export async function getTestLibrary(): Promise<LibraryEntry[]> {
+    return TEST_LIBRARY;
+}
