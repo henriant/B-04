@@ -73,20 +73,20 @@ const Library = () => {
     }
 
     return (
-        <SafeAreaView>
-            <View style={styles.filterRow}>
-                {STATUS_OPTIONS.map(option => (
-                    <Pressable
-                        key={option.value}
-                        onPress={() => setStatus(option.value)}
-                        style={[styles.filterButton, status === option.value && styles.selectedFilterButton]}
-                    >
-                        <Text style={styles.filterText}>{option.label}</Text>
-                    </Pressable>
-                ))}
-            </View>
-            <View>
-                <Text>Library</Text>
+        <SafeAreaView style={styles.safeArea} edges={['top']}>
+            <View style={styles.container}>
+                <Text style={styles.title}>Library</Text>
+                <View style={styles.filterRow}>
+                    {STATUS_OPTIONS.map(option => (
+                        <Pressable
+                            key={option.value}
+                            onPress={() => setStatus(option.value)}
+                            style={[styles.filterButton, status === option.value && styles.selectedFilterButton]}
+                        >
+                            <Text style={styles.filterText}>{option.label}</Text>
+                        </Pressable>
+                    ))}
+                </View>
                 {renderContent()}
             </View>
         </SafeAreaView>
@@ -96,6 +96,29 @@ const Library = () => {
 
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: colors.black,
+    },
+    container: {
+        flex: 1,
+        padding: 15,
+        gap: 16,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: colors.white,
+    },
+    message: {
+        color: colors.white,
+        textAlign: 'center',
+        padding: 5,
+    },
+    gameName: {
+        color: colors.white,
+        paddingVertical: 8,
+    },
     filterRow: { flexDirection: 'row', gap: 8 },
     filterButton: {
         paddingVertical: 8,
