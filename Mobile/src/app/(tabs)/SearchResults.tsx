@@ -1,137 +1,157 @@
-// Viser alle spillene som matcher søkefilter som brukeren skriver i søkefeltet Search.tsx. Disse kan klikkes på for å vise GameInfo.tsx for det spesifikke spillet.
+import { useEffect, useState } from "react";
+import {
+    FlatList,
+    Pressable,
+    Text,
+    View,
+} from "react-native";
+import { Image } from "expo-image";
+import { Link, useLocalSearchParams } from "expo-router";
+import {
+    createApiClient,
+    igdbImageUrl,
+    type IGDBGame,
+} from "@backlog-defeater/api-client";
+import { API_URL } from "@/config";
+import colors from "@/theme";
 
-import { igdbImageUrl, type IGDBGame } from '@backlog-defeater/api-client'
-import { View, Text, TextInput, StyleSheet, FlatList, Pressable } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { useState, useEffect } from 'react'
-import { searchTestGames } from '@/data/testGames'
-import colors from '@/theme'
-import { Image } from 'expo-image'
-import { Link } from 'expo-router'
+const apiClient = createApiClient(API_URL);
 
+export default function SearchResults() {
+    const { q } = useLocalSearchParams<{ q?: string }>();
+    const query = typeof q === "string" ? q.trim() : "";
 
-
-const SearchResults = () => {
-
-    const [query, setQuery] = useState('');
-    const [loading, setLoading] = useState<boolean>(false);
     const [results, setResults] = useState<IGDBGame[]>([]);
+    const [loading, setLoading] = useState(Boolean(query));
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        let isCancelled = false;
+        let cancelled = false;
 
-        setLoading(true);
+        setResults([]);
         setError(null);
 
-        searchTestGames(query)
+        if (!query) {
+            setLoading(false);
+
+            return () => {
+                cancelled = true;
+            };
+        }
+
+        setLoading(true);
+
+        apiClient.searchGames(query)
             .then((games) => {
-                if (!isCancelled) {
+                if (!cancelled) {
                     setResults(games);
                 }
             })
-            .catch((err) => {
-                if (!isCancelled) {
-                    console.error("Search failed:", err);
-                    setError('Something went wrong. Please try again')
+            .catch((cause: unknown) => {
+                if (!cancelled) {
+                    console.error("Game search failed:", cause);
+                    setError(
+                        cause instanceof Error
+                            ? cause.message
+                            : "Could not search for games. Please try again.",
+                    );
                 }
             })
             .finally(() => {
-                if (!isCancelled) {
+                if (!cancelled) {
                     setLoading(false);
                 }
-            })
+            });
 
-        return () => { isCancelled = true }
-    }, [query])
-
-    const renderStatus = () => {
-        if (query.trim() === '') {
-            return <Text style={styles.message}>Search for a game</Text>
-        }
-        if (error) {
-            return <Text style={styles.message}>{error}</Text>
-        }
-        if (loading) {
-            return <Text style={styles.message}>Searching...</Text>
-        }
-        if (results.length === 0) {
-            return <Text style={styles.message}>No results</Text>
-        }
-        return (
-            <FlatList
-                data={results}
-                keyExtractor={(item) => String(item.id)}
-                renderItem={({ item }) => (
-                    <Link href={{ pathname: '/GameInfo', params: { id: item.id } }} asChild>
-                        <Pressable>
-                            <View style={styles.row}>
-                                <Image
-                                    source={igdbImageUrl(item.coverImageId)}
-                                    style={styles.cover}
-                                    contentFit='cover'
-                                />
-                                <Text style={styles.title}>{item.name}</Text>
-                            </View>
-                        </Pressable>
-                    </Link>
-                )}
-            />
-        )
-    }
+        return () => {
+            cancelled = true;
+        };
+    }, [query]);
 
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <View style={{ padding: 15 }}>
-                <TextInput style={styles.inputText}
-                    placeholder='Search for a game..'
-                    placeholderTextColor={colors.muted}
-                    value={query}
-                    onChangeText={setQuery}
+        <View style={{ flex: 1, backgroundColor: colors.black }}>
+            <Text style={{ color: colors.white }}>
+                {query ? `Games matching "${query}"` : "Search for a game"}
+            </Text>
+
+            {query !== "" && loading && (
+                <Text style={{ color: colors.white }}>
+                    Searching for games...
+                </Text>
+            )}
+
+            {query !== "" && !loading && error && (
+                <Text accessibilityRole="alert" style={{ color: colors.white }}>
+                    {error}
+                </Text>
+            )}
+
+            {query !== "" && !loading && !error && results.length === 0 && (
+                <Text style={{ color: colors.white }}>No games found</Text>
+            )}
+
+            {!loading && !error && results.length > 0 && (
+                <FlatList
+                    style={{ flex: 1 }}
+                    data={results}
+                    keyExtractor={(game) => String(game.id)}
+                    renderItem={({ item }) => {
+                        const coverUrl = igdbImageUrl(item.coverImageId);
+
+                        return (
+                            <Link
+                                href={{
+                                    pathname: "/GameInfo",
+                                    params: { id: String(item.id) },
+                                }}
+                                asChild
+                            >
+                                <Pressable>
+                                    <View
+                                        style={{
+                                            flexDirection: "row",
+                                            alignItems: "center",
+                                            gap: 12,
+                                            padding: 10,
+                                        }}
+                                    >
+                                        {coverUrl ? (
+                                            <Image
+                                                source={{ uri: coverUrl }}
+                                                style={{
+                                                    width: 60,
+                                                    height: 80,
+                                                    borderRadius: 6,
+                                                }}
+                                                contentFit="cover"
+                                                accessibilityLabel={`Cover for ${item.name}`}
+                                            />
+                                        ) : (
+                                            <View
+                                                style={{
+                                                    width: 60,
+                                                    height: 80,
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    backgroundColor: colors.navyBlue,
+                                                }}
+                                            >
+                                                <Text style={{ color: colors.white }}>
+                                                    No cover
+                                                </Text>
+                                            </View>
+                                        )}
+
+                                        <Text style={{ color: colors.white }}>
+                                            {item.name}
+                                        </Text>
+                                    </View>
+                                </Pressable>
+                            </Link>
+                        );
+                    }}
                 />
-            </View>
-
-            {renderStatus()}
-
-
-        </SafeAreaView>
-    )
+            )}
+        </View>
+    );
 }
-
-
-const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: colors.black
-    },
-    inputText: {
-        color: colors.white,
-        backgroundColor: colors.navyBlue,
-        padding: 10,
-        borderRadius: 10
-    },
-    message: {
-        color: colors.white,
-        textAlign: 'center',
-        padding: 5
-    },
-    row: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 12,
-        paddingHorizontal: 15,
-        paddingVertical: 8,
-    },
-    cover: {
-        width: 60,
-        aspectRatio: 3 / 4,
-        borderRadius: 6,
-    },
-    title: {
-        color: colors.white,
-        flex: 1,
-    },
-})
-
-
-export default SearchResults

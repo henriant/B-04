@@ -170,7 +170,7 @@ export async function searchTestGames(query: string): Promise<IGDBGame[]> {
     }
     
     return(
-        TEST_GAMES.filter(game => 
+        TEST_GAMES.filter(game =>
             game.name.toLowerCase().includes(q)
         )
     )

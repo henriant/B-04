@@ -166,3 +166,6 @@ app.get("/api/games", async (c) => {
 
 // Gjør appen (Hono) tilgjengelig for Wrangler
 export default app;
+
+
+

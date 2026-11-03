@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         gap: 10,
         marginBottom: 15
-    } 
+    }
 })
 
 export default GameInfo
