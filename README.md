@@ -47,6 +47,9 @@ Ikke start den eldre Worker-en fra `backend/` for spill- eller bibliotek-API-et.
 Ikke kjør `drizzle-kit push` mot Cloudflare som del av vanlig utvikling; databasen
 administreres separat, og skjemaendringer må gjøres som en kontrollert migrering.
 
+For å kjøre tester:
+- pnpm test
+
 --------------------------- Kravspekk ---------------------------
 
 BACKLOG DEFEATER
