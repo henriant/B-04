@@ -1,10 +1,12 @@
 // Selve base of operations for brukeren, hvor de får vist alle spillene de eier (spillene de har lagt til i library)
 
 import { getTestLibrary } from '@/data/testGames';
-import { type LibraryEntry, type LibraryStatus } from '@backlog-defeater/api-client/src/types'
-import { useState, useEffect } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { type LibraryEntry, type LibraryStatus } from '@backlog-defeater/api-client/src/types';
+import { useState, useEffect } from 'react';
+import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { STATUS_OPTIONS } from '@/constants/library';
+import colors from '@/theme';
 
 
 const Library = () => {
@@ -72,6 +74,17 @@ const Library = () => {
 
     return (
         <SafeAreaView>
+            <View style={styles.filterRow}>
+                {STATUS_OPTIONS.map(option => (
+                    <Pressable
+                        key={option.value}
+                        onPress={() => setStatus(option.value)}
+                        style={[styles.filterButton, status === option.value && styles.selectedFilterButton]}
+                    >
+                        <Text style={styles.filterText}>{option.label}</Text>
+                    </Pressable>
+                ))}
+            </View>
             <View>
                 <Text>Library</Text>
                 {renderContent()}
@@ -80,5 +93,25 @@ const Library = () => {
 
     )
 }
+
+
+const styles = StyleSheet.create({
+    filterRow: { flexDirection: 'row', gap: 8 },
+    filterButton: {
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: colors.wineRed,
+    },
+    selectedFilterButton: {
+        backgroundColor: colors.wineRed,
+    },
+    filterText: {
+        color: colors.white,
+        fontWeight: '600',
+    },
+})
+
 
 export default Library 
