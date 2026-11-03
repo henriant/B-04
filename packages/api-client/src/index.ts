@@ -99,6 +99,18 @@ export function createApiClient (
             );
         },
 
+        async getGame(igdbGameId: number): Promise<IGDBGame> {
+            const res = await fetch(`${baseUrl}/api/games/${igdbGameId}`, {
+                headers: await getHeaders(),
+            });
+
+            return parseResponse(
+                res,
+                igdbGameSchema,
+                "Could not load game details",
+            );
+        },
+
         async getLibrary(): Promise<LibraryEntry[]> {
             const res = await fetch(`${baseUrl}/api/library`, {
                 headers: await getHeaders(),
@@ -121,10 +133,11 @@ export function createApiClient (
                 method: "POST",
                 headers: await getHeaders(),
                 credentials: "include",
-                // API-et trenger IGDB-ID, navn og status for å lagre spillet.
+                // Send spill-ID, navn, cover og status til bibliotek-API-et.
                 body: JSON.stringify({
                     igdbGameId: game.id,
                     name: game.name,
+                    coverImageId: game.coverImageId,
                     status,
                 }),
             });

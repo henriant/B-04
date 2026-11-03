@@ -52,6 +52,12 @@ type IgdbGameResponse = {
 	name: string;
 	summary?: string;
 	first_release_date?: number;
+	involved_companies?: {
+		publisher?: boolean;
+		company?: {
+			name?: string;
+		};
+	}[];
 	cover?: {
 		image_id?: string;
 	} | null;
@@ -120,7 +126,7 @@ app.get("/api/games", async (c) => {
 	const escapedSearch = search.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 
 	// Ber IGDB om nødvendige felt og setter resultatgrensa til 30
-	const igdbQuery = `fields id,name,summary,first_release_date,cover.image_id; ` + `search "${escapedSearch}"; ` + "limit 30;";
+	const igdbQuery = `fields id,name,summary,first_release_date,cover.image_id,involved_companies.publisher,involved_companies.company.name; ` + `search "${escapedSearch}"; ` + "limit 30;";
 
 	try {
 		// henter et gyldig Twitch token for IGDB kallet
@@ -153,6 +159,7 @@ app.get("/api/games", async (c) => {
 			summary: game.summary,
 			firstReleaseDate: game.first_release_date,
 			coverImageId: game.cover?.image_id,
+			publisher: game.involved_companies?.find((company) => company.publisher)?.company?.name,
 		}));
 
 		// Returnerer resultatene til Web eller Mobile
@@ -164,8 +171,53 @@ app.get("/api/games", async (c) => {
 	}
 });
 
+// Henter full IGDB-informasjon for GameInfo ved hjelp av spillets ID.
+app.get("/api/games/:id", async (c) => {
+	const id = Number(c.req.param("id"));
+	if (!Number.isSafeInteger(id) || id <= 0) {
+		return c.json({ message: "Invalid game ID" }, 400);
+	}
+
+	if (!c.env.IGDB_CLIENT_ID || !c.env.IGDB_CLIENT_SECRET) {
+		console.error("IGDB credentials are missing");
+		return c.json({ message: "Game search is not configured" }, 500);
+	}
+
+	try {
+		const accessToken = await getAccessToken(c.env);
+		const response = await fetch("https://api.igdb.com/v4/games", {
+			method: "POST",
+			headers: {
+				"Client-ID": c.env.IGDB_CLIENT_ID,
+				Authorization: `Bearer ${accessToken}`,
+				"Content-Type": "text/plain",
+			},
+			body: `fields id,name,summary,first_release_date,cover.image_id,involved_companies.publisher,involved_companies.company.name; where id = ${id};`,
+		});
+
+		if (!response.ok) {
+			console.error("IGDB game details request failed:", response.status);
+			return c.json({ message: "Game details provider failed" }, 502);
+		}
+
+		const [game] = (await response.json()) as IgdbGameResponse[];
+		if (!game) {
+			return c.json({ message: "Game not found" }, 404);
+		}
+
+		return c.json({
+			id: game.id,
+			name: game.name,
+			summary: game.summary,
+			firstReleaseDate: game.first_release_date,
+			coverImageId: game.cover?.image_id,
+			publisher: game.involved_companies?.find((company) => company.publisher)?.company?.name,
+		});
+	} catch (error) {
+		console.error("IGDB game details request failed:", error);
+		return c.json({ message: "Unable to load game details" }, 502);
+	}
+});
+
 // Gjør appen (Hono) tilgjengelig for Wrangler
 export default app;
-
-
-

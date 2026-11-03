@@ -9,6 +9,7 @@ type LibraryRow = {
   status: "planned" | "playing" | "completed";
   addedAt: string;
   gameName: string;
+  coverImageId: string | null;
 };
 
 
@@ -77,6 +78,7 @@ export default {
       const input = body as {
         igdbGameId?: unknown;
         name?: unknown;
+        coverImageId?: unknown;
         status?: unknown;
       };
 
@@ -86,6 +88,9 @@ export default {
         input.igdbGameId <= 0 ||
         typeof input.name !== "string" ||
         input.name.trim().length === 0 ||
+        (input.coverImageId !== undefined &&
+          input.coverImageId !== null &&
+          (typeof input.coverImageId !== "string" || input.coverImageId.trim().length === 0)) ||
         (input.status !== undefined &&
           input.status !== "planned" &&
           input.status !== "playing" &&
@@ -108,9 +113,11 @@ export default {
       // Bruk IGDB-ID som spill-ID; et spill kan deles av flere brukeres bibliotek.
       await env.Backlog_Binding
         .prepare(
-          "INSERT INTO game (id, name) VALUES (?, ?) ON CONFLICT(id) DO NOTHING",
+          `INSERT INTO game (id, name, cover_image_id) VALUES (?, ?, ?)
+           ON CONFLICT(id) DO UPDATE SET
+             cover_image_id = COALESCE(excluded.cover_image_id, game.cover_image_id)`,
         )
-        .bind(input.igdbGameId, name)
+        .bind(input.igdbGameId, name, input.coverImageId ?? null)
         .run();
 
       // Koblingen lagrer statusen inne i akkurat denne brukerens bibliotek.
@@ -129,7 +136,8 @@ export default {
             game.id AS igdbGameId,
             library_game.status AS status,
             library_game.addedAt AS addedAt,
-            game.name AS gameName
+            game.name AS gameName,
+            game.cover_image_id AS coverImageId
           FROM library
           JOIN library_game ON library_game.library_id = library.id
           JOIN game ON game.id = library_game.game_id
@@ -150,15 +158,99 @@ export default {
           igdbGameId: entry.igdbGameId,
           status: entry.status,
           addedAt: entry.addedAt,
-          game: { id: entry.igdbGameId, name: entry.gameName },
+          game: {
+            id: entry.igdbGameId,
+            name: entry.gameName,
+            ...(entry.coverImageId ? { coverImageId: entry.coverImageId } : {}),
+          },
         },
         { status: 201 },
       ));
     }
 
-    // Slett bare koblingen i brukerens bibliotek, ikke selve spilloppføringen.
     const deleteMatch = url.pathname.match(/^\/api\/library\/(\d+)$/);
 
+    // Oppdater statusen for spillet bare i biblioteket til innlogget bruker.
+    if (deleteMatch && request.method === "PATCH") {
+      const igdbGameId = Number(deleteMatch[1]);
+      if (!Number.isSafeInteger(igdbGameId) || igdbGameId <= 0) {
+        return respond(Response.json({ message: "Invalid game ID" }, { status: 400 }));
+      }
+
+      let body: unknown;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(Response.json({ message: "Invalid JSON body" }, { status: 400 }));
+      }
+
+      if (
+        typeof body !== "object" ||
+        body === null ||
+        Array.isArray(body)
+      ) {
+        return respond(Response.json({ message: "Invalid status" }, { status: 400 }));
+      }
+
+      const status = (body as Record<string, unknown>).status;
+      if (status !== "planned" && status !== "playing" && status !== "completed") {
+        return respond(Response.json({ message: "Invalid status" }, { status: 400 }));
+      }
+
+      const result = await env.Backlog_Binding
+        .prepare(`
+          UPDATE library_game
+          SET status = ?
+          WHERE game_id = ?
+            AND library_id = (
+              SELECT id FROM library WHERE user_id = ?
+            )
+        `)
+        .bind(status, igdbGameId, session.user.id)
+        .run();
+
+      if (result.meta.changes === 0) {
+        return respond(Response.json(
+          { message: "Game not found in your library" },
+          { status: 404 },
+        ));
+      }
+
+      const entry = await env.Backlog_Binding
+        .prepare(`
+          SELECT
+            library_game.status AS status,
+            library_game.addedAt AS addedAt,
+            game.name AS gameName,
+            game.cover_image_id AS coverImageId
+          FROM library
+          JOIN library_game ON library_game.library_id = library.id
+          JOIN game ON game.id = library_game.game_id
+          WHERE library.user_id = ? AND game.id = ?
+        `)
+        .bind(session.user.id, igdbGameId)
+        .first<LibraryRow>();
+
+      if (!entry) {
+        return respond(Response.json(
+          { message: "Could not load updated library entry" },
+          { status: 500 },
+        ));
+      }
+
+      return respond(Response.json({
+        igdbGameId,
+        status: entry.status,
+        addedAt: entry.addedAt,
+        game: {
+          id: igdbGameId,
+          name: entry.gameName,
+          ...(entry.coverImageId ? { coverImageId: entry.coverImageId } : {}),
+        },
+      }));
+    }
+
+    // Slett bare koblingen i brukerens bibliotek, ikke selve spilloppføringen.
     if (deleteMatch && request.method === "DELETE") {
       const igdbGameId = Number(deleteMatch[1]);
 
@@ -204,7 +296,8 @@ export default {
             game.id AS igdbGameId,
             library_game.status AS status,
             library_game.addedAt AS addedAt,
-            game.name AS gameName
+            game.name AS gameName,
+            game.cover_image_id AS coverImageId
           FROM library
           JOIN library_game ON library_game.library_id = library.id
           JOIN game ON game.id = library_game.game_id
@@ -214,11 +307,15 @@ export default {
         .all<LibraryRow>();
 
       return respond(Response.json(
-        results.map(({ igdbGameId, status, addedAt, gameName }) => ({
+        results.map(({ igdbGameId, status, addedAt, gameName, coverImageId }) => ({
           igdbGameId,
           status,
           addedAt,
-          game: { id: igdbGameId, name: gameName },
+          game: {
+            id: igdbGameId,
+            name: gameName,
+            ...(coverImageId ? { coverImageId } : {}),
+          },
         })),
       ));
     }

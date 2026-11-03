@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
     ApiError,
     createApiClient,
+    igdbImageUrl,
     type LibraryEntry,
 } from "@backlog-defeater/api-client";
 
@@ -83,13 +84,28 @@ export function LibraryList({ query }: LibraryListProps) {
         <>
             {filteredGames.map((entry) => (
                 <article className="game" key={entry.igdbGameId}>
-                    <a href={`/GameInfo?id=${entry.igdbGameId}`}>
-                        <div className="library-game-img" aria-label="No cover available">
-                            No cover available
+                    <a className="library-game-card" href={`/GameInfo?id=${entry.igdbGameId}`}>
+                        {/* Navn og status vises oppå coveret ved hover eller tastaturfokus. */}
+                        <div className="library-game-cover">
+                            {igdbImageUrl(entry.game?.coverImageId) ? (
+                                <img
+                                    className="library-game-img"
+                                    src={igdbImageUrl(entry.game?.coverImageId)}
+                                    alt={`Cover for ${entry.game?.name ?? "game"}`}
+                                    loading="lazy"
+                                />
+                            ) : (
+                                <div className="library-game-img" aria-label="No cover available">
+                                    No cover available
+                                </div>
+                            )}
+                            <div className="library-game-hover">
+                                <h3>{entry.game?.name ?? "Unknown game"}</h3>
+                                <p>Status: {entry.status}</p>
+                            </div>
                         </div>
                         <h2>{entry.game?.name ?? "Unknown game"}</h2>
                     </a>
-                    <p>Status: {entry.status}</p>
                 </article>
             ))}
         </>

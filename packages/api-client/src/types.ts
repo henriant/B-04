@@ -10,6 +10,7 @@ export type IGDBGame = {
     coverImageId?: string;
     summary?: string;
     firstReleaseDate?: number;
+    publisher?: string;
 };
 
 // Typr for brukerens egne library-spill

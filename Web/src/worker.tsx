@@ -21,7 +21,11 @@ export default defineApp([
       route("/Library", Library),
       route("/LogIn", LogIn),
       route("/SignUp", SignUp),
-      route("/GameInfo", GameInfo),
+      route("/GameInfo", ({ request }) => {
+        const url = new URL(request.url);
+        const gameId = url.searchParams.get("id") ?? "";
+        return <GameInfo gameId={gameId} />;
+      }),
       route("/Filter", Filter),
 
       /* Test for SearchResults pages*/

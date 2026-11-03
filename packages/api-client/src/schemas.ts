@@ -27,6 +27,7 @@ export const igdbGameSchema = z.object({
     coverImageId: z.string().optional(),
     summary: z.string().optional(),
     firstReleaseDate: z.number().optional(),
+    publisher: z.string().optional(),
 });
 
 export const libraryStatusSchema = z.enum([
