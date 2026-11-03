@@ -7,8 +7,6 @@ import {
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import GameCoverCard from "@/components/gameComponents/GameCoverCard";
-import { TEST_GAMES } from "@/data/testGames";
 import colors from "@/theme";
 
 export default function Index() {
@@ -39,16 +37,6 @@ export default function Index() {
                     </Link>
                 </View>
 
-                <Text style={styles.sectionTitle}>Discover games</Text>
-                <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={styles.games}
-                >
-                    {TEST_GAMES.map((game) => (
-                        <GameCoverCard key={game.id} game={game} width={140} />
-                    ))}
-                </ScrollView>
             </ScrollView>
         </SafeAreaView>
     );
@@ -107,15 +95,5 @@ const styles = StyleSheet.create({
     secondaryButtonText: {
         color: colors.white,
         fontWeight: "600",
-    },
-    sectionTitle: {
-        color: colors.white,
-        fontSize: 20,
-        fontWeight: "bold",
-        paddingHorizontal: 16,
-    },
-    games: {
-        gap: 12,
-        paddingHorizontal: 16,
     },
 });

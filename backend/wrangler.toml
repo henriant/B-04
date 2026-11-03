@@ -7,5 +7,6 @@ compatibility_flags = ["nodejs_compat"]
 [[ d1_databases ]]
 binding = "Backlog_Binding"
 database_name = "backlog-defeater-db"
-database_id = "bbbe32bd-116d-4dca-b334-ab25e62dda2b"
+database_id = "75e16b6b-4ac1-4618-9dcd-f98c2b1a4eeb"
+remote = true
 migrations_dir = "./drizzle/output"

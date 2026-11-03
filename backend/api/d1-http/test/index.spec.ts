@@ -28,7 +28,7 @@ describe("d1-http worker", () => {
 
 		expect(response.status).toBe(400);
 		expect(await response.json()).toEqual({
-			error: "Search query is required",
+			message: "Search text is required",
 		});
 	});
 
@@ -43,7 +43,7 @@ describe("d1-http worker", () => {
 
 		expect(response.status).toBe(400);
 		expect(await response.json()).toEqual({
-			error: "Search query must be 80 characters or fewer",
+			message: "Search text is too long",
 		});
 	});
 

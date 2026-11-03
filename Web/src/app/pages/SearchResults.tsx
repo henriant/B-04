@@ -11,8 +11,7 @@ import {
 } from "@backlog-defeater/api-client";
 
 const apiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
-const libraryApiUrl = import.meta.env.VITE_LIBRARY_API_BASE_URL;
-const libraryApiClient = libraryApiUrl ? createApiClient(libraryApiUrl) : null;
+const libraryApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
 
 type SearchResultsProps = {
     query: string;
@@ -33,14 +32,6 @@ export function SearchResults({ query }: SearchResultsProps) {
 
     // Legg til nye spill, eller oppdater statusen hvis spillet allerede eies.
     const handleSaveStatus = async (game: IGDBGame) => {
-        if (!libraryApiClient) {
-            setAddErrors((current) => ({
-                ...current,
-                [game.id]: "Library API URL is not configured.",
-            }));
-            return;
-        }
-
         setAddErrors((current) => {
             const next = { ...current };
             delete next[game.id];
@@ -110,33 +101,28 @@ export function SearchResults({ query }: SearchResultsProps) {
             });
 
         // Hent eierens statuser slik at søkeresultatene viser riktig bibliotekstatus.
-        if (libraryApiClient) {
-            libraryApiClient.getLibrary()
-                .then((entries) => {
-                    if (!canceled) {
-                        const statuses: Record<number, LibraryStatus> = {};
-                        for (const entry of entries) {
-                            statuses[entry.igdbGameId] = entry.status;
-                        }
-                        setLibraryStatuses(statuses);
-                        setSelectedStatuses(statuses);
+        libraryApiClient.getLibrary()
+            .then((entries) => {
+                if (!canceled) {
+                    const statuses: Record<number, LibraryStatus> = {};
+                    for (const entry of entries) {
+                        statuses[entry.igdbGameId] = entry.status;
                     }
-                })
-                .catch((cause: unknown) => {
-                    if (!canceled && !(cause instanceof ApiError && cause.status === 401)) {
-                        console.error("Could not load library statuses:", cause);
-                        setLibraryLoadError("Could not check your library status. Please try again.");
-                    }
-                })
-                .finally(() => {
-                    if (!canceled) {
-                        setLibraryLoaded(true);
-                    }
-                });
-        } else {
-            setLibraryLoadError("Library API URL is not configured.");
-            setLibraryLoaded(true);
-        }
+                    setLibraryStatuses(statuses);
+                    setSelectedStatuses(statuses);
+                }
+            })
+            .catch((cause: unknown) => {
+                if (!canceled && !(cause instanceof ApiError && cause.status === 401)) {
+                    console.error("Could not load library statuses:", cause);
+                    setLibraryLoadError("Could not check your library status. Please try again.");
+                }
+            })
+            .finally(() => {
+                if (!canceled) {
+                    setLibraryLoaded(true);
+                }
+            });
 
     return() => {
         canceled = true;

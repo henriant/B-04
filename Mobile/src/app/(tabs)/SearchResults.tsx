@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
     FlatList,
     StyleSheet,
@@ -7,9 +7,12 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
+    ApiError,
     createApiClient,
     type IGDBGame,
+    type LibraryEntry,
 } from "@backlog-defeater/api-client";
+import { useFocusEffect } from "expo-router";
 import GameRow from "@/components/gameComponents/GameRow";
 import { API_URL } from "@/config";
 import colors from "@/theme";
@@ -21,6 +24,26 @@ export default function SearchResults() {
     const [results, setResults] = useState<IGDBGame[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [libraryEntries, setLibraryEntries] = useState<LibraryEntry[]>([]);
+
+    useFocusEffect(
+        useCallback(() => {
+            let active = true;
+            apiClient.getLibrary()
+                .then((entries) => {
+                    if (active) setLibraryEntries(entries);
+                })
+                .catch((cause: unknown) => {
+                    if (!(cause instanceof ApiError && cause.status === 401)) {
+                        console.error("Could not load library statuses:", cause);
+                    }
+                    if (active) setLibraryEntries([]);
+                });
+            return () => {
+                active = false;
+            };
+        }, []),
+    );
 
     useEffect(() => {
         let cancelled = false;
@@ -98,7 +121,12 @@ export default function SearchResults() {
                 <FlatList
                     data={results}
                     keyExtractor={(game) => String(game.id)}
-                    renderItem={({ item }) => <GameRow game={item} />}
+                    renderItem={({ item }) => (
+                        <GameRow
+                            game={item}
+                            status={libraryEntries.find((entry) => entry.igdbGameId === item.id)?.status}
+                        />
+                    )}
                     contentContainerStyle={styles.results}
                     keyboardShouldPersistTaps="handled"
                 />

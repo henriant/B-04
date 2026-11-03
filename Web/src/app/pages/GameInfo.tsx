@@ -10,8 +10,7 @@ import {
 } from "@backlog-defeater/api-client";
 
 const gameApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
-const libraryApiUrl = import.meta.env.VITE_LIBRARY_API_BASE_URL;
-const libraryApiClient = libraryApiUrl ? createApiClient(libraryApiUrl) : null;
+const libraryApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
 
 const statuses: { value: LibraryStatus; label: string }[] = [
     { value: "planned", label: "Planned" },
@@ -76,32 +75,27 @@ export function GameInfo({ gameId }: GameInfoProps) {
                 }
             });
 
-        if (!libraryApiClient) {
-            setLibraryError("Library API URL is not configured.");
-            setLibraryLoaded(true);
-        } else {
-            libraryApiClient.getLibrary()
-                .then((entries) => {
-                    if (!cancelled) {
-                        const entry = entries.find((item) => item.igdbGameId === id);
-                        if (entry) {
-                            setIsInLibrary(true);
-                            setSelectedStatus(entry.status);
-                        }
+        libraryApiClient.getLibrary()
+            .then((entries) => {
+                if (!cancelled) {
+                    const entry = entries.find((item) => item.igdbGameId === id);
+                    if (entry) {
+                        setIsInLibrary(true);
+                        setSelectedStatus(entry.status);
                     }
-                })
-                .catch((cause: unknown) => {
-                    if (!cancelled && !(cause instanceof ApiError && cause.status === 401)) {
-                        console.error("Could not check game library status:", cause);
-                        setLibraryError("Could not check your library. Please try again.");
-                    }
-                })
-                .finally(() => {
-                    if (!cancelled) {
-                        setLibraryLoaded(true);
-                    }
-                });
-        }
+                }
+            })
+            .catch((cause: unknown) => {
+                if (!cancelled && !(cause instanceof ApiError && cause.status === 401)) {
+                    console.error("Could not check game library status:", cause);
+                    setLibraryError("Could not check your library. Please try again.");
+                }
+            })
+            .finally(() => {
+                if (!cancelled) {
+                    setLibraryLoaded(true);
+                }
+            });
 
         return () => {
             cancelled = true;
@@ -110,8 +104,8 @@ export function GameInfo({ gameId }: GameInfoProps) {
 
     // Bruk PATCH for et spill som eies, ellers legg spillet til med valgt status.
     const handleSaveStatus = async () => {
-        if (!game || !libraryApiClient) {
-            setStatusError("Library API URL is not configured.");
+        if (!game) {
+            setStatusError("Game details are not loaded.");
             return;
         }
 

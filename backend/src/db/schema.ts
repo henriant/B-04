@@ -68,7 +68,12 @@ export const game = t.sqliteTable("game", {
   // IGDB-ID-en brukes som spillets ID, så vi kan gjenbruke samme spill for flere brukere.
   id: t.integer().primaryKey(),
   name: t.text().notNull(),
-  coverImageId: t.text("cover_image_id"),
+  summary: t.text(),
+  releaseDate: t.text(),
+  publisher: t.text(),
+  developer: t.text(),
+  genre: t.text(),
+  coverImage: t.text(),
 });
 
 export const libraryGame = t.sqliteTable("library_game", {

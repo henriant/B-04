@@ -7,6 +7,9 @@ import { Image } from 'expo-image'
 import { Link } from 'expo-router'
 import colors from '@/theme'
 import { useState } from 'react'
+import { router } from 'expo-router'
+import { ApiError } from '@backlog-defeater/api-client'
+import { apiClient } from '@/api'
 import { signUpSchema, type UserSignUpInput } from '@/schemas/auth'
 import { AuthInput } from '@/components/shared/AuthInput'
 
@@ -16,11 +19,14 @@ const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [requestError, setRequestError] = useState<string | null>(null)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     //tilstand for feil
     const [errors, setErrors] = useState<Partial<Record<keyof UserSignUpInput, string>>>({})
 
-    const handleSignUp = () => {
+    const handleSignUp = async () => {
+        setRequestError(null)
         const result = signUpSchema.safeParse({ name, email, password, confirmPassword })
 
         if (!result.success) {
@@ -38,7 +44,24 @@ const SignUp = () => {
         }
 
         setErrors({})
-
+        setIsSubmitting(true)
+        try {
+            await apiClient.register({
+                name: result.data.name,
+                email: result.data.email,
+                password: result.data.password,
+            })
+            router.replace('/Home')
+        } catch (cause: unknown) {
+            console.error('Sign-up failed:', cause)
+            setRequestError(
+                cause instanceof ApiError
+                    ? cause.message
+                    : 'Could not create your account. Please try again.',
+            )
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -105,8 +128,9 @@ const SignUp = () => {
                     error={errors.confirmPassword}
                 />
 
-                <Pressable style={styles.button} onPress={handleSignUp}>
-                    <Text style={styles.text}>Sign up</Text>
+                {requestError ? <Text accessibilityRole="alert" style={styles.error}>{requestError}</Text> : null}
+                <Pressable style={styles.button} onPress={() => void handleSignUp()} disabled={isSubmitting}>
+                    <Text style={styles.text}>{isSubmitting ? 'Signing up...' : 'Sign up'}</Text>
                 </Pressable>
 
                 <View style={{ flexDirection: 'row' }}>
@@ -140,6 +164,7 @@ const styles = StyleSheet.create({
     text: {
         color: colors.white
     },
+    error: { color: colors.errorColor, marginTop: 10, textAlign: 'center', paddingHorizontal: 20 },
     button: {
         backgroundColor: colors.wineRed,
         padding: 10,

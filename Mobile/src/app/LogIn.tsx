@@ -7,6 +7,9 @@ import { Image } from 'expo-image'
 import { Link } from 'expo-router'
 import colors from '@/theme'
 import { useState } from 'react'
+import { router } from 'expo-router'
+import { ApiError } from '@backlog-defeater/api-client'
+import { apiClient } from '@/api'
 import { logInSchema } from '@/schemas/auth'
 import { AuthInput } from '@/components/shared/AuthInput'
 
@@ -14,6 +17,8 @@ const LogIn = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [requestError, setRequestError] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
 
   //Tilsdand for feil
@@ -22,7 +27,8 @@ const LogIn = () => {
     password?: string
   }>({})
 
-  const handleLogIn = () => {
+  const handleLogIn = async () => {
+    setRequestError(null)
     const result = logInSchema.safeParse({ email, password })
 
     if (!result.success) {
@@ -42,7 +48,20 @@ const LogIn = () => {
     }
 
     setErrors({})
-
+    setIsSubmitting(true)
+    try {
+      await apiClient.login(result.data)
+      router.replace('/Home')
+    } catch (cause: unknown) {
+      console.error('Log-in failed:', cause)
+      setRequestError(
+        cause instanceof ApiError
+          ? cause.message
+          : 'Could not log in. Please check your details and try again.',
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
 
@@ -86,8 +105,9 @@ const LogIn = () => {
 
         />
 
-        <Pressable style={styles.button} onPress={handleLogIn}>
-          <Text style={styles.text}>Log in</Text>
+        {requestError ? <Text accessibilityRole="alert" style={styles.error}>{requestError}</Text> : null}
+        <Pressable style={styles.button} onPress={() => void handleLogIn()} disabled={isSubmitting}>
+          <Text style={styles.text}>{isSubmitting ? 'Logging in...' : 'Log in'}</Text>
         </Pressable>
 
         <View style={{ flexDirection: 'row' }}>
@@ -117,6 +137,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.white
   },
+  error: { color: colors.errorColor, marginTop: 10, textAlign: 'center', paddingHorizontal: 20 },
   button: {
     backgroundColor: colors.wineRed,
     padding: 10,

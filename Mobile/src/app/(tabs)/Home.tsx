@@ -1,76 +1,101 @@
-// Hjemmeskjermen etter at en bruker har logget inn. Gir brukeren mulighet til å navigere andre steder i appen, som å se biblioteket sitt, se spillene de har lagt til i watchlist, og se spillene de har vurdert.
-
+import { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from 'expo-router';
 import colors from '@/theme';
-import { TEST_GAMES, TEST_LIBRARY } from '@/data/testGames';
-import GameBannerCard from '@/components/gameComponents/GameBanner';
 import GameCoverCard from '@/components/gameComponents/GameCoverCard';
 import { type LibraryEntry } from '@backlog-defeater/api-client';
-
+import { ApiError } from '@backlog-defeater/api-client';
+import { apiClient } from '@/api';
 
 const Home = () => {
-
-    //bare for test. 
-    const user1 = 'Ole';
-
-    //TODO: byttes ut med ekte data fra getLibrary()
-    const library: LibraryEntry[] = TEST_LIBRARY;
-
-    const playing = library.filter((entry) => entry.status === 'playing');
-
-    // bredden til banneren. Destrukturerer og henter bredde 
+    const [library, setLibrary] = useState<LibraryEntry[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const { width } = useWindowDimensions();
-    const bannerWidth = width - 20;
+    const cardWidth = Math.min(width * 0.38, 150);
 
-    //TODO: byttes ut med ekte data (f.eks. getTopGames()) fra backend
-    const popular = TEST_GAMES.slice(0, 3)
+    useFocusEffect(
+        useCallback(() => {
+            let active = true;
+            setLoading(true);
+            setError(null);
+            apiClient.getLibrary()
+                .then((entries) => {
+                    if (active) setLibrary(entries);
+                })
+                .catch((cause: unknown) => {
+                    if (active) {
+                        console.error("Could not load home library:", cause);
+                        setError(cause instanceof ApiError && cause.status === 401
+                            ? "Log in to view your games."
+                            : "Could not load your library. Please try again.");
+                    }
+                })
+                .finally(() => {
+                    if (active) setLoading(false);
+                });
+            return () => {
+                active = false;
+            };
+        }, []),
+    );
+
+    const games = library.flatMap((entry) => entry.game ? [entry.game] : []);
+    const playing = library.flatMap((entry) =>
+        entry.status === 'playing' && entry.game ? [entry.game] : [],
+    );
 
 
     return (
         <SafeAreaView style={styles.safeArea} edges={['top']}>
             <ScrollView contentContainerStyle={styles.container}>
-
                 <View style={styles.section}>
-                    <Text style={styles.title}>Hi, {user1} 👋!</Text>
-                    <Text style={styles.text}>Ready to continue playing? 🎮🚀</Text>
-
+                    <Text style={styles.title}>Your games</Text>
+                    <Text style={styles.text}>Your library, stored in your account.</Text>
                 </View>
-
-                <FlatList
-                    horizontal
-                    pagingEnabled
-                    showsHorizontalScrollIndicator={false}
-                    data={popular}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => <GameBannerCard game={item} width={bannerWidth} />}
-                />
-
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Continue playing</Text>
-                    <FlatList
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        data={playing}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => item.game ? <GameCoverCard game={item.game} width={130} /> : null}
-                        contentContainerStyle={{ gap: 12 }}
-                    />
-                </View>
-
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Popular games</Text>
-                    <FlatList
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        data={popular}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => <GameCoverCard game={item} width={130}/>}
-                        contentContainerStyle={{ gap: 12 }}
-                    />
-                </View>
-
-
+                {loading ? (
+                    <Text style={styles.text}>Loading your library...</Text>
+                ) : error ? (
+                    <Text accessibilityRole="alert" style={styles.text}>{error}</Text>
+                ) : (
+                    <>
+                        <View style={styles.section}>
+                            <Text style={styles.sectionTitle}>Continue playing</Text>
+                            {playing.length > 0 ? (
+                                <FlatList
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}
+                                    data={playing}
+                                    keyExtractor={(item) => item.id.toString()}
+                                    renderItem={({ item }) => (
+                                        <GameCoverCard game={item} width={cardWidth} />
+                                    )}
+                                    contentContainerStyle={{ gap: 12 }}
+                                />
+                            ) : (
+                                <Text style={styles.text}>No games in progress.</Text>
+                            )}
+                        </View>
+                        <View style={styles.section}>
+                            <Text style={styles.sectionTitle}>Your library</Text>
+                            {games.length > 0 ? (
+                                <FlatList
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}
+                                    data={games}
+                                    keyExtractor={(item) => item.id.toString()}
+                                    renderItem={({ item }) => (
+                                        <GameCoverCard game={item} width={cardWidth} />
+                                    )}
+                                    contentContainerStyle={{ gap: 12 }}
+                                />
+                            ) : (
+                                <Text style={styles.text}>Your library is empty.</Text>
+                            )}
+                        </View>
+                    </>
+                )}
             </ScrollView>
         </SafeAreaView>
     );
@@ -85,22 +110,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.black
     },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        color: colors.white
-    },
+    title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, color: colors.white },
     text: {
         color: colors.white
     },
-    section: {
-        marginTop: 24,
-    },
+    section: { marginTop: 24, gap: 10 },
     sectionTitle: {
         fontSize: 18,
         color: colors.white
     }
-})
+});
 
 export default Home;

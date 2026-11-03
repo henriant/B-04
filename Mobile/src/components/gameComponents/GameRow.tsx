@@ -4,12 +4,14 @@ import { Link } from 'expo-router'
 import { ChevronRight } from 'lucide-react-native'
 import { igdbImageUrl, type IGDBGame } from '@backlog-defeater/api-client'
 import colors from '@/theme'
+import type { LibraryStatus } from '@backlog-defeater/api-client'
 
 type Props = {
     game: IGDBGame
+    status?: LibraryStatus
 }
 
-const GameRow = ({ game }: Props) => (
+const GameRow = ({ game, status }: Props) => (
     <Link href={{ pathname: '/GameInfo', params: { id: game.id } }} asChild>
         <Pressable>
             <View style={styles.row}>
@@ -18,7 +20,10 @@ const GameRow = ({ game }: Props) => (
                     style={styles.cover}
                     contentFit="cover"
                 />
-                <Text style={styles.title}>{game.name}</Text>
+                <View style={styles.details}>
+                    <Text style={styles.title}>{game.name}</Text>
+                    {status ? <Text style={styles.status}>In library · {status}</Text> : null}
+                </View>
                 <ChevronRight color={colors.muted} />
             </View>
         </Pressable>
@@ -39,8 +44,9 @@ const styles = StyleSheet.create({
     },
     title: {
         color: colors.white,
-        flex: 1,
     },
+    details: { flex: 1 },
+    status: { color: colors.muted, fontSize: 12, marginTop: 3 },
 })
 
 export default GameRow

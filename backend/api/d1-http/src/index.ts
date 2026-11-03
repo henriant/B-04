@@ -46,7 +46,7 @@ app.use("*", prettyJSON());
 app.use(
 	"*",
 	cors({
-		origin: ["http://localhost:5174"],
+		origin: ["http://localhost:5174", "http://localhost:8081"],
 		allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
 		allowHeaders: ["Content-Type", "Authorization"],
 		credentials: true,
@@ -148,7 +148,7 @@ app.get("/api/library", async (c) => {
 		       library_game.status AS status,
 		       library_game.addedAt AS addedAt,
 		       game.name AS gameName,
-		       game.cover_image_id AS coverImageId
+		       game.coverImage AS coverImageId
 		FROM library_game
 		JOIN game ON game.id = library_game.game_id
 		WHERE library_game.library_id = ?
@@ -201,11 +201,11 @@ app.post("/api/library", async (c) => {
 
 	const libraryId = await ensureUserLibraryId(c.env.DB, session.user.id);
 	await c.env.DB.prepare(`
-		INSERT INTO game (id, name, cover_image_id)
+		INSERT INTO game (id, name, coverImage)
 		VALUES (?, ?, ?)
 		ON CONFLICT(id) DO UPDATE SET
 			name = excluded.name,
-			cover_image_id = COALESCE(excluded.cover_image_id, game.cover_image_id)
+			coverImage = COALESCE(excluded.coverImage, game.coverImage)
 	`)
 		.bind(body.igdbGameId, body.name.trim(), coverImageId)
 		.run();
@@ -355,7 +355,7 @@ async function getLibraryEntry(
 		       library_game.status AS status,
 		       library_game.addedAt AS addedAt,
 		       game.name AS gameName,
-		       game.cover_image_id AS coverImageId
+		       game.coverImage AS coverImageId
 		FROM library_game
 		JOIN game ON game.id = library_game.game_id
 		WHERE library_game.library_id = ? AND library_game.game_id = ?

@@ -1,4 +1,4 @@
-import { type LibraryStatus } from "@backlog-defeater/api-client/src/types";
+import { type LibraryStatus } from "@backlog-defeater/api-client";
 
 
 export const STATUS_OPTIONS: { value: LibraryStatus; label: string }[] = [

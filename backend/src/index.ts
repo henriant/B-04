@@ -113,9 +113,9 @@ export default {
       // Bruk IGDB-ID som spill-ID; et spill kan deles av flere brukeres bibliotek.
       await env.Backlog_Binding
         .prepare(
-          `INSERT INTO game (id, name, cover_image_id) VALUES (?, ?, ?)
+          `INSERT INTO game (id, name, coverImage) VALUES (?, ?, ?)
            ON CONFLICT(id) DO UPDATE SET
-             cover_image_id = COALESCE(excluded.cover_image_id, game.cover_image_id)`,
+             coverImage = COALESCE(excluded.coverImage, game.coverImage)`,
         )
         .bind(input.igdbGameId, name, input.coverImageId ?? null)
         .run();
@@ -137,7 +137,7 @@ export default {
             library_game.status AS status,
             library_game.addedAt AS addedAt,
             game.name AS gameName,
-            game.cover_image_id AS coverImageId
+            game.coverImage AS coverImageId
           FROM library
           JOIN library_game ON library_game.library_id = library.id
           JOIN game ON game.id = library_game.game_id
@@ -222,7 +222,7 @@ export default {
             library_game.status AS status,
             library_game.addedAt AS addedAt,
             game.name AS gameName,
-            game.cover_image_id AS coverImageId
+            game.coverImage AS coverImageId
           FROM library
           JOIN library_game ON library_game.library_id = library.id
           JOIN game ON game.id = library_game.game_id
@@ -297,7 +297,7 @@ export default {
             library_game.status AS status,
             library_game.addedAt AS addedAt,
             game.name AS gameName,
-            game.cover_image_id AS coverImageId
+            game.coverImage AS coverImageId
           FROM library
           JOIN library_game ON library_game.library_id = library.id
           JOIN game ON game.id = library_game.game_id

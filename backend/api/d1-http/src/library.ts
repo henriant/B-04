@@ -2,35 +2,20 @@ export async function ensureUserLibraryId(
 	db: D1Database,
 	userId: string,
 ): Promise<number> {
-	await db.batch([
-		db
-			.prepare(
-				`INSERT INTO library ("createdAt")
-				 SELECT CURRENT_TIMESTAMP
-				 WHERE EXISTS (
-				   SELECT 1 FROM "user" WHERE id = ? AND library_id IS NULL
-				 )`,
-			)
-			.bind(userId),
-		db
-			.prepare(
-				`UPDATE "user"
-				 SET library_id = last_insert_rowid()
-				 WHERE id = ? AND library_id IS NULL`,
-			)
-			.bind(userId),
-	]);
-
-	const user = await db
-		.prepare('SELECT library_id AS libraryId FROM "user" WHERE id = ?')
+	// Each account has one library, so reuse it instead of creating duplicates.
+	await db
+		.prepare(
+			"INSERT INTO library (user_id) VALUES (?) ON CONFLICT(user_id) DO NOTHING",
+		)
 		.bind(userId)
-		.first<{ libraryId: number | null }>();
-	if (!user) {
-		throw new Error("Authenticated user was not found in D1");
-	}
-	if (user.libraryId === null) {
-		throw new Error("Could not assign a library to the user");
-	}
+		.run();
 
-	return user.libraryId;
+	const library = await db
+		.prepare("SELECT id FROM library WHERE user_id = ?")
+		.bind(userId)
+		.first<{ id: number }>();
+	if (!library) {
+		throw new Error("Could not create or load the user's library");
+	}
+	return library.id;
 }

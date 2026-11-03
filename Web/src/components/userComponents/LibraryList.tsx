@@ -13,19 +13,21 @@ type LibraryListProps = {
 };
 
 const libraryApiUrl = import.meta.env.VITE_API_BASE_URL;
+const libraryApiClient = createApiClient(libraryApiUrl);
 
 export function LibraryList({ query }: LibraryListProps) {
     // Disse verdiene styrer lasting, feil og spillene som vises.
     const [games, setGames] = useState<LibraryEntry[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [removingGameId, setRemovingGameId] = useState<number | null>(null);
 
     useEffect(() => {
         let cancelled = false;
 
         // Stopp tidlig hvis adressen til bibliotekserveren ikke er satt opp.
         if (!libraryApiUrl) {
-            setError("Library API URL is not configured.");
+            setError("API URL is not configured.");
             setLoading(false);
             return () => {
                 cancelled = true;
@@ -33,7 +35,7 @@ export function LibraryList({ query }: LibraryListProps) {
         }
 
         // Hent biblioteket én gang når komponenten vises.
-        createApiClient(libraryApiUrl)
+        libraryApiClient
             .getLibrary()
             .then((entries) => {
                 if (!cancelled) {
@@ -61,6 +63,30 @@ export function LibraryList({ query }: LibraryListProps) {
             cancelled = true;
         };
     }, []);
+
+    const handleRemove = async (entry: LibraryEntry) => {
+        if (!window.confirm(`Remove ${entry.game?.name ?? "this game"} from your library?`)) {
+            return;
+        }
+
+        setRemovingGameId(entry.igdbGameId);
+        setError(null);
+        try {
+            await libraryApiClient.removeFromLibrary(entry.igdbGameId);
+            setGames((current) =>
+                current.filter((game) => game.igdbGameId !== entry.igdbGameId),
+            );
+        } catch (cause: unknown) {
+            console.error("Could not remove game from library:", cause);
+            setError(
+                cause instanceof ApiError && cause.status === 401
+                    ? "Log in to manage your library."
+                    : "Could not remove the game. Please try again.",
+            );
+        } finally {
+            setRemovingGameId(null);
+        }
+    };
 
     // Filtrer bare spillene som allerede er hentet fra brukerens bibliotek.
     const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -106,6 +132,14 @@ export function LibraryList({ query }: LibraryListProps) {
                         </div>
                         <h2>{entry.game?.name ?? "Unknown game"}</h2>
                     </a>
+                    <button
+                        className="library-remove-button"
+                        type="button"
+                        disabled={removingGameId === entry.igdbGameId}
+                        onClick={() => void handleRemove(entry)}
+                    >
+                        {removingGameId === entry.igdbGameId ? "Removing..." : "Remove from library"}
+                    </button>
                 </article>
             ))}
         </>
