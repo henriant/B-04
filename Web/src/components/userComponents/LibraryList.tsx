@@ -1,118 +1,97 @@
-// en liste som holder på alle spillene som en bruker har lagt til i sitt library. Denne vises på Library.tsx
+"use client";
 
-export function LibraryList () {
+import { useEffect, useState } from "react";
+import {
+    ApiError,
+    createApiClient,
+    type LibraryEntry,
+} from "@backlog-defeater/api-client";
 
-    return(
+type LibraryListProps = {
+    query: string;
+};
+
+const libraryApiUrl = import.meta.env.VITE_API_BASE_URL;
+
+export function LibraryList({ query }: LibraryListProps) {
+    // Disse verdiene styrer lasting, feil og spillene som vises.
+    const [games, setGames] = useState<LibraryEntry[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        let cancelled = false;
+
+        // Stopp tidlig hvis adressen til bibliotekserveren ikke er satt opp.
+        if (!libraryApiUrl) {
+            setError("Library API URL is not configured.");
+            setLoading(false);
+            return () => {
+                cancelled = true;
+            };
+        }
+
+        // Hent biblioteket én gang når komponenten vises.
+        createApiClient(libraryApiUrl)
+            .getLibrary()
+            .then((entries) => {
+                if (!cancelled) {
+                    setGames(entries);
+                    setError(null);
+                }
+            })
+            .catch((cause: unknown) => {
+                if (!cancelled) {
+                    console.error("Could not load library:", cause);
+                    setError(
+                        cause instanceof ApiError && cause.status === 401
+                            ? "Log in to view your library."
+                            : "Could not load your library. Please try again.",
+                    );
+                }
+            })
+            .finally(() => {
+                if (!cancelled) {
+                    setLoading(false);
+                }
+            });
+
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
+    // Filtrer bare spillene som allerede er hentet fra brukerens bibliotek.
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    const filteredGames = games.filter((entry) =>
+        (entry.game?.name ?? "").toLocaleLowerCase().includes(normalizedQuery),
+    );
+
+    if (loading) {
+        return <p role="status">Loading your library...</p>;
+    }
+
+    if (error) {
+        return <p role="alert">{error}</p>;
+    }
+
+    if (filteredGames.length === 0) {
+        return <p>{normalizedQuery ? "No matching games found." : "Your library is empty."}</p>;
+    }
+
+    return (
         <>
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-                <div className="filtrer-buttons">
-                    <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-                </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-            
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
-
-            <article className="game">
-                {/*Sette logo som bilde eksempel for spill så lenge*/}
-                <a href="/GameInfo"><img className='library-game-img' src='./secondaryLogo.png' alt='Game photo'/></a>
-                <h2><a href="/GameInfo">Name of game</a></h2>
-               <div className="filtrer-buttons">
-                <button className="filtrer-button">Planned</button>
-                    <button className="filtrer-button">Playing</button>
-                    <button className="filtrer-button">Finished</button>
-               </div>
-            </article>
+            {filteredGames.map((entry) => (
+                <article className="game" key={entry.igdbGameId}>
+                    <a href={`/GameInfo?id=${entry.igdbGameId}`}>
+                        <div className="library-game-img" aria-label="No cover available">
+                            No cover available
+                        </div>
+                        <h2>{entry.game?.name ?? "Unknown game"}</h2>
+                    </a>
+                    <p>Status: {entry.status}</p>
+                </article>
+            ))}
         </>
-    )
+    );
 }

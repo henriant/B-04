@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const registerUserSchema = z.object({
-    username: z.string().min(5, "Username must have at least 5 characters"),
+    name: z.string().min(1, "Name is required").max(20, "Name must be 20 characters or fewer"),
     email: z.email("Invalid e-mail"),
     password: z.string()
         .min(8, "Password needs at least 8 characters")
@@ -17,7 +17,7 @@ export const registerUserSchema = z.object({
 });
 
 export const loginUserSchema = z.object ({
-    username: z.string().min(1, "Username required"),
+    email: z.email("Invalid e-mail"),
     password: z.string().min(1, "Password is required")
 });
 
@@ -36,8 +36,6 @@ export const libraryStatusSchema = z.enum([
 ]);
 
 export const libraryEntrySchema = z.object({
-    id: z.number(),
-    userId: z.number(),
     igdbGameId: z.number(),
     status: libraryStatusSchema,
     addedAt: z.string(),

@@ -4,8 +4,8 @@
 	"private": true,
 	"scripts": {
 		"deploy": "wrangler deploy",
-		"dev": "wrangler dev --env-file ../../../.env",
-		"start": "wrangler dev",
+		"dev": "wrangler dev --env-file ../../../.env --port 8790",
+		"start": "wrangler dev --env-file ../../../.env --port 8790",
 		"test": "vitest",
 		"cf-typegen": "wrangler types"
 	},
@@ -17,6 +17,8 @@
 		"wrangler": "^4.151.3"
 	},
 	"dependencies": {
+		"better-auth": "^1.7.7",
+		"drizzle-orm": "1.0.0-rc.4",
 		"hono": "^4.13.13"
 	}
 }
