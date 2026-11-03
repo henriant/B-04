@@ -183,6 +183,12 @@ Bibliotek-API-adressen er satt i .env.local. IGDB-søket og kollegaens Layout bl
 Legg til at header-søket ble testet og fungerer igjen.
 
 
+- nå trenger vi tre servere samtidig: 
+webappen (5174), 
+spillsøk (8790) og 
+bibliotek/innlogging (8789) - kjør kommand i backend for å logge seg inn og hente sine spill pnpm dev -- --port 8789.
+
+
 - Hva gjenstår
 Biblioteket kan vises og søkes i, men nettsiden har ennå ikke knapper koblet til for å legge til eller slette spill. Backend-ruta for å legge til og slette er testet, men knappene i brukergrensesnittet mangler. Statusendring må også fullføres i backend før den kan brukes. Typesjekken ble ikke fullført, så hele prosjektet er ikke validert.
 
