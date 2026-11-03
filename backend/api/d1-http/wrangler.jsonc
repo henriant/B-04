@@ -2,13 +2,15 @@
   "secrets": {
     "required": [
       "IGDB_CLIENT_ID",
-      "IGDB_CLIENT_SECRET"
+      "IGDB_CLIENT_SECRET",
+      "BETTER_AUTH_SECRET"
     ]
   },
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "d1-http",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-22",
+  "compatibility_flags": ["nodejs_compat"],
   "vars": {
     "API_KEY": ""
   },
@@ -16,7 +18,8 @@
     {
       "binding": "DB",
       "database_name": "backlog-defeater-db",
-      "database_id": "75e16b6b-4ac1-4618-9dcd-f98c2b1a4eeb"
+      "database_id": "75e16b6b-4ac1-4618-9dcd-f98c2b1a4eeb",
+      "remote": true
     }
   ]
 }

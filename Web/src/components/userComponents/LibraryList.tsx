@@ -12,7 +12,7 @@ type LibraryListProps = {
     query: string;
 };
 
-const libraryApiUrl = import.meta.env.VITE_LIBRARY_API_BASE_URL;
+const libraryApiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export function LibraryList({ query }: LibraryListProps) {
     // Disse verdiene styrer lasting, feil og spillene som vises.
