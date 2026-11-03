@@ -1,13 +1,12 @@
 // Viser alle spillene som matcher søkefilter som brukeren skriver i søkefeltet Search.tsx. Disse kan klikkes på for å vise GameInfo.tsx for det spesifikke spillet.
 
-import { igdbImageUrl, type IGDBGame } from '@backlog-defeater/api-client'
-import { View, Text, TextInput, StyleSheet, FlatList, Pressable } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { useState, useEffect } from 'react'
-import { searchTestGames } from '@/data/testGames'
-import colors from '@/theme'
-import { Image } from 'expo-image'
-import { Link } from 'expo-router'
+import { type IGDBGame } from '@backlog-defeater/api-client';
+import { View, Text, TextInput, StyleSheet, FlatList, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState, useEffect } from 'react';
+import { searchTestGames } from '@/data/testGames';
+import colors from '@/theme';
+import GameRow from '@/components/gameComponents/GameRow';
 
 
 
@@ -59,24 +58,14 @@ const SearchResults = () => {
             return <Text style={styles.message}>No results</Text>
         }
         return (
-            <FlatList
+            <View style={{ paddingHorizontal: 15, gap: 5 }}>
+                <FlatList
                 data={results}
                 keyExtractor={(item) => String(item.id)}
-                renderItem={({ item }) => (
-                    <Link href={{ pathname: '/GameInfo', params: { id: item.id } }} asChild>
-                        <Pressable>
-                            <View style={styles.row}>
-                                <Image
-                                    source={igdbImageUrl(item.coverImageId)}
-                                    style={styles.cover}
-                                    contentFit='cover'
-                                />
-                                <Text style={styles.title}>{item.name}</Text>
-                            </View>
-                        </Pressable>
-                    </Link>
+                renderItem={({ item }) => (<GameRow game={item} />
                 )}
             />
+            </View>
         )
     }
 
