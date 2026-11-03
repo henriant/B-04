@@ -5,7 +5,6 @@ packages:
   - Web
   - Mobile
   - backend/*
-  - backend/api/*
   - packages/*
   - Tests/*
 
@@ -13,3 +12,7 @@ allowBuilds:
   esbuild: true
   sharp: true
   workerd: true
+
+permissions:
+  drizzle-kit:
+    skills: false
