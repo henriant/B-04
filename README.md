@@ -184,9 +184,13 @@ Legg til at header-søket ble testet og fungerer igjen.
 
 
 - nå trenger vi tre servere samtidig: 
-webappen (5174), 
-spillsøk (8790) og 
-bibliotek/innlogging (8789) - kjør kommand i backend for å logge seg inn og hente sine spill pnpm dev -- --port 8789.
+spillsøk (8790) - cd backend\api\d1-http -> kjør kommand pnpm dev 
+
+bibliotek/innlogging (8789) - cd backend ->kjør kommand for å logge seg inn og 
+
+hente sine spill -> pnpm dev -- --port 8789
+webappen (5174)
+
 
 
 - Hva gjenstår
