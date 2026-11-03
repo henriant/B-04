@@ -40,6 +40,9 @@ For å oppdatere database schema:
 - cd inn i /backend/drizzle
 - npx drizzle-kit push
 
+For å kjøre tester:
+- pnpm test
+
 --------------------------- Kravspekk ---------------------------
 
 BACKLOG DEFEATER
