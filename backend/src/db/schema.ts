@@ -3,12 +3,12 @@ import * as t from "drizzle-orm/sqlite-core";
 
 export const user = t.sqliteTable("user", {
   // One user
-  id: t.integer("id").primaryKey(),
+  // Better Auth bruker tekst-ID-er for brukere.
+  id: t.text("id").primaryKey(),
   name: t.text("name").notNull(),
   email: t.text("email").notNull().unique(),
   emailVerified: t.integer("email_verified", { mode: "boolean" }).default(false).notNull(),
   image: t.text("image"),
-  libraryId: t.integer('library_id').references(() => library.id),
   createdAt: t.integer("created_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).notNull(),
   updatedAt: t.integer("updated_at", { mode: "timestamp_ms" }).$defaultFn(() => new Date()).$onUpdate(() => new Date()).notNull(),
   userRole: t.text("role", { enum: ["user", "admin", "developer"] }).notNull().default("user"),
@@ -59,19 +59,22 @@ export const verification = t.sqliteTable("verification", {
 export const library = t.sqliteTable("library", {
   // One library for one user
   id: t.integer().primaryKey({ autoIncrement: true }),
+  // Knytter biblioteket til eieren. unique() gir hver bruker maks ett bibliotek.
+  userId: t.text("user_id").notNull().unique().references(() => user.id, { onDelete: "cascade" }),
   createdAt: t.text('createdAt').notNull().default(sql`(current_timestamp)`),
 });
 
 export const game = t.sqliteTable("game", {
-  // Universal details for a single game
+  // IGDB-ID-en brukes som spillets ID, så vi kan gjenbruke samme spill for flere brukere.
   id: t.integer().primaryKey(),
   name: t.text().notNull(),
 });
 
 export const libraryGame = t.sqliteTable("library_game", {
-  // Specific details for one game in one library
+  // Kobler ett spill til ett bibliotek og lagrer brukerens egen status.
   libraryId: t.integer('library_id').notNull().references(() => library.id, { onDelete: 'cascade' }),
   gameId: t.integer('game_id').notNull().references(() => game.id, { onDelete: 'cascade' }),
+  // Statusverdiene må samsvare med API-et og brukergrensesnittet.
   status: t.text("status", { enum: ["planned", "playing", "completed"] }).notNull().default("planned"),
   addedAt: t.text('addedAt').notNull().default(sql`(current_timestamp)`),
   playtime: t.integer().notNull().default(0)
@@ -85,17 +88,19 @@ export const libraryGame = t.sqliteTable("library_game", {
 );
 
 export const relations = defineRelations({ user, library, game, libraryGame }, (r) => ({
-  // Defining relations between everything
+  // Disse koblingene forteller Drizzle hvordan bruker, bibliotek og spill hører sammen.
     user: {
       library: r.one.library({
-        from: r.user.libraryId,
-        to: r.library.id,
+        // Brukerens ID peker til eieren av biblioteket.
+        from: r.user.id,
+        to: r.library.userId,
       }),
     },
     library: {
       user: r.one.user({
-        from: r.library.id,
-        to: r.user.libraryId,
+        // Finn brukeren som eier dette biblioteket.
+        from: r.library.userId,
+        to: r.user.id,
         optional: false,
       }),
       games: r.many.game({

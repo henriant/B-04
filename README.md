@@ -124,3 +124,67 @@ Backend:
 - Chat funksjon for å snakke med andre
 
 
+
+
+
+
+
+
+
+
+.env.local i web
+- er en bibliotekets API-adresse
+- forteller webappen hvilken adresse bibliotekserveren kjører på
+- laget ny fil for å ha separert konfigurasjon for bibliotekserveren. 
+Dette gjør det enklere å endre adressen uten å påvirke andre deler av applikasjonen - som søkeoppsettet.
+
+
+
+
+------ 02.11.2026 - Oppsummering ------
+
+Lagt grunnlaget for et personlig spillbibliotek. Bibliotekets database og API er koblet sammen med Better Auth, og har testet de viktigste backend-funksjonene lokalt.
+
+- Database
+I schema.ts ble modellen tilpasset slik at:
+
+Better Auth-brukeren har en tekstbasert ID.
+Hvert bibliotek er knyttet til én bruker.
+Spillets game.id er IGDB-ID-en, slik at samme spill kan gjenbrukes i flere biblioteker.
+Statusene er planned, playing og completed.
+
+Migreringen migration.sql ble generert og kjørt mot den lokale D1-databasen, ikke Cloudflare-produksjon.
+
+- Backend og innlogging
+auth.ts oppretter Better Auth med D1 og tillater lokale webapp-adresser.
+
+index.ts håndterer Auth-forespørsler og bibliotekets GET-, POST- og DELETE-ruter. Bibliotekdata hentes og endres for den innloggede brukeren.
+
+wrangler.toml peker på Worker-koden og aktiverer Node-kompatibilitet, som Better Auth trenger.
+
+CORS er satt opp for lokale webapp-porter. Vi la også til enkle kommentarer som forklarer hensikten med viktige deler.
+
+Testet lokalt at Auth startet, at biblioteket ble opprettet, at et testspill kunne legges til og hentes, og at sletting fjernet det fra biblioteket.
+
+- Web og API-klient
+Library.tsx har et søkefelt som filtrerer biblioteklisten.
+
+LibraryList.tsx henter spill fra bibliotek-API-et og viser lasting, feil og tom liste.
+
+LogIn.tsx bruker Better Auth for innlogging.
+
+index.ts sender innloggingscookies med bibliotekforespørslene og har funksjoner for å hente, legge til, oppdatere status og slette.
+
+Bibliotek-API-adressen er satt i .env.local. IGDB-søket og kollegaens Layout ble ikke endret.
+
+
+- Fikset oppstarten av søke-Worker-en og CORS-oppsettet, slik at headerens spillsøk fungerer fra http://localhost:5174 (nå tillates bare den url). Søkelogikken og Layout ble ikke endret.
+
+Legg til at header-søket ble testet og fungerer igjen.
+
+
+- Hva gjenstår
+Biblioteket kan vises og søkes i, men nettsiden har ennå ikke knapper koblet til for å legge til eller slette spill. Backend-ruta for å legge til og slette er testet, men knappene i brukergrensesnittet mangler. Statusendring må også fullføres i backend før den kan brukes. Typesjekken ble ikke fullført, så hele prosjektet er ikke validert.
+
+
+

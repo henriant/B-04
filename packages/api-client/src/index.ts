@@ -102,6 +102,8 @@ export function createApiClient (
         async getLibrary(): Promise<LibraryEntry[]> {
             const res = await fetch(`${baseUrl}/api/library`, {
                 headers: await getHeaders(),
+                // Send Better Auth-cookien med, slik at serveren vet hvem brukeren er.
+                credentials: "include",
             });
 
             return parseResponse(
@@ -112,13 +114,19 @@ export function createApiClient (
         },
 
         async addToLibrary(
-            igdbGameId: number,
+            game: IGDBGame,
             status: LibraryStatus = "planned",
         ): Promise<LibraryEntry> {
             const res = await fetch(`${baseUrl}/api/library`, {
                 method: "POST",
                 headers: await getHeaders(),
-                body: JSON.stringify({ igdbGameId, status }),
+                credentials: "include",
+                // API-et trenger IGDB-ID, navn og status for å lagre spillet.
+                body: JSON.stringify({
+                    igdbGameId: game.id,
+                    name: game.name,
+                    status,
+                }),
             });
 
             return parseResponse(
@@ -129,12 +137,14 @@ export function createApiClient (
         },
 
         async updateLibraryStatus(
-            id: number,
+            igdbGameId: number,
             status: LibraryStatus,
         ): Promise<LibraryEntry> {
-            const res = await fetch(`${baseUrl}/api/library/${id}`, {
+            const res = await fetch(`${baseUrl}/api/library/${igdbGameId}`, {
                 method: "PATCH",
                 headers: await getHeaders(),
+                credentials: "include",
+                // Send den nye statusen til serveren for lagring.
                 body: JSON.stringify({ status }),
             });
 
@@ -145,10 +155,12 @@ export function createApiClient (
             );
         },
 
-        async removeFromLibrary(id: number): Promise<void> {
-            const res = await fetch(`${baseUrl}/api/library/${id}`, {
+        async removeFromLibrary(igdbGameId: number): Promise<void> {
+            const res = await fetch(`${baseUrl}/api/library/${igdbGameId}`, {
                 method: "DELETE",
                 headers: await getHeaders(),
+                // Send innloggingscookien, så serveren sletter bare fra riktig bibliotek.
+                credentials: "include",
             });
 
             if (!res.ok) {

@@ -1,5 +1,5 @@
 CREATE TABLE `game` (
-	`id` integer PRIMARY KEY AUTOINCREMENT,
+	`id` integer PRIMARY KEY,
 	`name` text NOT NULL
 );
 --> statement-breakpoint
@@ -17,7 +17,7 @@ CREATE TABLE `library_game` (
 	CONSTRAINT `library_game_pk` PRIMARY KEY(`library_id`, `game_id`),
 	CONSTRAINT `fk_library_game_library_id_library_id_fk` FOREIGN KEY (`library_id`) REFERENCES `library`(`id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_library_game_game_id_game_id_fk` FOREIGN KEY (`game_id`) REFERENCES `game`(`id`) ON DELETE CASCADE,
-	CONSTRAINT "status_check" CHECK("status" IN ('planned', 'playing', 'finished'))
+	CONSTRAINT "status_check" CHECK("status" IN ('planned', 'playing', 'completed'))
 );
 --> statement-breakpoint
 CREATE TABLE `user` (

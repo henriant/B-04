@@ -17,7 +17,6 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
-import { auth } from "../../../src/auth.js"; // path to your auth file
 
 type Bindings = {
 	DB: D1Database;
@@ -34,18 +33,12 @@ app.use("*", prettyJSON(), logger());
 // Lar web-appen lese API svar fra nettleser
 app.use("/api/*", cors({
 	origin: [
-		"http://localhost:5173", 
-		"http://localhost:5174",
-		"http://localhost:8081",
+	"http://localhost:5174",
 	],
 	allowMethods: ["GET", "OPTIONS"],
 	allowHeaders: ["Content-Type"],
 }),
 );
-
-// Connection to better-auth
-app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
-
 
 // Tokenfelter Twitch returnerer
 type TwitchTokenResponse = {

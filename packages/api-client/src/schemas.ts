@@ -36,8 +36,6 @@ export const libraryStatusSchema = z.enum([
 ]);
 
 export const libraryEntrySchema = z.object({
-    id: z.number(),
-    userId: z.number(),
     igdbGameId: z.number(),
     status: libraryStatusSchema,
     addedAt: z.string(),

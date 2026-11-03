@@ -14,8 +14,6 @@ export type IGDBGame = {
 
 // Typr for brukerens egne library-spill
 export type LibraryEntry = {
-    id: number;
-    userId: number;
     igdbGameId: number;
     status: LibraryStatus;
     addedAt: string;
