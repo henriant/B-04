@@ -57,9 +57,10 @@ export function createApiClient (
 
     return {
         async register(input: UserSignupInput) {
-            const res = await fetch(`${baseUrl}/api/auth/signup`, {
+            const res = await fetch(`${baseUrl}/api/auth/sign-up/email`, {
                 method: "POST",
                 headers: await getHeaders(),
+                credentials: "include",
                 body: JSON.stringify(input),
             });
 
@@ -71,9 +72,10 @@ export function createApiClient (
         },
 
         async login(input: UserLoginInput) {
-            const res = await fetch(`${baseUrl}/api/auth/login`, {
+            const res = await fetch(`${baseUrl}/api/auth/sign-in/email`, {
                 method: "POST",
                 headers: await getHeaders(),
+                credentials: "include",
                 body: JSON.stringify(input),
             });
 
@@ -159,8 +161,8 @@ export function createApiClient (
             const res = await fetch(`${baseUrl}/api/library/${igdbGameId}`, {
                 method: "DELETE",
                 headers: await getHeaders(),
-                // Send innloggingscookien, så serveren sletter bare fra riktig bibliotek.
                 credentials: "include",
+                // Send innloggingscookien, så serveren sletter bare fra riktig bibliotek.
             });
 
             if (!res.ok) {

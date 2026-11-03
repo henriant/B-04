@@ -11,19 +11,44 @@ import worker from "../src/index";
 // `Request` to pass to `worker.fetch()`.
 const IncomingRequest = Request<unknown, IncomingRequestCfProperties>;
 
-describe("Hello World worker", () => {
-	it("responds with Hello World! (unit style)", async () => {
+describe("d1-http worker", () => {
+	it("returns an API health response (unit style)", async () => {
 		const request = new IncomingRequest("http://example.com");
-		// Create an empty context to pass to `worker.fetch()`.
 		const ctx = createExecutionContext();
 		const response = await worker.fetch(request, env, ctx);
-		// Wait for all `Promise`s passed to `ctx.waitUntil()` to settle before running test assertions
 		await waitOnExecutionContext(ctx);
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
+		expect(await response.text()).toBe("d1-http API");
 	});
 
-	it("responds with Hello World! (integration style)", async () => {
+	it("requires a search query before calling IGDB", async () => {
+		const request = new IncomingRequest("http://example.com/api/games");
+		const ctx = createExecutionContext();
+		const response = await worker.fetch(request, env, ctx);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(400);
+		expect(await response.json()).toEqual({
+			error: "Search query is required",
+		});
+	});
+
+	it("rejects search queries over 80 characters", async () => {
+		const query = encodeURIComponent("a".repeat(81));
+		const request = new IncomingRequest(
+			`http://example.com/api/games?search=${query}`,
+		);
+		const ctx = createExecutionContext();
+		const response = await worker.fetch(request, env, ctx);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(400);
+		expect(await response.json()).toEqual({
+			error: "Search query must be 80 characters or fewer",
+		});
+	});
+
+	it("returns an API health response (integration style)", async () => {
 		const response = await SELF.fetch("https://example.com");
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
+		expect(await response.text()).toBe("d1-http API");
 	});
 });
