@@ -14,7 +14,7 @@ export function Library() {
             <section id="my-games-start">
                 <h1 id="my-games-title">My games</h1>
                 <div id="top-library">
-                    <section className='search-felte-library'>
+                    <section className='search-felte'>
                         {/* Oppdater søketeksten hver gang brukeren skriver. */}
                         <input
                             id="find-my-game-felte"
@@ -25,10 +25,9 @@ export function Library() {
                             value={query}
                             onChange={(event) => setQuery(event.target.value)}
                         />
-
-                        <label htmlFor='find-my-game-felte' className='search-label-library'>
-                            <VscSearchCompact/>
-                        </label>
+                        <button className="search-icon-label" type="submit" aria-label="Search">
+                            <VscSearchCompact aria-hidden="true" className='search-icon'/>
+                        </button>
                     </section>
                     <h2><a href="/Filter">Filter</a></h2>
                 </div>

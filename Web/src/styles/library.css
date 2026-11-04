@@ -13,10 +13,7 @@
 
 /* Search */
 
-.search-felte-library{
-    position: relative;
-    width: 400px;
-}
+
 
 /* input */
 #find-my-game-felte{
@@ -25,14 +22,12 @@
     border-radius: 15px;
     border: var(--black);
     padding: 0.5rem;
+        align-items: center;
 
 }
 
 /* label -> ikon*/
 .search-label-library{
-    position: absolute;
-    right: 100px;
-    top: 36%;
     cursor: pointer;
     color: var(--black);
 }

@@ -26,7 +26,7 @@ export function Layout({ children } : LayoutProps) {
                     </ul>
                 </nav>
 
-            // Søkefeltet
+                {/* Søkefelter */}
                 <Search />
 
                 <nav>

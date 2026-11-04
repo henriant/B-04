@@ -5,11 +5,11 @@ import { VscSearchCompact } from "react-icons/vsc";
 
 export function Search() {
     return (
-        <form className="search-bar" action="/SearchResults" method="get" role="search">
-            <input id="search-input" name="q" type="search" placeholder="Search for games you own..." aria-label="Search for games you own" maxLength={80} required />
-            <button className="search-submit" type="submit" aria-label="Search">
-                <VscSearchCompact aria-hidden="true" />
+        <form className="search-felte" action="/SearchResults" method="get" role="search">
+            <input id="search" name="q" type="search" placeholder="Search for games you own..." aria-label="Search for games you own" maxLength={80} required />
+            <button className="search-icon-label" type="submit" aria-label="Search">
+                <VscSearchCompact aria-hidden="true" className='search-icon' />
             </button>
         </form>
-    );
+    )
 }

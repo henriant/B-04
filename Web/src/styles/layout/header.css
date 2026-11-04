@@ -79,15 +79,18 @@
 .search-icon-label{
     padding: 0;
     position: absolute;
+    background-color: var(--white);
+    border-radius: 15px;
+    border: none;
 }
 
 /* icon */
-#search-icon{
-    color: var(--black);
+.search-icon{
     width: 30px;
     height: 30px;
-    padding: 0.5rem;
     cursor: pointer;
+    margin-left: -40px;
+
 
 }
 
