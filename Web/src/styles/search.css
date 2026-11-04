@@ -11,12 +11,20 @@
     margin: 2rem;
 }
 
+#search-results-list{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+
+/* Spill kort som viser søkeresultater. */
 .searchResults-game{
     display: flex;
     flex-direction: column;
     padding: 2rem;
     margin: 2rem auto;
-    align-items: center;
+    align-items: start;
 }
 
 /* Kortet viser coveret normalt og bibliotekstatus ved hover eller fokus. */

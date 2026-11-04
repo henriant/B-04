@@ -3,7 +3,7 @@ import * as t from "drizzle-orm/sqlite-core";
 
 export const user = t.sqliteTable("user", {
   // One user
-  // Better Auth bruker tekst-ID-er for brukere.
+  // Better Auth uses text IDs
   id: t.text("id").primaryKey(),
   name: t.text("name").notNull().unique(),
   email: t.text("email").notNull().unique(),
@@ -59,13 +59,12 @@ export const verification = t.sqliteTable("verification", {
 export const library = t.sqliteTable("library", {
   // One library for one user
   id: t.integer().primaryKey({ autoIncrement: true }),
-  // Knytter biblioteket til eieren. unique() gir hver bruker maks ett bibliotek.
   userId: t.text("user_id").notNull().unique().references(() => user.id, { onDelete: "cascade" }),
   createdAt: t.text('createdAt').notNull().default(sql`(current_timestamp)`),
 });
 
 export const game = t.sqliteTable("game", {
-  // IGDB-ID-en brukes som spillets ID, så vi kan gjenbruke samme spill for flere brukere.
+  // We use the IGDB's ID for our ID instead of our own
   id: t.integer().primaryKey(),
   name: t.text().notNull(),
   summary: t.text(),
@@ -77,10 +76,9 @@ export const game = t.sqliteTable("game", {
 });
 
 export const libraryGame = t.sqliteTable("library_game", {
-  // Kobler ett spill til ett bibliotek og lagrer brukerens egen status.
+  // This is the real library of the user, where the data for one game in one library is stored
   libraryId: t.integer('library_id').notNull().references(() => library.id, { onDelete: 'cascade' }),
   gameId: t.integer('game_id').notNull().references(() => game.id, { onDelete: 'cascade' }),
-  // Statusverdiene må samsvare med API-et og brukergrensesnittet.
   status: t.text("status", { enum: ["planned", "playing", "completed"] }).notNull().default("planned"),
   addedAt: t.text('addedAt').notNull().default(sql`(current_timestamp)`),
   playtime: t.integer().notNull().default(0)
@@ -94,17 +92,14 @@ export const libraryGame = t.sqliteTable("library_game", {
 );
 
 export const relations = defineRelations({ user, library, game, libraryGame }, (r) => ({
-  // Disse koblingene forteller Drizzle hvordan bruker, bibliotek og spill hører sammen.
     user: {
       library: r.one.library({
-        // Brukerens ID peker til eieren av biblioteket.
         from: r.user.id,
         to: r.library.userId,
       }),
     },
     library: {
       user: r.one.user({
-        // Finn brukeren som eier dette biblioteket.
         from: r.library.userId,
         to: r.user.id,
         optional: false,
