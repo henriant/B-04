@@ -6,7 +6,7 @@ packages:
   - Mobile
   - backend/*
   - packages/*
-  - Tests/*
+  - Tests
 
 allowBuilds:
   esbuild: true

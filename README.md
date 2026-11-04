@@ -11,8 +11,11 @@ https://docs.google.com/document/d/1xPGiPMfXj1Dv0fjIMI9oQ7GuXVQfSy6UwPikrsie6rE/
 For å sette opp prosjektene må du kjøre:
 - pnpm install i rot mappen (B-04)
 
+For å kjøre tester:
+- pnpm test
+
 For å kjøre Backlog Defeater API (IGDB-søk, innlogging og bibliotek) må du:
-- Åpne `.\backend\api\d1-http\`
+- Cd inn i `.\backend\api\d1-http\`
 - Kjør `pnpm dev`
 - Stopp med `CTRL+C`
 
@@ -46,9 +49,6 @@ For å slutte den må du:
 Ikke start den eldre Worker-en fra `backend/` for spill- eller bibliotek-API-et.
 Ikke kjør `drizzle-kit push` mot Cloudflare som del av vanlig utvikling; databasen
 administreres separat, og skjemaendringer må gjøres som en kontrollert migrering.
-
-For å kjøre tester:
-- pnpm test
 
 --------------------------- Kravspekk ---------------------------
 
