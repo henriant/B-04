@@ -26,7 +26,6 @@ export default defineApp([
         const gameId = url.searchParams.get("id") ?? "";
         return <GameInfo gameId={gameId} />;
       }),
-      route("/Filter", Filter),
 
       /* Test for SearchResults pages*/
       route("/SearchResults", ({ request }) => {
