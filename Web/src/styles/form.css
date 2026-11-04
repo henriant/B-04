@@ -2,7 +2,7 @@
 
 /* Home -get started-section */
 .get-startet-form{
-    background-color: var(--black);
+    background-color: var(--white);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -17,31 +17,29 @@
 
 /* Log in skjema*/
 #logIn{
-    background-color: var(--black);
+    background-color: var(--white);
     display: flex;
     flex-wrap: wrap;
     max-width: 500px;
     margin: 0 auto;
     border-radius: 15px;
-    height: 400px;
     padding: 1rem;
 }
 
 /* Sign up skjema */
 #signUp{
-    background-color: var(--black);
+    background-color: var(--white);
     display: flex;
     flex-wrap: wrap;
     max-width: 500px;
     margin: 0 auto;
     border-radius: 15px;
-    height: 500px;
     padding: 1rem;
 }
 
 /* Home -get started-section tekst */
 .get-startet-form p{
-    color: var(--white);
+    color: var(--navyBlue);
     width: 100%;
     text-align: center;
     margin: 1rem;
@@ -61,7 +59,8 @@
     border-radius: 10px;
     width: 300px;
     background-color: var(--white);
-    color: var(--black);
+    border-color: var(--navyBlue);
+    border-style: solid;
 }
 
 .email{
@@ -85,5 +84,5 @@
 .icons-form{
     width: 50px;
     height: 50px;
-    color: var(--white);
+    color: var(--navyBlue);
 }
