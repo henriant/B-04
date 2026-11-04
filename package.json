@@ -10,7 +10,8 @@
     "start:mobile": "pnpm --filter mobile start",
     "android": "pnpm --filter mobile android",
     "ios": "pnpm --filter mobile ios",
-    "lint": "pnpm -r --if-present lint"
+    "lint": "pnpm -r --if-present lint",
+    "test": "vitest"
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.7.14",
