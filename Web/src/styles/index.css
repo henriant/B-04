@@ -11,10 +11,9 @@
 
 /* Library */
 @import "./library.css"; 
+
+/* Profile */
 @import "./profile.css";
-
-
-
 
 /* Skjema */
 @import "./form.css";
