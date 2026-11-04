@@ -4,10 +4,14 @@
 }
 
 #my-games-start{
-    margin: 5rem;
+    margin: 2rem clamp(1rem, 5vw, 5rem);
 }
 
 #my-games-title{
+    color: var(--white);
+}
+
+.library-greeting{
     color: var(--white);
 }
 

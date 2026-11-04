@@ -3,16 +3,16 @@ Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
 
-Dokument:
-https://docs.google.com/document/d/1xPGiPMfXj1Dv0fjIMI9oQ7GuXVQfSy6UwPikrsie6rE/edit?usp=sharing
-
 /// Kort forklaring av hva prosjektet gjør
 
 For å sette opp prosjektene må du kjøre:
 - pnpm install i rot mappen (B-04)
 
-For å kjøre Backlog Defeater API (IGDB-søk, innlogging og bibliotek) må du:
-- Åpne `.\backend\api\d1-http\`
+For å kjøre tester:
+- pnpm test
+
+For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bibliotek) må du:
+- Cd inn i `.\backend\api\d1-http\`
 - Kjør `pnpm dev`
 - Stopp med `CTRL+C`
 
@@ -47,8 +47,9 @@ Ikke start den eldre Worker-en fra `backend/` for spill- eller bibliotek-API-et.
 Ikke kjør `drizzle-kit push` mot Cloudflare som del av vanlig utvikling; databasen
 administreres separat, og skjemaendringer må gjøres som en kontrollert migrering.
 
-For å kjøre tester:
-- pnpm test
+For å teste appene, opprett en bruker, eller logg inn med den allerede eksisterende brukeren laget spesifikt for Marius:
+email: supermarius@letsago.com
+passord: test12345678
 
 --------------------------- Kravspekk ---------------------------
 

@@ -5,8 +5,9 @@ packages:
   - Web
   - Mobile
   - backend/*
+  - backend/api/*
   - packages/*
-  - Tests/*
+  - Tests
 
 allowBuilds:
   esbuild: true

@@ -10,6 +10,7 @@ import { LogIn } from "./app/pages/LogIn";
 import { SignUp } from "./app/pages/SignUp"
 import { GameInfo } from "./app/pages/GameInfo";
 import { SearchResults } from "./app/pages/SearchResults";
+import { Profile } from "./app/pages/Profile";
 
 export type AppContext = {};
 
@@ -18,6 +19,7 @@ export default defineApp([
     layout(Layout, [
       route("/", Home),
       route("/Library", Library),
+      route("/Profile", Profile),
       route("/LogIn", LogIn),
       route("/SignUp", SignUp),
       route("/GameInfo", ({ request }) => {
