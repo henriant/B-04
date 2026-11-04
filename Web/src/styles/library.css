@@ -33,6 +33,11 @@
 }
 
 
+.filterButton.active {
+    background-color: #333;
+    color: white;
+}
+
 
 .my-games{
     display: flex;
@@ -44,7 +49,7 @@
     flex-direction: column;
     padding: 2rem;
     margin: 2rem auto;
-    align-items: center;
+    align-items: start;
 } 
 
 .game h2{
@@ -119,19 +124,4 @@
 .library-game-img{
     height: 200px;
     width: 200px;
-}
-
-.library-remove-button{
-    margin-top: 0.75rem;
-    padding: 0.5rem 0.75rem;
-    color: var(--white);
-    background: var(--wineRed);
-    border: 0;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-.library-remove-button:disabled{
-    cursor: wait;
-    opacity: 0.65;
 }

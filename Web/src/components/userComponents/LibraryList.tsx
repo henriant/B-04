@@ -7,15 +7,17 @@ import {
     igdbImageUrl,
     type LibraryEntry,
 } from "@backlog-defeater/api-client";
+import type { LibraryStatus } from "@/constants/library";
 
 type LibraryListProps = {
     query: string;
+    status: LibraryStatus;
 };
 
 const libraryApiUrl = import.meta.env.VITE_API_BASE_URL;
 const libraryApiClient = createApiClient(libraryApiUrl);
 
-export function LibraryList({ query }: LibraryListProps) {
+export function LibraryList({ query, status }: LibraryListProps) {
     // Disse verdiene styrer lasting, feil og spillene som vises.
     const [games, setGames] = useState<LibraryEntry[]>([]);
     const [loading, setLoading] = useState(true);
@@ -90,8 +92,10 @@ export function LibraryList({ query }: LibraryListProps) {
 
     // Filtrer bare spillene som allerede er hentet fra brukerens bibliotek.
     const normalizedQuery = query.trim().toLocaleLowerCase();
-    const filteredGames = games.filter((entry) =>
-        (entry.game?.name ?? "").toLocaleLowerCase().includes(normalizedQuery),
+    const filteredGames = games.filter(
+        (entry) =>
+            entry.status === status &&
+            (entry.game?.name ?? "").toLocaleLowerCase().includes(normalizedQuery),
     );
 
     if (loading) {
@@ -133,7 +137,7 @@ export function LibraryList({ query }: LibraryListProps) {
                         <h2>{entry.game?.name ?? "Unknown game"}</h2>
                     </a>
                     <button
-                        className="library-remove-button"
+                        className="add-remove-button"
                         type="button"
                         disabled={removingGameId === entry.igdbGameId}
                         onClick={() => void handleRemove(entry)}
