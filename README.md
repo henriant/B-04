@@ -3,9 +3,6 @@ Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
 
-Dokument:
-https://docs.google.com/document/d/1xPGiPMfXj1Dv0fjIMI9oQ7GuXVQfSy6UwPikrsie6rE/edit?usp=sharing
-
 /// Kort forklaring av hva prosjektet gjør
 
 For å sette opp prosjektene må du kjøre:
