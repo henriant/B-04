@@ -7,11 +7,11 @@ import {
     igdbImageUrl,
     type LibraryEntry,
 } from "@backlog-defeater/api-client";
-import type { LibraryStatus } from "@/constants/library";
+import type { LibraryFilterStatus } from "@/constants/library";
 
 type LibraryListProps = {
     query: string;
-    status: LibraryStatus;
+    status: LibraryFilterStatus;
 };
 
 const libraryApiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -90,11 +90,11 @@ export function LibraryList({ query, status }: LibraryListProps) {
         }
     };
 
-    // Filtrer bare spillene som allerede er hentet fra brukerens bibliotek.
+    // Filtrer spillene fra brukerens bibliotek etter status og søk.
     const normalizedQuery = query.trim().toLocaleLowerCase();
     const filteredGames = games.filter(
         (entry) =>
-            entry.status === status &&
+            (status === "all" || entry.status === status) &&
             (entry.game?.name ?? "").toLocaleLowerCase().includes(normalizedQuery),
     );
 

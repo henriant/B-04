@@ -4,26 +4,18 @@
 import { useState } from "react";
 import { VscSearchCompact } from "react-icons/vsc";
 import { LibraryList } from '@/components/userComponents/LibraryList';
-import { statusOptions, type LibraryStatus } from '@/constants/library';
+
+import { statusOptions, type LibraryFilterStatus } from '@/constants/library';
 
 export function Library() {
     // Søket filtrerer spillene i biblioteket, ikke alle spill fra IGDB.
     const [query, setQuery] = useState("");
-    const [status, setStatus] = useState<LibraryStatus >('playing');
+    
+    const [status, setStatus] = useState<LibraryFilterStatus>('all');
+    
 
     return(
         <>
-        <section className="filterRow">
-                    {statusOptions.map(option => (
-                        <button
-                            key={option.value}
-                            onClick={() => setStatus(option.value)}
-                            className={`filterButton ${status === option.value ? 'active' : ''}`}
-                        >
-                            <p className="filterText">{option.label}</p>
-                        </button>
-                    ))}
-                </section>
             <section id="my-games-start">
                 <h1 id="my-games-title">My games</h1>
                 <div id="top-library">
@@ -42,12 +34,23 @@ export function Library() {
                             <VscSearchCompact aria-hidden="true" className='search-icon'/>
                         </button>
                     </section>
-                    <h2><a href="/Filter">Filter</a></h2>
                 </div>
             </section>
 
+        <section className="filterRow">
+                    {statusOptions.map(option => (
+                        <button
+                            key={option.value}
+                            onClick={() => setStatus(option.value)}
+                            className={`filterButton ${status === option.value ? 'active' : ''}`}
+                        >
+                            <p className="filterText">{option.label}</p>
+                        </button>
+                    ))}
+            </section>
+
             <section className="my-games">
-                <LibraryList query={query} status={status} />
+                <LibraryList query={query} status={status}/>
             </section>
         </>
     );
