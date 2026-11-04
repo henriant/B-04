@@ -2,157 +2,152 @@
 
 /* Header */
 .meny {
+    display: grid;
+    grid-template-columns: auto auto minmax(240px, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    min-height: 120px;
+    padding: 1rem clamp(1rem, 4vw, 3rem);
+    margin: 1rem 0 3rem;
+}
+
+.meny > a {
     display: flex;
     align-items: center;
-    height: 120px;
-    justify-content: space-between;
-    padding: 0 50px;
-    margin-bottom: 8rem;
-    margin-top: 1rem;
-
 }
 
-
-/* Header - elementer*/
-.meny nav ul{
+.meny .main-navigation ul,
+.meny .user-header-section {
     display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
-/* Header - tekst elementer*/
-.meny-text{
-    list-style: none;
-    padding: 3rem;
-    :hover{
-        color: var(--white);
-    }
+.meny .user-header-section {
+    justify-content: flex-end;
 }
-        
-.meny-text a{
+
+.meny-text {
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+}
+
+.meny-text a,
+.meny-text .auth-user-name {
     color: var(--white);
     text-decoration: none;
     position: relative;
-
-
 }
 
-/* Header - underlinje for for tekst */
-.meny-text a::after{
-    content: "";
-	position: absolute;
-	bottom: -5px;
-	left: 0;
-	height: 4px;
-	width: 0;              /* på starten underlinje er usynlig */
-
-    /* bestemmer underlinje utseende */
-	background-color: var(--white);
-	transition-duration: 200ms;
-}
-
-/* vis linje */
-.meny-text a:hover::after{
-    width: 100%;
-}
-
-
-
-/* Header - søkefelte */
-.search-felte{
+.meny > .search-felte {
+    position: relative;
     display: flex;
-    justify-content: end;
     align-items: center;
+    width: 100%;
+    min-width: 0;
 }
 
-/* input */
-#search{
+.meny #search {
+    box-sizing: border-box;
     height: 40px;
-    width: 400px;
+    width: 100%;
     border-radius: 15px;
     border: var(--black);
     padding: 0.5rem;
-    position: relative;
+    padding-right: 3rem;
 }
 
-/* label */
-.search-icon-label{
+.meny .search-icon-label {
     padding: 0;
     position: absolute;
+    right: 0.4rem;
     background-color: var(--white);
     border-radius: 15px;
     border: none;
 }
 
-/* icon */
-.search-icon{
+.meny .search-icon {
     width: 30px;
     height: 30px;
     cursor: pointer;
-    margin-left: -40px;
-
-
 }
 
-.user-header-section li{
-    list-style: none;
-}
-.user-header-section li a{
+.auth-user-name,
+.auth-logout-button{
     color: var(--white);
 }
 
-
-/* Mindre skjerm */
-@media (max-width: 1300px) {
-    
-.meny{
-            flex-wrap: wrap;
-            display: flex;
-            justify-content: center;
+.auth-logout-button{
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
 }
 
-.meny nav ul{
-    display: flex;
-    flex-wrap: wrap;
+.auth-logout-button:disabled{
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.auth-navigation-error{
+    color: var(--white);
     margin: 0;
-    padding: 0;
-    justify-content: space-around;
-    width: 350px;
 }
-    .search-felte{
-        order: 1;
-        width: 750px;
-    }
-    #search{
-        width: 100%;
-        margin: 2rem auto;
-    }
-}    
 
-@media (max-width: 900px) {
-    .meny{
+@media (max-width: 1100px) {
+    .meny {
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .meny > .search-felte,
+    .meny > .auth-navigation {
+        grid-column: 1 / -1;
+    }
+
+    .meny > .search-felte {
+        grid-row: 2;
+    }
+
+    .meny > .auth-navigation {
+        grid-row: 3;
+    }
+
+    .meny .auth-navigation .user-header-section {
         justify-content: center;
-        flex-direction: row;
+    }
+}
+
+@media (max-width: 600px) {
+    .meny {
+        grid-template-columns: 1fr;
+        justify-items: center;
     }
 
-    .meny a{
-        width: 100%;
-        display: flex;
+    .meny > .search-felte,
+    .meny > .auth-navigation {
+        grid-column: 1;
+    }
+
+    .meny > .search-felte {
+        grid-row: auto;
+    }
+
+    .meny > .auth-navigation {
+        grid-row: auto;
+    }
+
+    .meny .main-navigation ul,
+    .meny .user-header-section {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
-    .meny nav ul{
-        width: 100%;
-    }
-
-    .meny nav ul li{
-        padding: 2rem;
-        margin: 0;
-        display: flex;
-    }
-    
-    .search-felte{
-        order: 1;
-        width: 100%;
+    .meny-text {
+        padding: 0.5rem 0.75rem;
     }
 }

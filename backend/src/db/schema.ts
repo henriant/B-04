@@ -5,7 +5,7 @@ export const user = t.sqliteTable("user", {
   // One user
   // Better Auth bruker tekst-ID-er for brukere.
   id: t.text("id").primaryKey(),
-  name: t.text("name").notNull(),
+  name: t.text("name").notNull().unique(),
   email: t.text("email").notNull().unique(),
   emailVerified: t.integer("email_verified", { mode: "boolean" }).default(false).notNull(),
   image: t.text("image"),

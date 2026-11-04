@@ -4,6 +4,7 @@ import { VscSearchCompact } from "react-icons/vsc";
 import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
 import { AiFillTikTok } from 'react-icons/ai';
 import { Search } from '../searchComponents/Search';
+import { AuthNavigation } from '../userComponents/AuthNavigation';
 
 
 
@@ -14,7 +15,7 @@ export function Layout({ children } : LayoutProps) {
             {/* Header */}
             <header className='meny'>
                 <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
-                <nav>
+                <nav className="main-navigation" aria-label="Main">
                     <ul>
                         <li className='meny-text'>
                             <a href="/">Home</a>
@@ -29,16 +30,7 @@ export function Layout({ children } : LayoutProps) {
                 {/* Søkefelter */}
                 <Search />
 
-                <nav>
-                    <ul className='user-header-section'>
-                        <li className='meny-text'>
-                            <a href="/LogIn">Log in</a>
-                        </li>
-                        <li className='meny-text'>
-                            <a href="/SignUp">Sign up</a>
-                        </li>
-                    </ul>
-                </nav>
+                <AuthNavigation />
             </header>
             {/* Barnelementer */}
             <main>{children}</main>

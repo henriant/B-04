@@ -1,9 +1,14 @@
+"use client";
+
 // Hovedsiden, en introduksjon til nettsiden vår, samt en oppfordring til å opprette bruker eller logge inn.
 
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { useAuthSession } from "@/lib/auth-client";
 
 export function Home() {
+    const { data: session, isPending } = useAuthSession();
+
     return (
         <>
 
@@ -20,14 +25,29 @@ export function Home() {
             </section>
 
             <section>
-                <article className="get-startet-form">
-                    <p>Log in to get started!</p>
-                    <form action="/LogIn">
-                        <button className="form-button">Log in</button>
-                    </form>
-                    <form action="/SignUp">
-                        <button className="form-button">Sign up</button>
-                    </form>
+                <article className={`get-startet-form${session ? " home-library-cta" : ""}`}>
+                    {isPending ? (
+                        <p role="status">Checking your session...</p>
+                    ) : session ? (
+                        <>
+                            <p>Visit your library!</p>
+                            <form action="/Library">
+                                <button className="form-button home-library-button">
+                                    Visit your library
+                                </button>
+                            </form>
+                        </>
+                    ) : (
+                        <>
+                            <p>Log in to get started!</p>
+                            <form action="/LogIn">
+                                <button className="form-button">Log in</button>
+                            </form>
+                            <form action="/SignUp">
+                                <button className="form-button">Sign up</button>
+                            </form>
+                        </>
+                    )}
                 </article>
             </section>
 
