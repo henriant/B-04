@@ -14,7 +14,7 @@ For å sette opp prosjektene må du kjøre:
 For å kjøre tester:
 - pnpm test
 
-For å kjøre Backlog Defeater API (IGDB-søk, innlogging og bibliotek) må du:
+For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bibliotek) må du:
 - Cd inn i `.\backend\api\d1-http\`
 - Kjør `pnpm dev`
 - Stopp med `CTRL+C`
@@ -49,6 +49,10 @@ For å slutte den må du:
 Ikke start den eldre Worker-en fra `backend/` for spill- eller bibliotek-API-et.
 Ikke kjør `drizzle-kit push` mot Cloudflare som del av vanlig utvikling; databasen
 administreres separat, og skjemaendringer må gjøres som en kontrollert migrering.
+
+For å teste appene, opprett en bruker, eller logg inn med den allerede eksisterende brukeren laget spesifikt for Marius:
+email: supermarius@letsago.com
+passord: test12345678
 
 --------------------------- Kravspekk ---------------------------
 

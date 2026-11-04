@@ -5,6 +5,7 @@ packages:
   - Web
   - Mobile
   - backend/*
+  - backend/api/*
   - packages/*
   - Tests
 

@@ -42,5 +42,10 @@ export function createAuth(env: Bindings, requestUrl: string) {
 		emailAndPassword: {
 			enabled: true,
 		},
+		user: {
+			deleteUser: {
+				enabled: true,
+			},
+		},
 	});
 }

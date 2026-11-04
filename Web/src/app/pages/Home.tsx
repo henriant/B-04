@@ -11,12 +11,6 @@ export function Home() {
 
     return (
         <>
-
-
-        { /* Test for og SearchResults pages*/ }
-        <a href="/SearchResults">SearchResults</a>
-
-
             <section className="intro">
                 <a href="/"><img className='logoHome' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
                 <h1>Backlog Defeater</h1>

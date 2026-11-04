@@ -7,7 +7,7 @@ export const authClient = createAuthClient({
     credentials: "include",
   },
 });
-export const { signIn, signUp, signOut } = authClient;
+export const { signIn, signUp, signOut, deleteUser } = authClient;
 
 export function useAuthSession() {
   const sessionAtom = authClient.$store.atoms.session;

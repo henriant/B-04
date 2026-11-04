@@ -44,9 +44,9 @@ export function AuthNavigation() {
                 {session ? (
                     <>
                         <li className="meny-text">
-                            <span className="auth-user-name">
+                            <a className="auth-user-name" href="/Profile">
                                 Hello, {session.user.name}!
-                            </span>
+                            </a>
                         </li>
                         <li className="meny-text">
                             <button
