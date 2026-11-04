@@ -10,7 +10,6 @@ import { LogIn } from "./app/pages/LogIn";
 import { SignUp } from "./app/pages/SignUp"
 import { GameInfo } from "./app/pages/GameInfo";
 import { SearchResults } from "./app/pages/SearchResults";
-import { Filter } from "./components/Filter";
 
 export type AppContext = {};
 
