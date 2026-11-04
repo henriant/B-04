@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -61,7 +60,7 @@ export function Profile() {
                 <img
                     className="profile-avatar"
                     src="/backlogDefeaterSecondaryLogo2_blue_white2.png"
-                    alt="profile avatar"
+                    alt=""
                 />
                 <div className="profile-identity">
                     <h1>{session.user.name}</h1>
