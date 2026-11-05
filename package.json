@@ -12,6 +12,7 @@
     "android": "corepack pnpm --filter mobile android",
     "ios": "corepack pnpm --filter mobile ios",
     "db:local:migrate": "corepack pnpm --filter d1-http run db:migrate:local",
+    "db:test:migrate": "corepack pnpm --filter d1-http run db:migrate:test",
     "dev:api:local": "corepack pnpm --filter d1-http run dev:local",
     "dev:api:local:lan": "corepack pnpm --filter d1-http run dev:local:lan",
     "lint": "corepack pnpm -r --if-present lint",

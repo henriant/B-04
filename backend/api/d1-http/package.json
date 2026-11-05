@@ -9,6 +9,7 @@
 		"dev:local": "wrangler dev --local --config wrangler.local.jsonc --env-file ../../../.env --port 8790",
 		"dev:local:lan": "wrangler dev --local --ip 0.0.0.0 --config wrangler.local.jsonc --env-file ../../../.env --port 8790",
 		"db:migrate:local": "wrangler d1 migrations apply backlog-defeater-local --local --config wrangler.local.jsonc",
+		"db:migrate:test": "wrangler d1 migrations apply backlog-defeater-test --local --config wrangler.test.jsonc",
 		"test": "vitest",
 		"cf-typegen": "wrangler types"
 	},

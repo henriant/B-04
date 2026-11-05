@@ -11,15 +11,20 @@ For å sette opp prosjektene må du kjøre:
 For å kjøre tester:
 - pnpm test
 
+For å opprette eller oppdatere den lokale testdatabasen:
+- pnpm db:test:migrate
+
 For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bibliotek) må du:
 - Cd inn i `.\backend\api\d1-http\`
 - Kjør `pnpm dev`
 - Stopp med `CTRL+C`
 
-Worker-konfigurasjonen bruker Cloudflare D1 remote også under lokal utvikling. Kall til
-API-et fra `pnpm dev` leser og skriver derfor til Cloudflare-databasen
-`backlog-defeater-db`. Ikke kjør tester eller migreringer mot databasen uten å være
-klar over at de kan påvirke ekte data.
+`pnpm dev` bruker Cloudflare D1 remote og leser/skriver derfor til databasen
+`backlog-defeater-db`. For lokal utvikling brukes i stedet `pnpm dev:api:local`,
+som kobler til den lokale utviklingsdatabasen opprettet med `pnpm db:local:migrate`.
+Den separate lokale testdatabasen opprettes/migreres med `pnpm db:test:migrate`.
+Testdatabasen heter `backlog-defeater-test`; den er adskilt fra både utviklingsdatabasen
+og Cloudflare-databasen. API-ets Vitest-konfigurasjon bruker testkonfigurasjonen.
 
 Web- og mobilappen skal bruke denne Worker-en for IGDB-søk, registrering, innlogging
 og bibliotek. Mobilens API-adresse settes med `EXPO_PUBLIC_API_URL` og
