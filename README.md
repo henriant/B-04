@@ -9,6 +9,11 @@ For å sette opp prosjektene må du kjøre:
 - pnpm install i rot mappen (B-04)
 
 For å kjøre tester:
+Vitest:
+- Cd inn i Tests/vitest
+- pnpm test
+Jest:
+- Cd inn i Tests/Jest
 - pnpm test
 
 For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bibliotek) må du:
