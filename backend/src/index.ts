@@ -1,4 +1,6 @@
 import { createAuth } from "./auth.js";
+import { drizzle } from 'drizzle-orm/d1';
+export * from "./db/schema.js";
 
 export interface Env {
   Backlog_Binding: D1Database;
@@ -11,7 +13,6 @@ type LibraryRow = {
   gameName: string;
   coverImageId: string | null;
 };
-
 
 // Nettleseren godtar bare API-svar fra webappens lokale origin.
 function addCorsHeaders(request: Request, response: Response): Response {
@@ -35,11 +36,10 @@ function addCorsHeaders(request: Request, response: Response): Response {
   });
 }
 
-
-
-
 export default {
   async fetch(request: Request, env: Env) {
+    const db = drizzle(env.Backlog_Binding);
+
     // Nettleseren sender OPTIONS først for å spørre om API-kallet er tillatt.
     if (request.method === "OPTIONS") {
       return addCorsHeaders(request, new Response(null, { status: 204 }));
@@ -59,7 +59,6 @@ export default {
     if (!session) {
       return respond(Response.json({ message: "Unauthorized" }, { status: 401 }));
     }
-
 
     // Legg til et spill i biblioteket til den innloggede brukeren.
     if (url.pathname === "/api/library" && request.method === "POST") {
@@ -90,7 +89,8 @@ export default {
         input.name.trim().length === 0 ||
         (input.coverImageId !== undefined &&
           input.coverImageId !== null &&
-          (typeof input.coverImageId !== "string" || input.coverImageId.trim().length === 0)) ||
+          (typeof input.coverImageId !== "string" 
+            || input.coverImageId.trim().length === 0)) ||
         (input.status !== undefined &&
           input.status !== "planned" &&
           input.status !== "playing" &&
@@ -105,6 +105,7 @@ export default {
       // Opprett biblioteket første gang brukeren legger til et spill.
       await env.Backlog_Binding
         .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
           "INSERT INTO library (user_id) VALUES (?) ON CONFLICT(user_id) DO NOTHING",
         )
         .bind(session.user.id)
@@ -113,6 +114,7 @@ export default {
       // Bruk IGDB-ID som spill-ID; et spill kan deles av flere brukeres bibliotek.
       await env.Backlog_Binding
         .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
           `INSERT INTO game (id, name, coverImage) VALUES (?, ?, ?)
            ON CONFLICT(id) DO UPDATE SET
              coverImage = COALESCE(excluded.coverImage, game.coverImage)`,
@@ -122,8 +124,9 @@ export default {
 
       // Koblingen lagrer statusen inne i akkurat denne brukerens bibliotek.
       await env.Backlog_Binding
-        .prepare(`
-          INSERT INTO library_game (library_id, game_id, status)
+        .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+          `INSERT INTO library_game (library_id, game_id, status)
           SELECT id, ?, ? FROM library WHERE user_id = ?
           ON CONFLICT(library_id, game_id) DO NOTHING
         `)
@@ -131,8 +134,9 @@ export default {
         .run();
 
       const entry = await env.Backlog_Binding
-        .prepare(`
-          SELECT
+        .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+          `SELECT
             game.id AS igdbGameId,
             library_game.status AS status,
             library_game.addedAt AS addedAt,
@@ -198,8 +202,9 @@ export default {
       }
 
       const result = await env.Backlog_Binding
-        .prepare(`
-          UPDATE library_game
+        .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+          `UPDATE library_game
           SET status = ?
           WHERE game_id = ?
             AND library_id = (
@@ -217,8 +222,9 @@ export default {
       }
 
       const entry = await env.Backlog_Binding
-        .prepare(`
-          SELECT
+        .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+          `SELECT
             library_game.status AS status,
             library_game.addedAt AS addedAt,
             game.name AS gameName,
@@ -260,8 +266,9 @@ export default {
 
       // Bruk både spill-ID og innlogget bruker, slik at andre biblioteker ikke påvirkes.
       const result = await env.Backlog_Binding
-        .prepare(`
-          DELETE FROM library_game
+        .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+          `DELETE FROM library_game
           WHERE game_id = ?
             AND library_id = (
               SELECT id FROM library WHERE user_id = ?
@@ -284,6 +291,7 @@ export default {
       // Sørg for at en ny bruker får et tomt bibliotek som kan hentes.
       await env.Backlog_Binding
         .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
           "INSERT INTO library (user_id) VALUES (?) ON CONFLICT(user_id) DO NOTHING",
         )
         .bind(session.user.id)
@@ -291,8 +299,9 @@ export default {
 
       // Hent bare spillene som er koblet til denne brukerens bibliotek.
       const { results } = await env.Backlog_Binding
-        .prepare(`
-          SELECT
+        .prepare(
+          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+          `SELECT
             game.id AS igdbGameId,
             library_game.status AS status,
             library_game.addedAt AS addedAt,

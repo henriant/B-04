@@ -41,8 +41,9 @@
     position: relative;
     background: none;
     border: none;
-        font-size: 20px;
+    font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
 }
 
 /* Header - underlinje for for tekst */
@@ -122,4 +123,60 @@
 }
 .user-header-section li a{
     color: var(--white);
+}
+
+
+/* Mindre skjerm */
+@media (max-width: 1300px) {
+    
+    .meny{
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+        }
+.meny nav ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: space-around;
+    width: 350px;
+}
+
+    .search-felte{
+        order: 1;
+        width: 750px;
+    }
+    #search{
+        width: 100%;
+        margin: 2rem auto;
+    }
+}    
+
+@media (max-width: 900px) {
+    .meny{
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .meny a{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .meny nav ul{
+        width: 100%;
+    }
+
+    .meny nav ul li{
+        padding: 2rem;
+        margin: 0;
+        display: flex;
+    }
+    
+    .search-felte{
+        order: 1;
+        width: 100%;
+    }
 }

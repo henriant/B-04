@@ -143,8 +143,9 @@ app.get("/api/library", async (c) => {
 	}
 
 	const libraryId = await ensureUserLibraryId(c.env.DB, session.user.id);
-	const result = await c.env.DB.prepare(`
-		SELECT game.id AS igdbGameId,
+	const result = await c.env.DB.prepare(
+		// TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+		`SELECT game.id AS igdbGameId,
 		       library_game.status AS status,
 		       library_game.addedAt AS addedAt,
 		       game.name AS gameName,
@@ -200,8 +201,9 @@ app.post("/api/library", async (c) => {
 	}
 
 	const libraryId = await ensureUserLibraryId(c.env.DB, session.user.id);
-	await c.env.DB.prepare(`
-		INSERT INTO game (id, name, coverImage)
+	await c.env.DB.prepare(
+		// TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+		`INSERT INTO game (id, name, coverImage)
 		VALUES (?, ?, ?)
 		ON CONFLICT(id) DO UPDATE SET
 			name = excluded.name,
@@ -209,8 +211,9 @@ app.post("/api/library", async (c) => {
 	`)
 		.bind(body.igdbGameId, body.name.trim(), coverImageId)
 		.run();
-	await c.env.DB.prepare(`
-		INSERT INTO library_game (library_id, game_id, status)
+	await c.env.DB.prepare(
+		// TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
+		`INSERT INTO library_game (library_id, game_id, status)
 		VALUES (?, ?, ?)
 		ON CONFLICT(library_id, game_id) DO NOTHING
 	`)

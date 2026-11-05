@@ -103,15 +103,15 @@ export function LibraryList({ query, status }: LibraryListProps) {
     );
 
     if (loading) {
-        return <p role="status">Loading your library...</p>;
+        return <p role="status" className="text">Loading your library...</p>;
     }
 
     if (error) {
-        return <p role="alert">{error}</p>;
+        return <p role="alert" className="text">{error}</p>;
     }
 
     if (filteredGames.length === 0) {
-        return <p>{normalizedQuery ? "No matching games found." : "Your library is empty."}</p>;
+        return <p className="text">{normalizedQuery ? "No matching games found." : "Your library is empty."}</p>;
     }
 
     return (

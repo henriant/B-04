@@ -17,14 +17,14 @@ export function Library() {
     
 
     if (isPending) {
-        return <p role="status">Checking your session...</p>;
+        return <p role="status" className="text">Checking your session...</p>;
     }
 
     if (!session) {
         return (
             <section id="my-games-start">
                 <h1 id="my-games-title">My games</h1>
-                <p role="status">
+                <p role="status" className="text">
                     Log in to view your library. <a href="/LogIn">Log in</a>
                 </p>
             </section>
@@ -51,20 +51,24 @@ export function Library() {
                             <VscSearchCompact aria-hidden="true" className='search-icon'/>
                         </button>
                     </section>
+
+                    <section className="filterButtons">
+                        {statusOptions.map(option => (
+                            <button
+                                key={option.value}
+                                onClick={() => setStatus(option.value)}
+                                className={`filterButton ${status === option.value ? 'active' : ''}`}
+                            >
+                                <p className="filterText">{option.label}</p>
+                            </button>
+                        ))}
+                    </section>    
                 </div>
             </section>
 
-        <section className="filterRow">
-                    {statusOptions.map(option => (
-                        <button
-                            key={option.value}
-                            onClick={() => setStatus(option.value)}
-                            className={`filterButton ${status === option.value ? 'active' : ''}`}
-                        >
-                            <p className="filterText">{option.label}</p>
-                        </button>
-                    ))}
-            </section>
+        
+
+
 
             <section className="my-games">
                 <LibraryList query={query} status={status}/>

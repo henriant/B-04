@@ -1,18 +1,15 @@
 /* Stiling for Libraray.tsx */
 #top-library{
     align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem ;
 }
 
-#my-games-start{
-    margin: 2rem clamp(1rem, 5vw, 5rem);
-}
 
 #my-games-title{
     color: var(--white);
-}
-
-.library-greeting{
-    color: var(--white);
+    margin: 3rem;
 }
 
 /* Search */
@@ -27,6 +24,7 @@
     border: var(--black);
     padding: 0.5rem;
         align-items: center;
+        justify-content: start;
 
 }
 
@@ -35,17 +33,27 @@
     cursor: pointer;
     color: var(--black);
 }
-
+.filterButton{
+    color: var(--white);
+    background-color: var(--navyBlue);
+    cursor: pointer;
+    width: 100px;
+    margin: 0.2rem;
+    border-radius: 10px;
+    border-color: var(--white);
+}
 
 .filterButton.active {
-    background-color: #333;
-    color: white;
+    background-color: var(--white);
+    color: var(--navyBlue);
 }
 
 
 .my-games{
     display: flex;
     flex-wrap: wrap;
+    align-items: start;
+   
 }
 
 .game{
@@ -54,11 +62,13 @@
     padding: 2rem;
     margin: 2rem auto;
     align-items: start;
+    max-width: 300px;
+    flex-wrap: wrap;
 } 
 
 .game h2{
     color: var(--white);
-
+    display: flex;
 }
 
 .game p{
@@ -69,6 +79,7 @@
 .library-game-card{
     color: var(--white);
     text-decoration: none;
+    max-width: 200px;
 }
 
 .library-game-cover{
