@@ -7,6 +7,7 @@ import Button from "@/components/shared/Button";
 import { authClient } from "@/auth-client";
 import { useState } from "react";
 import { router } from "expo-router";
+import ConfirmDialog from "@/components/shared/ConfirmDialog";
 
 const Profile = () => {
 
@@ -14,6 +15,7 @@ const Profile = () => {
 
     const [isLoggingOut, setIsLoggingOut] = useState(false)
     const [requestError, setRequestError] = useState<string | null>(null)
+    const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
 
     const handleLogOut = async () => {
         setRequestError(null)
@@ -46,7 +48,11 @@ const Profile = () => {
             </View>
 
             <View style={styles.actionButtons}>
-                <Button label="Delete account" variant="outlined" />
+                <Button
+                    label="Delete account"
+                    variant="outlined"
+                    onPress={() => setIsConfirmingDelete(true)}
+                />
                 <Button
                     label={isLoggingOut ? 'Logging out...' : 'Log out'}
                     variant="filled"
@@ -55,6 +61,14 @@ const Profile = () => {
                 />
             </View>
             {requestError ? <Text accessibilityRole="alert" style={styles.error}>{requestError}</Text> : null}
+            <ConfirmDialog
+                visible={isConfirmingDelete}
+                title="Delete account?"
+                message="This will permanently delete your account and cannot be undone."
+                confirmLabel="Delete"
+                onConfirm={() => setIsConfirmingDelete(false)}
+                onCancel={() => setIsConfirmingDelete(false)}
+            />
         </SafeAreaView>
     );
 }
