@@ -1,0 +1,21 @@
+{
+  "extends": "../../Web/tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "@cloudflare/workers-types",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ]
+  },
+  "include": [
+    "*.test.ts",
+    "*.test.tsx",
+    "vitest.config.ts",
+    "setup.ts",
+    "../../Web/worker-configuration.d.ts",
+    "../../Web/types/**/*.d.ts",
+    "../../Web/src/**/*.ts",
+    "../../Web/src/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "../../Web/node_modules", "../../Web/.tmp"]
+}

@@ -15,6 +15,10 @@ export default defineConfig({
         globals: true,
         include: ["*.test.{ts,tsx}"],
         setupFiles: ["./setup.ts"],
+        typecheck: {
+            enabled: true,
+            tsconfig: "./tsconfig.json",
+        },
         restoreMocks: true,
     },
 });
