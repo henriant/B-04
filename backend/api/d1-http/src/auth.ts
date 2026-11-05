@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { drizzle } from "drizzle-orm/d1";
+import { expo } from "@better-auth/expo";
 import {
 	account,
 	session,
@@ -25,6 +26,7 @@ export function createAuth(env: Bindings, requestUrl: string) {
 		trustedOrigins: [
 			"http://localhost:5174",
 			"http://localhost:8081",
+			"mobile://",
 		],
 		database: drizzleAdapter(db, {
 			provider: "sqlite",
@@ -47,5 +49,6 @@ export function createAuth(env: Bindings, requestUrl: string) {
 				enabled: true,
 			},
 		},
+		plugins: [expo()],
 	});
 }
