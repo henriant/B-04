@@ -1,0 +1,65 @@
+{
+  "planHash": "e82964dc7a6ba88b2e5a8360f08ee9c43b3c5e3ca6b623951bb25d6da8deaceb",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-11-05T16:54:17.8135366Z",
+  "retryCount": 1,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 593,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "$ jest --config jest.config.cjs --runInBand\r\nPASS ./jest.test.ts\r\n  Mobile auth schemas\r\n    \u221A accepts valid login details and rejects invalid email or empty password (4 ms)\r\n    \u221A requires matching signup passwords (3 ms)\r\n  AuthInput\r\n    \u221A renders input errors and forwards text changes (198 ms)\r\n  Home library flow\r\n    \u221A loads and displays games returned by the API (513 ms)\r\n\r\nTest Suites: 1 passed, 1 total\r\nTests:       4 passed, 4 total\r\nSnapshots:   0 total\r\nTime:        3.828 s, estimated 5 s\r\nRan all test suites.\r\n",
+        "durationMs": 6275,
+        "testResults": {
+          "testFramework": "jest",
+          "runnerDetectedFrom": "package_json",
+          "testsTotal": 4,
+          "testsPassed": 4,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": false
+        }
+      }
+    ],
+    "executions": [
+      {
+        "source": "setup[0]",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\corepack.CMD",
+        "args": [
+          "pnpm",
+          "install",
+          "--frozen-lockfile"
+        ],
+        "cwd": "C:\\Users\\Haldo\\Documents\\GitHub\\B-04\\Mobile",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\corepack.CMD",
+        "args": [
+          "pnpm",
+          "--filter",
+          "mobile-jest-tests",
+          "test"
+        ],
+        "cwd": "C:\\Users\\Haldo\\Documents\\GitHub\\B-04\\Mobile",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

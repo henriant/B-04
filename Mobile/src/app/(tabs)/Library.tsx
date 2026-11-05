@@ -7,8 +7,11 @@ import { apiClient } from '@/api';
 import GameRow from '@/components/gameComponents/GameRow';
 import { STATUS_OPTIONS } from '@/constants/library';
 import colors from '@/theme';
+import { authClient } from '@/auth-client';
+import LoginPrompt from '@/components/shared/LoginPrompt';
 
 const Library = () => {
+    const { data: session, isPending } = authClient.useSession();
     const [entries, setEntries] = useState<LibraryEntry[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -16,6 +19,7 @@ const Library = () => {
     const [savingGameId, setSavingGameId] = useState<number | null>(null);
 
     const loadLibrary = useCallback(() => {
+        if (isPending || !session) return;
         let active = true;
         setLoading(true);
         setError(null);
@@ -37,7 +41,7 @@ const Library = () => {
         return () => {
             active = false;
         };
-    }, []);
+    }, [isPending, session]);
 
     useFocusEffect(loadLibrary);
 
@@ -85,6 +89,10 @@ const Library = () => {
     };
 
     const filteredEntries = entries.filter((entry) => entry.status === status);
+
+    if (!isPending && !session) {
+        return <LoginPrompt title="Library" message="Log in to view your library." />;
+    }
 
     return (
         <SafeAreaView style={styles.safeArea} edges={['top']}>

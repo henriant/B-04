@@ -7,8 +7,11 @@ import GameCoverCard from '@/components/gameComponents/GameCoverCard';
 import { type LibraryEntry } from '@backlog-defeater/api-client';
 import { ApiError } from '@backlog-defeater/api-client';
 import { apiClient } from '@/api';
+import { authClient } from '@/auth-client';
+import LoginPrompt from '@/components/shared/LoginPrompt';
 
 const Home = () => {
+    const { data: session, isPending } = authClient.useSession();
     const [library, setLibrary] = useState<LibraryEntry[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -17,6 +20,7 @@ const Home = () => {
 
     useFocusEffect(
         useCallback(() => {
+            if (isPending || !session) return;
             let active = true;
             setLoading(true);
             setError(null);
@@ -38,7 +42,7 @@ const Home = () => {
             return () => {
                 active = false;
             };
-        }, []),
+        }, [isPending, session]),
     );
 
     const games = library.flatMap((entry) => entry.game ? [entry.game] : []);
@@ -46,6 +50,9 @@ const Home = () => {
         entry.status === 'playing' && entry.game ? [entry.game] : [],
     );
 
+    if (!isPending && !session) {
+        return <LoginPrompt title="Your games" message="Log in to view your games." />;
+    }
 
     return (
         <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -100,7 +107,6 @@ const Home = () => {
         </SafeAreaView>
     );
 }
-
 
 const styles = StyleSheet.create({
     container: {

@@ -1,0 +1,7 @@
+{
+  "extends": "../../Mobile/tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest"]
+  },
+  "include": ["./**/*.ts", "./**/*.tsx"]
+}

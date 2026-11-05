@@ -9,14 +9,11 @@
 		"dev:local": "wrangler dev --local --config wrangler.local.jsonc --env-file ../../../.env --port 8790",
 		"dev:local:lan": "wrangler dev --local --ip 0.0.0.0 --config wrangler.local.jsonc --env-file ../../../.env --port 8790",
 		"db:migrate:local": "wrangler d1 migrations apply backlog-defeater-local --local --config wrangler.local.jsonc",
-		"test": "vitest",
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-plugin": "^1.4.3",
 		"@types/node": "^26.6.5",
 		"typescript": "^5.5.2",
-		"vitest": "~5.0.3",
 		"wrangler": "^4.151.3"
 	},
 	"dependencies": {

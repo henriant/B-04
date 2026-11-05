@@ -1,0 +1,19 @@
+{
+  "$schema": "../../backend/api/d1-http/node_modules/wrangler/config-schema.json",
+  "name": "d1-http-test",
+  "main": "../../backend/api/d1-http/src/index.ts",
+  "compatibility_date": "2026-10-22",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "BETTER_AUTH_SECRET": "test-only-secret-for-local-vitest-runtime",
+    "BETTER_AUTH_URL": "http://localhost"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "backlog-defeater-test",
+      "database_id": "00000000-0000-0000-0000-000000000002",
+      "migrations_dir": "../../backend/api/d1-http/migrations"
+    }
+  ]
+}

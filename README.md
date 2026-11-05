@@ -1,71 +1,55 @@
-# B-04
+B-04
 Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
 
----------------------------------------
-OPPSTART
+Velkommen til Backlog Defeater! Dette prosjektet er laget for dem som eier mange spill, og som kanskje ikke har spilt gjennom alle. Brukeren kan her opprette en konto og søke etter spill fra IGDB Api, eid av Twitch. Brukeren kan da velge spillet de ser etter og legge det til i sitt bibliotek, hvor de kan velge status på spillet (planned, playing og completed). Hvis brukeren ønsker, kan hen slette brukeren fra sin profilside.
 
-pnpm install i rot
+----- Mobilapplikasjonen -----
+Mobilappen er bygget med React Native. Expo router organiserer skjermer og navigasjonen i Home, Search, Library og Profile. Når brukeren søker etter spill, sender søkeskjermen forespørsel gjennom den delte API-klienten. Dette søket utføres mens brukeren skriver, med en kort delay for å unngå unødvendige API-kall. Søkeresultatene vises med navn og coverbilde . Brukeren kan da åpne et spill ved å klikke på det for å se detaljer, eller legge det til i biblioteket med en valgt status.
 
-opprette lokal database:
-- pnpm db:local:migrate
+Workeren henter spillinfo fra IGDB og håndterer bibliotekoperasjoner mot D1. Twitch-credentials som trengs for IGDB brukes på server siden og skal ikke ligge i selve mobilappen.
 
-start lokalt api i egen terminal:
-- pnpm dev:api:local
+----- Webapplikasjonen -----
+Webapplikasjonen er bygget med React, TypeScript og RedwoodSDK. RedwoodSDK-rutene viser sider som Home, Library SearchResults og GameInfo og et felles Layout komponent lar oss gjennbruke blant annet navigasjon og søkefelt
 
-start web i egen terminal
+Når bruker sender inn et søk, sendes bruker til SearchResults med søket som URL-parameter. SearchResults bruker den delte API-klienten til å hente spill fra API-et og viser navn og coverbilde. Den henter også biblotekstatus så brukeren kan se om spillet allerede ligger i bilbioteket. Her kan brukeren legge til spillet eller endre status på det.
+
+----- Hvordan kjøre Backlog Defeater -----
+
+For å sette opp prosjektene må du:
+- Sørge for at pnpm er installert på din maskin
+- Kjøre pnpm install i rot mappen (B-04-main)
+
+For å kjøre web:
+- opprett lokal database med: pnpm db:local:migrate
+- start lokalt API i samme terminal: pnpm db:local:migrate
+----- I NY TERMINAL -----
 - cd web
 - pnpm run dev
----------------------------------------
 
-/// Kort forklaring av hva prosjektet gjør
+For å kjøre mobil:
+- opprett lokal database med: pnpm db:local:migrate
+- start lokalt API i samme terminal: pnpm db:local:migrate
+----- I NY TERMINAL -----
+- cd mobile
+- npx expo start
 
-For å sette opp prosjektene må du kjøre:
-- pnpm install i rot mappen (B-04)
+----- Hvordan kjøre testene -----
 
-For å kjøre tester:
-- pnpm test
+For å kjøre testene:
+- `pnpm test` kjører Web-testene med Vitest og API-integrasjonstestene med Vitest.
+- `pnpm --filter web-tests test` kjører bare Web-testene.
+- `pnpm --filter backend-tests test` kjører bare API-Workerens integrasjonstester.
 
-For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bibliotek) må du:
-- Cd inn i `.\backend\api\d1-http\`
-- Kjør `pnpm dev`
-- Stopp med `CTRL+C`
+Web-testene ligger i `Tests/web/`:
+- Enhetstest av hjelpefunksjon (`Tests/web/library-filter.test.ts`): sjekker søk og statusfiltrering av biblioteket.
+- Enhetstest av API-service (`Tests/web/api-client.test.ts`): sjekker søkeforespørsel, responsvalidering og API-feil i den delte klienten.
+- Komponenttest (`Tests/web/LibraryList.test.tsx`): sjekker at biblioteklisten laster og viser spill med valgt status.
+- Integrasjonstest av Web-hovedflyten (`Tests/web/SearchResults.integration.test.tsx`): bruker ekte `SearchResults`-UI og API-klient, men mock API-svar og server action, og sjekker at et søkeresultat kan legges til og vises som lagret.
 
-Worker-konfigurasjonen bruker Cloudflare D1 remote også under lokal utvikling. Kall til
-API-et fra `pnpm dev` leser og skriver derfor til Cloudflare-databasen
-`backlog-defeater-db`. Ikke kjør tester eller migreringer mot databasen uten å være
-klar over at de kan påvirke ekte data.
+Vitest-konfigurasjon og oppsett ligger også i `Tests/web/`. Web-testene bruker testdata og trenger ikke IGDB-credentials eller Cloudflare-tilgang. API-integrasjonstesten og dens konfigurasjon ligger i `Tests/backend/` og bruker Cloudflare Vitest-runtime med lokal D1. Ingen Playwright E2E-test er satt opp ennå.
 
-Web- og mobilappen skal bruke denne Worker-en for IGDB-søk, registrering, innlogging
-og bibliotek. Mobilens API-adresse settes med `EXPO_PUBLIC_API_URL` og
-`EXPO_PUBLIC_API_URL_ANDROID`; webappens adresse settes med `VITE_API_BASE_URL`.
-Under lokal utvikling skal disse adressene peke på Worker-en på port `8790`.
-
-`pnpm dev` bruker Wranglers lokale Cloudflare-autentisering. `CLOUDFLARE_D1_TOKEN`
-i rotens `.env` brukes av Drizzle Kit for D1-operasjoner, men er ikke automatisk
-det samme som `CLOUDFLARE_API_TOKEN` som Cloudflare Vitest-pluginen kan kreve for
-remote bindinger.
-
-For å kjøre webappen må du:
-- cd inn i ./Web/
-- pnpm run dev
-For å slutte den må du:
-- CTRL+C
-
-For å kjøre mobilappen må du:
-- cd inn i ./Mobile/
-- npx expo start (--android eller --IOS for å velge emulator)
-For å slutte den må du:
-- CTRL+C
-
-Ikke start den eldre Worker-en fra `backend/` for spill- eller bibliotek-API-et.
-Ikke kjør `drizzle-kit push` mot Cloudflare som del av vanlig utvikling; databasen
-administreres separat, og skjemaendringer må gjøres som en kontrollert migrering.
-
-For å teste appene, opprett en bruker, eller logg inn med den allerede eksisterende brukeren laget spesifikt for Marius:
-email: supermarius@letsago.com
-passord: test12345678
 
 --------------------------- Kravspekk ---------------------------
 
@@ -148,3 +132,51 @@ Backend:
 
 - Live progress tracker i spillet
 - Chat funksjon for å snakke med andre
+
+
+----- Notater fra sign-off -----
+
+Oppsummering fra sign-off 1.10.26
+Roller
+•	Per nå har vi en rolle, user. Brukere av plattformen
+
+Krav – hva skal brukeren kunne gjøre
+•	Som bruker skal jeg kunne:
+o	Logge inn
+o	Søke etter spill
+o	Få opp mer info om spillet
+o	Legge til spill i en liste
+o	Kunne logge ut
+
+•	Videre utvikling
+o	Kunne logge inn/koble til med annen konto
+	F. eks. steam konto
+	Xbox/microsoft
+
+KI – avtalen
+•	Gjøre avtalen mer offisielt, med paragrafer
+•	Skrive inn konsekvenser ved brudd på avtalen
+•	Medlemmene skriver under avtalen
+Passord – hvordan håndterer vi dette
+•	Passord skal hashes når den sendes
+•	Vi hasher pass og sammen input fra bruker og hash i databasen
+•	
+Ikon lucide
+•	Installer pnpm lucide  for web. I terminal kjør: pnpm add lucide
+Og npm lucide for mobil. I terminalen kjør: npm install lucide
+
+•	Kan også legge til ikonene i figma
+Stilsetting
+•	Tailwind
+•	CSS
+
+Komponenter
+•	Ordne bedre struktur i Component-mappe
+o	Lage egne komponentmappe – f. eks. egen mappe for user komponenter, games komponenter osv
+
+Vite test
+•	Funksjonstester komponenter
+o	eks at epost input sjekker at eposten er ordentlig
+
+
+

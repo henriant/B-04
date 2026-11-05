@@ -8,10 +8,9 @@ import { Link } from 'expo-router'
 import colors from '@/theme'
 import { useState } from 'react'
 import { router } from 'expo-router'
-import { ApiError } from '@backlog-defeater/api-client'
-import { apiClient } from '@/api'
 import { logInSchema } from '@/schemas/auth'
 import { AuthInput } from '@/components/shared/AuthInput'
+import { authClient } from '@/auth-client'
 
 const LogIn = () => {
 
@@ -50,15 +49,15 @@ const LogIn = () => {
     setErrors({})
     setIsSubmitting(true)
     try {
-      await apiClient.login(result.data)
+      const { error } = await authClient.signIn.email(result.data)
+      if (error) {
+        setRequestError(error.message ?? 'Could not log in. Please check your details and try again.')
+        return
+      }
       router.replace('/Home')
     } catch (cause: unknown) {
       console.error('Log-in failed:', cause)
-      setRequestError(
-        cause instanceof ApiError
-          ? cause.message
-          : 'Could not log in. Please check your details and try again.',
-      )
+      setRequestError('Could not log in. Please check your details and try again.')
     } finally {
       setIsSubmitting(false)
     }
