@@ -17,14 +17,14 @@ export function Library() {
     
 
     if (isPending) {
-        return <p role="status">Checking your session...</p>;
+        return <p role="status" className="text">Checking your session...</p>;
     }
 
     if (!session) {
         return (
             <section id="my-games-start">
                 <h1 id="my-games-title">My games</h1>
-                <p role="status">
+                <p role="status" className="text">
                     Log in to view your library. <a href="/LogIn">Log in</a>
                 </p>
             </section>

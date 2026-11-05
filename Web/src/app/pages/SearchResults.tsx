@@ -137,7 +137,7 @@ return (
             {normalizedQuery ? `Games matching "${normalizedQuery}":`: "Search for a game"}
         </h1>
         {normalizedQuery && loading && (
-            <p role="status">Searching for your games...</p>
+            <p role="status" className="text">Searching for your games...</p>
         )}
         {normalizedQuery && !loading && error && (
             <p role="alert">{error}</p>
@@ -146,7 +146,7 @@ return (
             <p role="alert">{libraryLoadError}</p>
         )}
         {normalizedQuery && !loading && !error && games.length === 0 && (
-            <p>No games found</p>
+            <p className="text">No games found</p>
         )}
         {!loading && !error && games.length > 0 && (
             <ul>
@@ -166,13 +166,13 @@ return (
                             <div className="search-result-hover">
                                 <h3>{game.name}</h3>
                                 {!libraryLoaded ? (
-                                    <p>Checking your library...</p>
+                                    <p className="text">Checking your library...</p>
                                 ) : libraryLoadError ? (
                                     <p>{libraryLoadError}</p>
                                 ) : libraryStatuses[game.id] ? (
-                                    <p>In your library · Status: {libraryStatuses[game.id][0].toUpperCase() + libraryStatuses[game.id].slice(1)}</p>
+                                    <p className="text">In your library · Status: {libraryStatuses[game.id][0].toUpperCase() + libraryStatuses[game.id].slice(1)}</p>
                                 ) : (
-                                    <p>Not in your library</p>
+                                    <p className="text">Not in your library</p>
                                 )}
                             </div>
                         </a>

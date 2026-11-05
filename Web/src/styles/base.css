@@ -31,3 +31,8 @@ a:hover{
     color: var(--white);
     text-decoration: none;
 }
+
+.text{
+    color: var(--white);
+    margin: 2rem;
+}
