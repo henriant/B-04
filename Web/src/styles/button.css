@@ -33,6 +33,13 @@
     width: 30%;
 }
 
+/* Library knapper section */
+.filterButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* GameInfo og Library*/
 .filtrer-buttons{
     display: flex;

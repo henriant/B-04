@@ -35,7 +35,6 @@ export function Library() {
         <>
             <section id="my-games-start">
                 <h1 id="my-games-title">My games</h1>
-                <h2 className="library-greeting">What have you played today?</h2>
                 <div id="top-library">
                     <section className='search-felte'>
                         {/* Oppdater søketeksten hver gang brukeren skriver. */}
@@ -52,20 +51,24 @@ export function Library() {
                             <VscSearchCompact aria-hidden="true" className='search-icon'/>
                         </button>
                     </section>
+
+                    <section className="filterButtons">
+                        {statusOptions.map(option => (
+                            <button
+                                key={option.value}
+                                onClick={() => setStatus(option.value)}
+                                className={`filterButton ${status === option.value ? 'active' : ''}`}
+                            >
+                                <p className="filterText">{option.label}</p>
+                            </button>
+                        ))}
+                    </section>    
                 </div>
             </section>
 
-        <section className="filterRow">
-                    {statusOptions.map(option => (
-                        <button
-                            key={option.value}
-                            onClick={() => setStatus(option.value)}
-                            className={`filterButton ${status === option.value ? 'active' : ''}`}
-                        >
-                            <p className="filterText">{option.label}</p>
-                        </button>
-                    ))}
-            </section>
+        
+
+
 
             <section className="my-games">
                 <LibraryList query={query} status={status}/>
