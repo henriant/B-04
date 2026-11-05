@@ -9,7 +9,11 @@ export default function TabsLayout() {
                 headerShown: false,
                 tabBarStyle: {
                     backgroundColor: colors.navyBlue,
-                    borderTopColor: colors.wineRed,
+                    borderWidth: 1,
+                    borderColor: colors.wineRed,
+                    borderRadius: 10,
+                    marginHorizontal: 16,
+                    marginBottom: 12,
                 },
                 tabBarActiveTintColor: colors.wineRed,
                 tabBarInactiveTintColor: colors.muted,
@@ -51,6 +55,7 @@ export default function TabsLayout() {
                     ),
                 }}
             />
+
         </Tabs>
     );
 }
