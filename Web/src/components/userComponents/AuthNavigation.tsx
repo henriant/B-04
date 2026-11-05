@@ -40,7 +40,7 @@ export function AuthNavigation() {
 
     return (
         <nav aria-label="Account">
-            <ul className="user-header-section">
+            <ul>
                 {session ? (
                     <>
                         <li className="meny-text">
@@ -69,7 +69,7 @@ export function AuthNavigation() {
                     </>
                 )}
             </ul>
-            {error && <p role="alert" className="auth-navigation-error">{error}</p>}
+            {error && <p role="alert">{error}</p>}
         </nav>
     );
 }
