@@ -3,7 +3,11 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
 import { createAuth } from "./auth.js";
-import { ensureUserLibraryId } from "./library.js";
+import {
+	createLibraryQueries,
+	type LibraryEntryRow,
+	type LibraryStatus,
+} from "../../../src/db/library.js";
 
 export interface Bindings {
 	DB: D1Database;
@@ -12,8 +16,6 @@ export interface Bindings {
 	IGDB_CLIENT_ID: string;
 	IGDB_CLIENT_SECRET: string;
 }
-
-type LibraryStatus = "planned" | "playing" | "completed";
 
 type IgdbGameResponse = {
 	id: number;
@@ -29,14 +31,6 @@ type IgdbGameResponse = {
 	cover?: {
 		image_id?: string | null;
 	} | null;
-};
-
-type LibraryEntryRow = {
-	igdbGameId: number;
-	status: LibraryStatus;
-	addedAt: string;
-	gameName: string;
-	coverImageId: string | null;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -142,23 +136,11 @@ app.get("/api/library", async (c) => {
 		return c.json({ message: "Unauthorized" }, 401);
 	}
 
-	const libraryId = await ensureUserLibraryId(c.env.DB, session.user.id);
-	const result = await c.env.DB.prepare(
-		// TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-		`SELECT game.id AS igdbGameId,
-		       library_game.status AS status,
-		       library_game.addedAt AS addedAt,
-		       game.name AS gameName,
-		       game.coverImage AS coverImageId
-		FROM library_game
-		JOIN game ON game.id = library_game.game_id
-		WHERE library_game.library_id = ?
-		ORDER BY game.name
-	`)
-		.bind(libraryId)
-		.all<LibraryEntryRow>();
+	const queries = createLibraryQueries(c.env.DB);
+	const libraryId = await queries.ensureUserLibraryId(session.user.id);
+	const entries = await queries.listLibraryEntries(libraryId);
 
-	return c.json(result.results.map(mapLibraryEntry));
+	return c.json(entries.map(mapLibraryEntry));
 });
 
 app.post("/api/library", async (c) => {
@@ -200,27 +182,16 @@ app.post("/api/library", async (c) => {
 		return c.json({ message: "Invalid game details or library status" }, 400);
 	}
 
-	const libraryId = await ensureUserLibraryId(c.env.DB, session.user.id);
-	await c.env.DB.prepare(
-		// TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-		`INSERT INTO game (id, name, coverImage)
-		VALUES (?, ?, ?)
-		ON CONFLICT(id) DO UPDATE SET
-			name = excluded.name,
-			coverImage = COALESCE(excluded.coverImage, game.coverImage)
-	`)
-		.bind(body.igdbGameId, body.name.trim(), coverImageId)
-		.run();
-	await c.env.DB.prepare(
-		// TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-		`INSERT INTO library_game (library_id, game_id, status)
-		VALUES (?, ?, ?)
-		ON CONFLICT(library_id, game_id) DO NOTHING
-	`)
-		.bind(libraryId, body.igdbGameId, status)
-		.run();
+	const queries = createLibraryQueries(c.env.DB);
+	const libraryId = await queries.ensureUserLibraryId(session.user.id);
+	await queries.upsertGame(
+		body.igdbGameId,
+		body.name.trim(),
+		coverImageId,
+	);
+	await queries.addGameToLibrary(libraryId, body.igdbGameId, status);
 
-	const entry = await getLibraryEntry(c.env.DB, libraryId, body.igdbGameId);
+	const entry = await queries.getLibraryEntry(libraryId, body.igdbGameId);
 	if (!entry) {
 		throw new Error("Added library entry could not be loaded from D1");
 	}
@@ -248,17 +219,14 @@ app.patch("/api/library/:gameId", async (c) => {
 		return c.json({ message: "Invalid library status" }, 400);
 	}
 
-	const libraryId = await ensureUserLibraryId(c.env.DB, session.user.id);
-	const result = await c.env.DB.prepare(
-		"UPDATE library_game SET status = ? WHERE library_id = ? AND game_id = ?",
-	)
-		.bind(status, libraryId, gameId)
-		.run();
-	if (result.meta.changes === 0) {
+	const queries = createLibraryQueries(c.env.DB);
+	const libraryId = await queries.ensureUserLibraryId(session.user.id);
+	const changes = await queries.updateLibraryGameStatus(libraryId, gameId, status);
+	if (changes === 0) {
 		return c.json({ message: "Game not found in your library" }, 404);
 	}
 
-	const entry = await getLibraryEntry(c.env.DB, libraryId, gameId);
+	const entry = await queries.getLibraryEntry(libraryId, gameId);
 	if (!entry) {
 		throw new Error("Updated library entry could not be loaded from D1");
 	}
@@ -277,13 +245,10 @@ app.delete("/api/library/:gameId", async (c) => {
 		return c.json({ message: "Invalid game ID" }, 400);
 	}
 
-	const libraryId = await ensureUserLibraryId(c.env.DB, session.user.id);
-	const result = await c.env.DB.prepare(
-		"DELETE FROM library_game WHERE library_id = ? AND game_id = ?",
-	)
-		.bind(libraryId, gameId)
-		.run();
-	if (result.meta.changes === 0) {
+	const queries = createLibraryQueries(c.env.DB);
+	const libraryId = await queries.ensureUserLibraryId(session.user.id);
+	const changes = await queries.deleteLibraryGame(libraryId, gameId);
+	if (changes === 0) {
 		return c.json({ message: "Game not found in your library" }, 404);
 	}
 	return c.body(null, 204);
@@ -346,25 +311,6 @@ function mapIgdbGame(game: IgdbGameResponse) {
 
 function isLibraryStatus(value: unknown): value is LibraryStatus {
 	return value === "planned" || value === "playing" || value === "completed";
-}
-
-async function getLibraryEntry(
-	db: D1Database,
-	libraryId: number,
-	gameId: number,
-): Promise<LibraryEntryRow | null> {
-	return db.prepare(`
-		SELECT game.id AS igdbGameId,
-		       library_game.status AS status,
-		       library_game.addedAt AS addedAt,
-		       game.name AS gameName,
-		       game.coverImage AS coverImageId
-		FROM library_game
-		JOIN game ON game.id = library_game.game_id
-		WHERE library_game.library_id = ? AND library_game.game_id = ?
-	`)
-		.bind(libraryId, gameId)
-		.first<LibraryEntryRow>();
 }
 
 function mapLibraryEntry(entry: LibraryEntryRow) {

@@ -1,5 +1,7 @@
 import { createAuth } from "./auth.js";
-import { drizzle } from 'drizzle-orm/d1';
+import { and, eq, sql } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/d1";
+import { game, library, libraryGame } from "./db/schema.js";
 export * from "./db/schema.js";
 
 export interface Env {
@@ -103,52 +105,61 @@ export default {
       const name = input.name.trim();
 
       // Opprett biblioteket første gang brukeren legger til et spill.
-      await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          "INSERT INTO library (user_id) VALUES (?) ON CONFLICT(user_id) DO NOTHING",
-        )
-        .bind(session.user.id)
-        .run();
+      await db
+        .insert(library)
+        .values({ userId: session.user.id })
+        .onConflictDoNothing({ target: library.userId });
 
       // Bruk IGDB-ID som spill-ID; et spill kan deles av flere brukeres bibliotek.
-      await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          `INSERT INTO game (id, name, coverImage) VALUES (?, ?, ?)
-           ON CONFLICT(id) DO UPDATE SET
-             coverImage = COALESCE(excluded.coverImage, game.coverImage)`,
-        )
-        .bind(input.igdbGameId, name, input.coverImageId ?? null)
-        .run();
+      await db
+        .insert(game)
+        .values({
+          id: input.igdbGameId,
+          name,
+          coverImage: input.coverImageId ?? null,
+        })
+        .onConflictDoUpdate({
+          target: game.id,
+          set: {
+            coverImage: sql`coalesce(excluded.coverImage, ${game.coverImage})`,
+          },
+        });
 
       // Koblingen lagrer statusen inne i akkurat denne brukerens bibliotek.
-      await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          `INSERT INTO library_game (library_id, game_id, status)
-          SELECT id, ?, ? FROM library WHERE user_id = ?
-          ON CONFLICT(library_id, game_id) DO NOTHING
-        `)
-        .bind(input.igdbGameId, status, session.user.id)
-        .run();
+      const userLibrary = await db
+        .select({ id: library.id })
+        .from(library)
+        .where(eq(library.userId, session.user.id))
+        .get();
+      if (!userLibrary) {
+        throw new Error("Could not create or load the user's library");
+      }
 
-      const entry = await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          `SELECT
-            game.id AS igdbGameId,
-            library_game.status AS status,
-            library_game.addedAt AS addedAt,
-            game.name AS gameName,
-            game.coverImage AS coverImageId
-          FROM library
-          JOIN library_game ON library_game.library_id = library.id
-          JOIN game ON game.id = library_game.game_id
-          WHERE library.user_id = ? AND game.id = ?
-        `)
-        .bind(session.user.id, input.igdbGameId)
-        .first<LibraryRow>();
+      await db
+        .insert(libraryGame)
+        .values({
+          libraryId: userLibrary.id,
+          gameId: input.igdbGameId,
+          status,
+        })
+        .onConflictDoNothing();
+
+      const entry = await db
+        .select({
+          igdbGameId: game.id,
+          status: libraryGame.status,
+          addedAt: libraryGame.addedAt,
+          gameName: game.name,
+          coverImageId: game.coverImage,
+        })
+        .from(library)
+        .innerJoin(libraryGame, eq(libraryGame.libraryId, library.id))
+        .innerJoin(game, eq(game.id, libraryGame.gameId))
+        .where(and(
+          eq(library.userId, session.user.id),
+          eq(game.id, input.igdbGameId),
+        ))
+        .get();
 
       if (!entry) {
         return respond(Response.json(
@@ -201,17 +212,18 @@ export default {
         return respond(Response.json({ message: "Invalid status" }, { status: 400 }));
       }
 
-      const result = await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          `UPDATE library_game
-          SET status = ?
-          WHERE game_id = ?
-            AND library_id = (
-              SELECT id FROM library WHERE user_id = ?
-            )
-        `)
-        .bind(status, igdbGameId, session.user.id)
+      const result = await db
+        .update(libraryGame)
+        .set({ status })
+        .where(and(
+          eq(libraryGame.gameId, igdbGameId),
+          eq(
+            libraryGame.libraryId,
+            db.select({ id: library.id })
+              .from(library)
+              .where(eq(library.userId, session.user.id)),
+          ),
+        ))
         .run();
 
       if (result.meta.changes === 0) {
@@ -221,21 +233,22 @@ export default {
         ));
       }
 
-      const entry = await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          `SELECT
-            library_game.status AS status,
-            library_game.addedAt AS addedAt,
-            game.name AS gameName,
-            game.coverImage AS coverImageId
-          FROM library
-          JOIN library_game ON library_game.library_id = library.id
-          JOIN game ON game.id = library_game.game_id
-          WHERE library.user_id = ? AND game.id = ?
-        `)
-        .bind(session.user.id, igdbGameId)
-        .first<LibraryRow>();
+      const entry = await db
+        .select({
+          igdbGameId: game.id,
+          status: libraryGame.status,
+          addedAt: libraryGame.addedAt,
+          gameName: game.name,
+          coverImageId: game.coverImage,
+        })
+        .from(library)
+        .innerJoin(libraryGame, eq(libraryGame.libraryId, library.id))
+        .innerJoin(game, eq(game.id, libraryGame.gameId))
+        .where(and(
+          eq(library.userId, session.user.id),
+          eq(game.id, igdbGameId),
+        ))
+        .get();
 
       if (!entry) {
         return respond(Response.json(
@@ -265,16 +278,17 @@ export default {
       }
 
       // Bruk både spill-ID og innlogget bruker, slik at andre biblioteker ikke påvirkes.
-      const result = await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          `DELETE FROM library_game
-          WHERE game_id = ?
-            AND library_id = (
-              SELECT id FROM library WHERE user_id = ?
-            )
-        `)
-        .bind(igdbGameId, session.user.id)
+      const result = await db
+        .delete(libraryGame)
+        .where(and(
+          eq(libraryGame.gameId, igdbGameId),
+          eq(
+            libraryGame.libraryId,
+            db.select({ id: library.id })
+              .from(library)
+              .where(eq(library.userId, session.user.id)),
+          ),
+        ))
         .run();
 
       if (result.meta.changes === 0) {
@@ -289,31 +303,24 @@ export default {
 
     if (url.pathname === "/api/library" && request.method === "GET") {
       // Sørg for at en ny bruker får et tomt bibliotek som kan hentes.
-      await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          "INSERT INTO library (user_id) VALUES (?) ON CONFLICT(user_id) DO NOTHING",
-        )
-        .bind(session.user.id)
-        .run();
+      await db
+        .insert(library)
+        .values({ userId: session.user.id })
+        .onConflictDoNothing({ target: library.userId });
 
       // Hent bare spillene som er koblet til denne brukerens bibliotek.
-      const { results } = await env.Backlog_Binding
-        .prepare(
-          // TODO CHANGE THIS INTO DRIZZLE SCHEMA CALL
-          `SELECT
-            game.id AS igdbGameId,
-            library_game.status AS status,
-            library_game.addedAt AS addedAt,
-            game.name AS gameName,
-            game.coverImage AS coverImageId
-          FROM library
-          JOIN library_game ON library_game.library_id = library.id
-          JOIN game ON game.id = library_game.game_id
-          WHERE library.user_id = ?
-        `)
-        .bind(session.user.id)
-        .all<LibraryRow>();
+      const results = await db
+        .select({
+          igdbGameId: game.id,
+          status: libraryGame.status,
+          addedAt: libraryGame.addedAt,
+          gameName: game.name,
+          coverImageId: game.coverImage,
+        })
+        .from(library)
+        .innerJoin(libraryGame, eq(libraryGame.libraryId, library.id))
+        .innerJoin(game, eq(game.id, libraryGame.gameId))
+        .where(eq(library.userId, session.user.id));
 
       return respond(Response.json(
         results.map(({ igdbGameId, status, addedAt, gameName, coverImageId }) => ({
