@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { House, Library, Search } from "lucide-react-native";
+import { House, Library, Search, User } from "lucide-react-native";
 import colors from "@/theme";
 
 export default function TabsLayout() {
@@ -39,6 +39,15 @@ export default function TabsLayout() {
                     title: "Library",
                     tabBarIcon: ({ color, size }) => (
                         <Library color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="Profile"
+                options={{
+                    title: "Profile",
+                    tabBarIcon: ({ color, size }) => (
+                        <User color={color} size={size} />
                     ),
                 }}
             />
