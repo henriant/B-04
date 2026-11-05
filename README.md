@@ -3,6 +3,22 @@ Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
 
+---------------------------------------
+OPPSTART
+
+pnpm install i rot
+
+opprette lokal database:
+- pnpm db:local:migrate
+
+start api i egen terminal:
+- pnpm dev:api:local
+
+start web i egen terminal
+- cd web
+- pnpm run dev
+---------------------------------------
+
 /// Kort forklaring av hva prosjektet gjør
 
 For å sette opp prosjektene må du kjøre:
