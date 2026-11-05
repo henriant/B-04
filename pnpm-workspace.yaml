@@ -4,8 +4,7 @@ packages:
   - backend/*
   - backend/api/*
   - packages/*
-  - Tests/vitest
-  - Tests/jest
+  - Tests/*
 
 allowBuilds:
   esbuild: true

@@ -1,4 +1,4 @@
-# B-04
+B-04
 Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
@@ -8,13 +8,18 @@ Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 For å sette opp prosjektene må du kjøre:
 - pnpm install i rot mappen (B-04)
 
-For å kjøre tester:
-Vitest:
-- Cd inn i Tests/vitest
-- pnpm test
-Jest:
-- Cd inn i Tests/Jest
-- pnpm test
+For å kjøre testene:
+- `pnpm test` kjører Web-testene med Vitest og API-integrasjonstestene med Vitest.
+- `pnpm --filter web-tests test` kjører bare Web-testene.
+- `pnpm --filter backend-tests test` kjører bare API-Workerens integrasjonstester.
+
+Web-testene ligger i `Tests/web/`:
+- Enhetstest av hjelpefunksjon (`Tests/web/library-filter.test.ts`): sjekker søk og statusfiltrering av biblioteket.
+- Enhetstest av API-service (`Tests/web/api-client.test.ts`): sjekker søkeforespørsel, responsvalidering og API-feil i den delte klienten.
+- Komponenttest (`Tests/web/LibraryList.test.tsx`): sjekker at biblioteklisten laster og viser spill med valgt status.
+- Integrasjonstest av Web-hovedflyten (`Tests/web/SearchResults.integration.test.tsx`): bruker ekte `SearchResults`-UI og API-klient, men mock API-svar og server action, og sjekker at et søkeresultat kan legges til og vises som lagret.
+
+Vitest-konfigurasjon og oppsett ligger også i `Tests/web/`. Web-testene bruker testdata og trenger ikke IGDB-credentials eller Cloudflare-tilgang. API-integrasjonstesten og dens konfigurasjon ligger i `Tests/backend/` og bruker Cloudflare Vitest-runtime med lokal D1. Ingen Playwright E2E-test er satt opp ennå.
 
 For å opprette eller oppdatere den lokale testdatabasen:
 - pnpm db:test:migrate
@@ -29,7 +34,8 @@ For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bib
 som kobler til den lokale utviklingsdatabasen opprettet med `pnpm db:local:migrate`.
 Den separate lokale testdatabasen opprettes/migreres med `pnpm db:test:migrate`.
 Testdatabasen heter `backlog-defeater-test`; den er adskilt fra både utviklingsdatabasen
-og Cloudflare-databasen. API-ets Vitest-konfigurasjon bruker testkonfigurasjonen.
+og Cloudflare-databasen. API-integrasjonstesten bruker en lokal D1 via konfigurasjonen
+i `Tests/backend/`.
 
 Web- og mobilappen skal bruke denne Worker-en for IGDB-søk, registrering, innlogging
 og bibliotek. Mobilens API-adresse settes med `EXPO_PUBLIC_API_URL` og

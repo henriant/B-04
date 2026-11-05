@@ -1,0 +1,19 @@
+{
+  "name": "web-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@backlog-defeater/api-client": "workspace:*",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "jsdom": "^30.1.3",
+    "vitest": "^5.0.3"
+  }
+}

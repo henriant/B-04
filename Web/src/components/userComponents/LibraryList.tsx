@@ -9,6 +9,7 @@ import {
 } from "@backlog-defeater/api-client";
 import type { LibraryFilterStatus } from "@/constants/library";
 import { removeGameFromLibrary } from "@/lib/library-actions";
+import { filterLibraryEntries } from "@/lib/library-filter";
 
 type LibraryListProps = {
     query: string;
@@ -95,12 +96,8 @@ export function LibraryList({ query, status }: LibraryListProps) {
     };
 
     // Filtrer spillene fra brukerens bibliotek etter status og søk.
-    const normalizedQuery = query.trim().toLocaleLowerCase();
-    const filteredGames = games.filter(
-        (entry) =>
-            (status === "all" || entry.status === status) &&
-            (entry.game?.name ?? "").toLocaleLowerCase().includes(normalizedQuery),
-    );
+    const normalizedQuery = query.trim();
+    const filteredGames = filterLibraryEntries(games, query, status);
 
     if (loading) {
         return <p role="status" className="text">Loading your library...</p>;
