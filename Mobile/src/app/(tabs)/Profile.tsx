@@ -9,7 +9,7 @@ const Profile = () => {
         <SafeAreaView edges={["top"]} style={styles.container}>
             <Text style={styles.title}>Profile</Text>
 
-            <View>
+            <View style={styles.card}>
                 <MenuRow icon={Settings} label="Settings" />
                 <View style={styles.divider} />
                 <MenuRow icon={CircleQuestionMark} label="Help & support"  />
