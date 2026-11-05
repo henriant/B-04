@@ -8,14 +8,16 @@ import { authClient } from "@/auth-client";
 import { useState } from "react";
 import { router } from "expo-router";
 import ConfirmDialog from "@/components/shared/ConfirmDialog";
+import LoginPrompt from "@/components/shared/LoginPrompt";
 
 const Profile = () => {
 
-    const { data: session } = authClient.useSession()
+    const { data: session, isPending } = authClient.useSession()
 
     const [isLoggingOut, setIsLoggingOut] = useState(false)
     const [requestError, setRequestError] = useState<string | null>(null)
     const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
 
     const handleLogOut = async () => {
         setRequestError(null)
@@ -33,6 +35,34 @@ const Profile = () => {
         } finally {
             setIsLoggingOut(false)
         }
+    }
+
+    const handleDeleteAccount = async () => {
+        setRequestError(null)
+        setIsDeleting(true)
+        try {
+            const { error } = await authClient.deleteUser()
+            setIsConfirmingDelete(false)
+            if (error) {
+                setRequestError(
+                    error.code === 'SESSION_EXPIRED'
+                        ? 'For security, please log in again before deleting your account.'
+                        : error.message ?? 'Could not delete your account. Please try again.',
+                )
+                return
+            }
+            router.replace('/')
+        } catch (cause: unknown) {
+            console.error('Account deletion failed:', cause)
+            setIsConfirmingDelete(false)
+            setRequestError('Could not delete your account. Please try again.')
+        } finally {
+            setIsDeleting(false)
+        }
+    }
+
+    if (!isPending && !session) {
+        return <LoginPrompt title="Profile" message="Log in to view your profile." />;
     }
 
     return (
@@ -65,9 +95,10 @@ const Profile = () => {
                 visible={isConfirmingDelete}
                 title="Delete account?"
                 message="This will permanently delete your account and cannot be undone."
-                confirmLabel="Delete"
-                onConfirm={() => setIsConfirmingDelete(false)}
+                confirmLabel={isDeleting ? 'Deleting...' : 'Delete'}
+                onConfirm={() => void handleDeleteAccount()}
                 onCancel={() => setIsConfirmingDelete(false)}
+                isBusy={isDeleting}
             />
         </SafeAreaView>
     );
