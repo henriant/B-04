@@ -1,13 +1,11 @@
-# pnpm 11 no longer reads the package.json "pnpm" field; these projects are
-# also installed standalone (tarball E2E envs, create-rwsdk output), so they
-# carry their own build-script approvals.
 packages:
   - Web
   - Mobile
   - backend/*
   - backend/api/*
   - packages/*
-  - Tests
+  - Tests/vitest
+  - Tests/jest
 
 allowBuilds:
   esbuild: true
@@ -15,5 +13,7 @@ allowBuilds:
   workerd: true
 
 permissions:
+  '@parcel/watcher':
+    build: false
   drizzle-kit:
     skills: false
