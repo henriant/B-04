@@ -3,7 +3,19 @@ Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
 
-/// Kort forklaring av hva prosjektet gjør
+Velkommen til Backlog Defeater! Dette prosjektet er laget for dem som eier mange spill, og som kanskje ikke har spilt gjennom alle. Brukeren kan her opprette en konto og søke etter spill fra IGDB Api, eid av Twitch. Brukeren kan da velge spillet de ser etter og legge det til i sitt bibliotek, hvor de kan velge status på spillet (planned, playing og completed). Hvis brukeren ønsker, kan hen slette brukeren fra sin profilside.
+
+----- Mobilapplikasjonen -----
+Mobilappen er bygget med React Native. Expo router organiserer skjermer og navigasjonen i Home, Search, Library og Profile. Når brukeren søker etter spill, sender søkeskjermen forespørsel gjennom den delte API-klienten. Dette søket utføres mens brukeren skriver, med en kort delay for å unngå unødvendige API-kall. Søkeresultatene vises med navn og coverbilde . Brukeren kan da åpne et spill ved å klikke på det for å se detaljer, eller legge det til i biblioteket med en valgt status.
+
+Workeren henter spillinfo fra IGDB og håndterer bibliotekoperasjoner mot D1. Twitch-credentials som trengs for IGDB brukes på server siden og skal ikke ligge i selve mobilappen.
+
+----- Webapplikasjonen -----
+Webapplikasjonen er bygget med React, TypeScript og RedwoodSDK. RedwoodSDK-rutene viser sider som Home, Library SearchResults og GameInfo og et felles Layout komponent lar oss gjennbruke blant annet navigasjon og søkefelt
+
+Når bruker sender inn et søk, sendes bruker til SearchResults med søket som URL-parameter. SearchResults bruker den delte API-klienten til å hente spill fra API-et og viser navn og coverbilde. Den henter også biblotekstatus så brukeren kan se om spillet allerede ligger i bilbioteket. Her kan brukeren legge til spillet eller endre status på det.
+
+----- Hvordan kjøre Backlog Defeater -----
 
 For å sette opp prosjektene må du:
 - Sørge for at pnpm er installert på din maskin
@@ -23,6 +35,7 @@ For å kjøre mobil:
 - cd mobile
 - npx expo start
 
+----- Hvordan kjøre testene -----
 
 For å kjøre testene:
 - `pnpm test` kjører Web-testene med Vitest og API-integrasjonstestene med Vitest.
@@ -119,3 +132,51 @@ Backend:
 
 - Live progress tracker i spillet
 - Chat funksjon for å snakke med andre
+
+
+----- Notater fra sign-off -----
+
+Oppsummering fra sign-off 1.10.26
+Roller
+•	Per nå har vi en rolle, user. Brukere av plattformen
+
+Krav – hva skal brukeren kunne gjøre
+•	Som bruker skal jeg kunne:
+o	Logge inn
+o	Søke etter spill
+o	Få opp mer info om spillet
+o	Legge til spill i en liste
+o	Kunne logge ut
+
+•	Videre utvikling
+o	Kunne logge inn/koble til med annen konto
+	F. eks. steam konto
+	Xbox/microsoft
+
+KI – avtalen
+•	Gjøre avtalen mer offisielt, med paragrafer
+•	Skrive inn konsekvenser ved brudd på avtalen
+•	Medlemmene skriver under avtalen
+Passord – hvordan håndterer vi dette
+•	Passord skal hashes når den sendes
+•	Vi hasher pass og sammen input fra bruker og hash i databasen
+•	
+Ikon lucide
+•	Installer pnpm lucide  for web. I terminal kjør: pnpm add lucide
+Og npm lucide for mobil. I terminalen kjør: npm install lucide
+
+•	Kan også legge til ikonene i figma
+Stilsetting
+•	Tailwind
+•	CSS
+
+Komponenter
+•	Ordne bedre struktur i Component-mappe
+o	Lage egne komponentmappe – f. eks. egen mappe for user komponenter, games komponenter osv
+
+Vite test
+•	Funksjonstester komponenter
+o	eks at epost input sjekker at eposten er ordentlig
+
+
+
