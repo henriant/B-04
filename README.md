@@ -20,6 +20,8 @@ For å kjøre mobil:
 - opprett lokal database med: pnpm db:local:migrate
 - start lokalt API i samme terminal: pnpm db:local:migrate
 ----- I NY TERMINAL -----
+- cd mobile
+- npx expo start
 
 
 For å kjøre testene:
