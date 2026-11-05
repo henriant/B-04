@@ -5,8 +5,22 @@ Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 /// Kort forklaring av hva prosjektet gjør
 
-For å sette opp prosjektene må du kjøre:
-- pnpm install i rot mappen (B-04)
+For å sette opp prosjektene må du:
+- Sørge for at pnpm er installert på din maskin
+- Kjøre pnpm install i rot mappen (B-04-main)
+
+For å kjøre web:
+- opprett lokal database med: pnpm db:local:migrate
+- start lokalt API i samme terminal: pnpm db:local:migrate
+----- I NY TERMINAL -----
+- cd web
+- pnpm run dev
+
+For å kjøre mobil:
+- opprett lokal database med: pnpm db:local:migrate
+- start lokalt API i samme terminal: pnpm db:local:migrate
+----- I NY TERMINAL -----
+
 
 For å kjøre testene:
 - `pnpm test` kjører Web-testene med Vitest og API-integrasjonstestene med Vitest.
