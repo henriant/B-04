@@ -4,7 +4,8 @@ packages:
   - backend/*
   - backend/api/*
   - packages/*
-  - Tests
+  - Tests/vitest
+  - Tests/jest
 
 allowBuilds:
   esbuild: true
@@ -12,5 +13,7 @@ allowBuilds:
   workerd: true
 
 permissions:
+  '@parcel/watcher':
+    build: false
   drizzle-kit:
     skills: false
