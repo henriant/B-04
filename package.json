@@ -2,25 +2,27 @@
   "name": "backlog-defeater",
   "private": true,
   "version": "0.0.1",
-  "description": "Monorepo for BacklogDefeater: webapp (RedwoodSDK/pnpm) + mobilapp (Expo/npm)",
+  "description": "Monorepo for BacklogDefeater: webapp (RedwoodSDK) + mobilapp (Expo), pnpm workspaces",
   "scripts": {
-    "web:install": "pnpm --dir Web install",
-    "web:dev": "pnpm --dir Web dev",
-    "web:build": "pnpm --dir Web build",
-    "web:release": "pnpm --dir Web release",
-    "mobile:install": "npm --prefix Mobile install",
-    "mobile:start": "npm --prefix Mobile run start",
-    "mobile:android": "npm --prefix Mobile run android",
-    "mobile:ios": "npm --prefix Mobile run ios",
-    "install:all": "npm run web:install && npm run mobile:install"
+    "dev:web": "pnpm --filter web dev",
+    "build:web": "pnpm --filter web build",
+    "release:web": "pnpm --filter web release",
+    "start:mobile": "pnpm --filter mobile start",
+    "android": "pnpm --filter mobile android",
+    "ios": "pnpm --filter mobile ios",
+    "lint": "pnpm -r --if-present lint",
+    "test": "vitest"
   },
   "dependencies": {
+    "@better-auth/drizzle-adapter": "^1.7.14",
     "@libsql/client": "^0.18.0",
+    "better-auth": "^1.7.12",
     "dotenv": "^18.0.4",
     "drizzle-orm": "1.0.0-rc.4"
   },
   "devDependencies": {
     "drizzle-kit": "1.0.0-rc.4",
-    "tsx": "^4.23.15"
+    "tsx": "^4.23.15",
+    "vitest": "^5.0.5"
   }
 }

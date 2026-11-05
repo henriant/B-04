@@ -1,0 +1,65 @@
+/* Styling for side med valgt spill -> components -> gameComponents -> GameCard.tsx */
+
+.game-info{
+    color: var(--white);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: min(100%, 1100px);
+}
+
+.game-info-title{
+    width: 100%;
+    margin: 2rem;
+    color: var(--white);
+
+}
+
+.game-info article{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.game-info-cover{
+    width: min(280px, 100%);
+    height: auto;
+    object-fit: cover;
+}
+
+.game-info-details{
+    flex: 1;
+    min-width: min(100%, 300px);
+}
+
+.game-info .filtrer-buttons{
+    flex-wrap: wrap;
+    margin: 1rem 0;
+}
+
+.game-info .filtrer-button[aria-pressed="true"]{
+    color: var(--navyBlue);
+    background-color: var(--white);
+}
+
+.game-info-save{
+    width: auto;
+    cursor: pointer;
+}
+
+.game-info-save:disabled{
+    cursor: wait;
+}
+
+@media (max-width: 640px){
+    .game-info-cover{
+        width: min(220px, 100%);
+    }
+
+    .game-info-details{
+        min-width: 100%;
+    }
+}

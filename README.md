@@ -3,33 +3,53 @@ Prosjekt-repo for gruppe B-04 i Webapplikasjoner og Mobilprogrammering H2026
 
 --------------------------- Introduksjon til prosjektet ---------------------------
 
-Dokument:
-https://docs.google.com/document/d/1xPGiPMfXj1Dv0fjIMI9oQ7GuXVQfSy6UwPikrsie6rE/edit?usp=sharing
-
 /// Kort forklaring av hva prosjektet gjør
 
 For å sette opp prosjektene må du kjøre:
 - pnpm install i rot mappen (B-04)
 
+For å kjøre tester:
+- pnpm test
+
+For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bibliotek) må du:
+- Cd inn i `.\backend\api\d1-http\`
+- Kjør `pnpm dev`
+- Stopp med `CTRL+C`
+
+Worker-konfigurasjonen bruker Cloudflare D1 remote også under lokal utvikling. Kall til
+API-et fra `pnpm dev` leser og skriver derfor til Cloudflare-databasen
+`backlog-defeater-db`. Ikke kjør tester eller migreringer mot databasen uten å være
+klar over at de kan påvirke ekte data.
+
+Web- og mobilappen skal bruke denne Worker-en for IGDB-søk, registrering, innlogging
+og bibliotek. Mobilens API-adresse settes med `EXPO_PUBLIC_API_URL` og
+`EXPO_PUBLIC_API_URL_ANDROID`; webappens adresse settes med `VITE_API_BASE_URL`.
+Under lokal utvikling skal disse adressene peke på Worker-en på port `8790`.
+
+`pnpm dev` bruker Wranglers lokale Cloudflare-autentisering. `CLOUDFLARE_D1_TOKEN`
+i rotens `.env` brukes av Drizzle Kit for D1-operasjoner, men er ikke automatisk
+det samme som `CLOUDFLARE_API_TOKEN` som Cloudflare Vitest-pluginen kan kreve for
+remote bindinger.
+
 For å kjøre webappen må du:
 - cd inn i ./Web/
 - pnpm run dev
 For å slutte den må du:
-- CTRL+C i terminalen
+- CTRL+C
 
 For å kjøre mobilappen må du:
 - cd inn i ./Mobile/
 - npx expo start (--android eller --IOS for å velge emulator)
 For å slutte den må du:
-- CTRL+C i terminalen
+- CTRL+C
 
-For å kjøre lokal server i backend:
-- cd inn i .\backend\
-- npx pnpm dev
-For å kjøre testen: 
-- Åpne http://localhost:5000/api/top-games i browser
-For å slutte den må du:
-- CTRL+C i terminalen
+Ikke start den eldre Worker-en fra `backend/` for spill- eller bibliotek-API-et.
+Ikke kjør `drizzle-kit push` mot Cloudflare som del av vanlig utvikling; databasen
+administreres separat, og skjemaendringer må gjøres som en kontrollert migrering.
+
+For å teste appene, opprett en bruker, eller logg inn med den allerede eksisterende brukeren laget spesifikt for Marius:
+email: supermarius@letsago.com
+passord: test12345678
 
 --------------------------- Kravspekk ---------------------------
 
@@ -112,5 +132,3 @@ Backend:
 
 - Live progress tracker i spillet
 - Chat funksjon for å snakke med andre
-
-

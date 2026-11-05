@@ -1,0 +1,12 @@
+name = "backlog_defeater"
+main = "src/index.ts"
+compatibility_date = "2022-11-07"
+# Better Auth trenger Node.js-moduler som crypto i Workers.
+compatibility_flags = ["nodejs_compat"]
+
+[[ d1_databases ]]
+binding = "Backlog_Binding"
+database_name = "backlog-defeater-db"
+database_id = "75e16b6b-4ac1-4618-9dcd-f98c2b1a4eeb"
+remote = true
+migrations_dir = "./drizzle/output"

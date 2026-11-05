@@ -1,0 +1,72 @@
+/* Styling for knapper */
+
+/* For knapper i Home LogIn og SignUp*/
+.form-button{
+    background-color: var(--white);
+    color: var(--navyBlue);
+    padding: 0rem;
+    border: solid;
+    border-radius: 80px;
+    margin: 1rem auto;
+    min-width: 200px;
+    cursor: pointer;
+    height: 70px;
+        font-size: 1.2rem;
+
+}
+
+.form-button:hover{
+    color: var(--white);
+    background-color: var(--navyBlue);
+}
+
+
+/* Home get started section */
+.get-startet-button{
+    background-color: var(--white);
+    color: var(--navyBlue);
+    padding: 0rem;
+    border: solid;
+    border-radius: 80px;
+    margin: 1.5rem auto;
+    cursor: pointer;
+    width: 30%;
+}
+
+/* GameInfo og Library*/
+.filtrer-buttons{
+    display: flex;
+}
+
+.filtrer-button{
+    color: var(--white);
+    background-color: var(--navyBlue);
+    cursor: pointer;
+    padding: 1rem;
+    margin: 0.2rem;
+    border-radius: 10px;
+    border-color: var(--white);
+}
+
+.filtrer-button:hover{
+    color: var(--navyBlue);
+    background-color: var(--white);
+}
+
+/* SearchResults */
+.add-remove-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    color: var(--navyBlue);
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+
+}
+
+.add-remove-button:hover{
+    background-color: var(--navyBlue);
+    color: var(--white);
+}

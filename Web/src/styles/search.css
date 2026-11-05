@@ -1,0 +1,120 @@
+/* Stiling for søke resultater */
+
+#search-results{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#search-results-title{
+    color: var(--white);
+    width: 100%;
+    margin: 2rem;
+}
+
+#search-results-list{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+
+/* Spill kort som viser søkeresultater. */
+.searchResults-game{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: 2rem auto;
+    align-items: start;
+}
+
+/* Kortet viser coveret normalt og bibliotekstatus ved hover eller fokus. */
+.search-result-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    color: var(--white);
+}
+
+.search-result-card .library-game-img,
+.search-result-cover-placeholder{
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    transition: opacity 160ms ease;
+}
+
+.search-result-cover-placeholder{
+    display: grid;
+    place-items: center;
+    background: rgb(0 0 0 / 25%);
+    color: var(--white);
+}
+
+.search-result-hover{
+    position: absolute;
+    inset: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    padding: 0.75rem;
+    color: var(--white);
+    background: linear-gradient(
+        to top,
+        rgb(25 31 69 / 96%) 0%,
+        rgb(25 31 69 / 78%) 48%,
+        rgb(25 31 69 / 12%) 100%
+    );
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 160ms ease;
+}
+
+.search-result-hover h3,
+.search-result-hover p{
+    margin: 0.25rem 0;
+}
+
+.search-result-card:hover .search-result-hover,
+.search-result-card:focus-visible .search-result-hover{
+    opacity: 1;
+    visibility: visible;
+}
+
+.search-result-card:hover .library-game-img,
+.search-result-card:focus-visible .library-game-img{
+    opacity: 0.58;
+}
+
+.search-result-hover h3,
+.search-result-hover p{
+    text-shadow: 0 1px 3px var(--black);
+}
+
+.searchResults-game .add-button{
+    position: static;
+    width: auto;
+    margin: 0.75rem 0 0;
+    cursor: pointer;
+}
+
+.searchResults-game .add-button:disabled{
+    cursor: default;
+}
+
+.search-result-status{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    color: var(--white);
+}
+
+.search-result-status select{
+    padding: 0.4rem;
+    border-radius: 6px;
+}

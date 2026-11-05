@@ -1,0 +1,1 @@
+The packages folder is used for storing code that is going to be shared between Web, Mobile and backend.

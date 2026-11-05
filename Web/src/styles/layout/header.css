@@ -1,0 +1,125 @@
+/* Styling for header */
+
+/* Header */
+.meny {
+    display: flex;
+    align-items: center;
+    height: 120px;
+    justify-content: space-between;
+    padding: 0 50px;
+    margin-bottom: 8rem;
+    margin-top: 1rem;
+
+}
+
+
+/* Header - elementer*/
+.meny nav ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header - tekst elementer*/
+.meny-text{
+    list-style: none;
+    padding: 3rem;
+    :hover{
+        color: var(--white);
+    }
+}
+        
+.meny-text a{
+    color: var(--white);
+    text-decoration: none;
+    position: relative;
+}
+
+.meny-text button{
+    color: var(--white);
+    text-decoration: none;
+    position: relative;
+    background: none;
+    border: none;
+        font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Header - underlinje for for tekst */
+.meny-text a::after{
+    content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	height: 4px;
+	width: 0;              /* på starten underlinje er usynlig */
+
+    /* bestemmer underlinje utseende */
+	background-color: var(--white);
+	transition-duration: 200ms;
+}
+
+
+.meny-text button::after{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 4px;
+    width: 0;              /* på starten underlinje er usynlig */
+
+    /* bestemmer underlinje utseende */
+    background-color: var(--white);
+    transition-duration: 200ms;
+}
+
+/* vis linje */
+.meny-text a:hover::after{
+    width: 100%;
+}
+
+.meny-text button:hover::after{
+    width: 100%;
+}
+
+
+
+/* Header - søkefelte */
+.search-felte{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+/* input */
+#search{
+    height: 40px;
+    width: 400px;
+    border-radius: 15px;
+    border: var(--black);
+    padding: 0.5rem;
+    position: relative;
+}
+
+/* label */
+.search-icon-label{
+    position: absolute;
+    border:none;
+    background: none;
+    width: 40px;
+    height: 40px;
+}
+
+/* icon */
+#search-icon{
+    color: var(--black);
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.user-header-section li{
+    list-style: none;
+}
+.user-header-section li a{
+    color: var(--white);
+}

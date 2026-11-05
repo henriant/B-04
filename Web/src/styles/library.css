@@ -1,0 +1,131 @@
+/* Stiling for Libraray.tsx */
+#top-library{
+    align-items: center;
+}
+
+#my-games-start{
+    margin: 2rem clamp(1rem, 5vw, 5rem);
+}
+
+#my-games-title{
+    color: var(--white);
+}
+
+.library-greeting{
+    color: var(--white);
+}
+
+/* Search */
+
+
+
+/* input */
+#find-my-game-felte{
+    height: 40px;
+    width: 300px;
+    border-radius: 15px;
+    border: var(--black);
+    padding: 0.5rem;
+        align-items: center;
+
+}
+
+/* label -> ikon*/
+.search-label-library{
+    cursor: pointer;
+    color: var(--black);
+}
+
+
+.filterButton.active {
+    background-color: #333;
+    color: white;
+}
+
+
+.my-games{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: 2rem auto;
+    align-items: start;
+} 
+
+.game h2{
+    color: var(--white);
+
+}
+
+.game p{
+    color: var(--white);
+}
+
+/* Hoverlaget gir kontrast til navn og status over spillcoveret. */
+.library-game-card{
+    color: var(--white);
+    text-decoration: none;
+}
+
+.library-game-cover{
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.library-game-cover .library-game-img{
+    display: block;
+    object-fit: cover;
+    transition: opacity 160ms ease;
+}
+
+.library-game-hover{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    color: var(--white);
+    background: linear-gradient(
+        to top,
+        rgb(25 31 69 / 96%) 0%,
+        rgb(25 31 69 / 78%) 48%,
+        rgb(25 31 69 / 12%) 100%
+    );
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 160ms ease;
+}
+
+.library-game-hover h3,
+.library-game-hover p{
+    margin: 0.25rem 0;
+}
+
+.library-game-card:hover .library-game-hover,
+.library-game-card:focus-visible .library-game-hover{
+    opacity: 1;
+    visibility: visible;
+}
+
+.library-game-card:hover .library-game-img,
+.library-game-card:focus-visible .library-game-img{
+    opacity: 0.58;
+}
+
+.library-game-hover h3,
+.library-game-hover p{
+    text-shadow: 0 1px 3px var(--black);
+}
+
+
+.library-game-img{
+    height: 200px;
+    width: 200px;
+}
