@@ -9,6 +9,10 @@ import {
     type IGDBGame,
     type LibraryStatus,
 } from "@backlog-defeater/api-client";
+import {
+    addGameToLibrary,
+    updateGameLibraryStatus,
+} from "@/lib/library-actions";
 
 const apiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
 const libraryApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
@@ -42,9 +46,15 @@ export function SearchResults({ query }: SearchResultsProps) {
         try {
             const status = selectedStatuses[game.id] ?? libraryStatuses[game.id] ?? "planned";
             if (libraryStatuses[game.id]) {
-                await libraryApiClient.updateLibraryStatus(game.id, status);
+                const result = await updateGameLibraryStatus(game.id, status);
+                if (!result.ok) {
+                    throw new ApiError(result.status, result.message);
+                }
             } else {
-                await libraryApiClient.addToLibrary(game, status);
+                const result = await addGameToLibrary(game, status);
+                if (!result.ok) {
+                    throw new ApiError(result.status, result.message);
+                }
             }
             setLibraryStatuses((current) => ({ ...current, [game.id]: status }));
             setSelectedStatuses((current) => ({ ...current, [game.id]: status }));

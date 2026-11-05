@@ -8,6 +8,7 @@ import {
     type LibraryEntry,
 } from "@backlog-defeater/api-client";
 import type { LibraryFilterStatus } from "@/constants/library";
+import { removeGameFromLibrary } from "@/lib/library-actions";
 
 type LibraryListProps = {
     query: string;
@@ -74,7 +75,10 @@ export function LibraryList({ query, status }: LibraryListProps) {
         setRemovingGameId(entry.igdbGameId);
         setError(null);
         try {
-            await libraryApiClient.removeFromLibrary(entry.igdbGameId);
+            const result = await removeGameFromLibrary(entry.igdbGameId);
+            if (!result.ok) {
+                throw new ApiError(result.status, result.message);
+            }
             setGames((current) =>
                 current.filter((game) => game.igdbGameId !== entry.igdbGameId),
             );

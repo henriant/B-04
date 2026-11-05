@@ -8,6 +8,10 @@ import {
     type IGDBGame,
     type LibraryStatus,
 } from "@backlog-defeater/api-client";
+import {
+    addGameToLibrary,
+    updateGameLibraryStatus,
+} from "@/lib/library-actions";
 
 const gameApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
 const libraryApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL);
@@ -115,9 +119,15 @@ export function GameInfo({ gameId }: GameInfoProps) {
 
         try {
             if (isInLibrary) {
-                await libraryApiClient.updateLibraryStatus(game.id, selectedStatus);
+                const result = await updateGameLibraryStatus(game.id, selectedStatus);
+                if (!result.ok) {
+                    throw new ApiError(result.status, result.message);
+                }
             } else {
-                await libraryApiClient.addToLibrary(game, selectedStatus);
+                const result = await addGameToLibrary(game, selectedStatus);
+                if (!result.ok) {
+                    throw new ApiError(result.status, result.message);
+                }
                 setIsInLibrary(true);
             }
             setStatusMessage("Library status saved.");
