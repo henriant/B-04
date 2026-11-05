@@ -5,10 +5,33 @@ import { CircleQuestionMark, Settings } from "lucide-react-native";
 import MenuRow from "@/components/shared/MenuRow";
 import Button from "@/components/shared/Button";
 import { authClient } from "@/auth-client";
+import { useState } from "react";
+import { router } from "expo-router";
 
 const Profile = () => {
 
     const { data: session } = authClient.useSession()
+
+    const [isLoggingOut, setIsLoggingOut] = useState(false)
+    const [requestError, setRequestError] = useState<string | null>(null)
+
+    const handleLogOut = async () => {
+        setRequestError(null)
+        setIsLoggingOut(true)
+        try {
+            const { error } = await authClient.signOut()
+            if (error) {
+                setRequestError(error.message ?? 'Could not log out. Please try again.')
+                return
+            }
+            router.replace('/')
+        } catch (cause: unknown) {
+            console.error('Log-out failed:', cause)
+            setRequestError('Could not log out. Please try again.')
+        } finally {
+            setIsLoggingOut(false)
+        }
+    }
 
     return (
         <SafeAreaView edges={["top"]} style={styles.container}>
@@ -24,8 +47,14 @@ const Profile = () => {
 
             <View style={styles.actionButtons}>
                 <Button label="Delete account" variant="outlined" />
-                <Button label="Log out" variant="filled" />
+                <Button
+                    label={isLoggingOut ? 'Logging out...' : 'Log out'}
+                    variant="filled"
+                    onPress={() => void handleLogOut()}
+                    disabled={isLoggingOut}
+                />
             </View>
+            {requestError ? <Text accessibilityRole="alert" style={styles.error}>{requestError}</Text> : null}
         </SafeAreaView>
     );
 }
@@ -63,6 +92,11 @@ const styles = StyleSheet.create({
     email: {
         color: colors.muted,
         marginBottom: 16,
+    },
+    error: {
+        color: colors.errorColor,
+        marginTop: 10,
+        textAlign: 'center',
     },
 });
 
