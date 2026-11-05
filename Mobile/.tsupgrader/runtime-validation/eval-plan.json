@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-11-05T16:50:00.000Z",
+  "generatedOnPlatform": "win32",
+  "projectType": "other",
+  "setup": [
+    {
+      "command": "corepack",
+      "args": ["pnpm", "install", "--frozen-lockfile"],
+      "timeoutSeconds": 600
+    }
+  ],
+  "assertions": [
+    {
+      "name": "tests-pass",
+      "kind": "process",
+      "command": "corepack",
+      "args": ["pnpm", "--filter", "mobile-jest-tests", "test"],
+      "verificationMethod": "test-results",
+      "expected": "0",
+      "timeoutSeconds": 180
+    }
+  ]
+}
