@@ -41,8 +41,9 @@
     position: relative;
     background: none;
     border: none;
-        font-size: 20px;
+    font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
 }
 
 /* Header - underlinje for for tekst */
