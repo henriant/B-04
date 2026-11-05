@@ -39,19 +39,18 @@ export function AuthNavigation() {
     }
 
     return (
-        <nav className="auth-navigation" aria-label="Account">
+        <nav aria-label="Account">
             <ul className="user-header-section">
                 {session ? (
                     <>
                         <li className="meny-text">
-                            <a className="auth-user-name" href="/Profile">
+                            <a href="/Profile">
                                 Hello, {session.user.name}!
                             </a>
                         </li>
                         <li className="meny-text">
                             <button
                                 type="button"
-                                className="auth-logout-button"
                                 onClick={handleSignOut}
                                 disabled={isSigningOut}
                             >

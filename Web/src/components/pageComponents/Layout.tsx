@@ -1,6 +1,5 @@
 import type { LayoutProps } from 'rwsdk/router'
 {/* Ikoner */}
-import { VscSearchCompact } from "react-icons/vsc";
 import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
 import { AiFillTikTok } from 'react-icons/ai';
 import { Search } from '../searchComponents/Search';
@@ -15,7 +14,7 @@ export function Layout({ children } : LayoutProps) {
             {/* Header */}
             <header className='meny'>
                 <a href="/"><img className='logoNav' src='./backlogDefeaterSecondaryLogo2_blue_white2.png' alt='Backlog Defeater logo'/></a>
-                <nav className="main-navigation" aria-label="Main">
+                <nav>
                     <ul>
                         <li className='meny-text'>
                             <a href="/">Home</a>

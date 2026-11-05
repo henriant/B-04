@@ -2,152 +2,124 @@
 
 /* Header */
 .meny {
-    display: grid;
-    grid-template-columns: auto auto minmax(240px, 1fr) auto;
-    align-items: center;
-    gap: 1rem;
-    min-height: 120px;
-    padding: 1rem clamp(1rem, 4vw, 3rem);
-    margin: 1rem 0 3rem;
-}
-
-.meny > a {
     display: flex;
     align-items: center;
+    height: 120px;
+    justify-content: space-between;
+    padding: 0 50px;
+    margin-bottom: 8rem;
+    margin-top: 1rem;
+
 }
 
-.meny .main-navigation ul,
-.meny .user-header-section {
+
+/* Header - elementer*/
+.meny nav ul{
     display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
     margin: 0;
     padding: 0;
+}
+
+/* Header - tekst elementer*/
+.meny-text{
     list-style: none;
+    padding: 3rem;
+    :hover{
+        color: var(--white);
+    }
 }
-
-.meny .user-header-section {
-    justify-content: flex-end;
-}
-
-.meny-text {
-    padding: 0.75rem 1rem;
-    white-space: nowrap;
-}
-
-.meny-text a,
-.meny-text .auth-user-name {
+        
+.meny-text a{
     color: var(--white);
     text-decoration: none;
     position: relative;
 }
 
-.meny > .search-felte {
+.meny-text button{
+    color: var(--white);
+    text-decoration: none;
     position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-width: 0;
+    background: none;
+    border: none;
+        font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
-.meny #search {
-    box-sizing: border-box;
-    height: 40px;
+/* Header - underlinje for for tekst */
+.meny-text a::after{
+    content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	height: 4px;
+	width: 0;              /* på starten underlinje er usynlig */
+
+    /* bestemmer underlinje utseende */
+	background-color: var(--white);
+	transition-duration: 200ms;
+}
+
+
+.meny-text button::after{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 4px;
+    width: 0;              /* på starten underlinje er usynlig */
+
+    /* bestemmer underlinje utseende */
+    background-color: var(--white);
+    transition-duration: 200ms;
+}
+
+/* vis linje */
+.meny-text a:hover::after{
     width: 100%;
+}
+
+.meny-text button:hover::after{
+    width: 100%;
+}
+
+
+
+/* Header - søkefelte */
+.search-felte{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+/* input */
+#search{
+    height: 40px;
+    width: 400px;
     border-radius: 15px;
     border: var(--black);
     padding: 0.5rem;
-    padding-right: 3rem;
+    position: relative;
 }
 
-.meny .search-icon-label {
+/* label */
+.search-icon-label{
     padding: 0;
     position: absolute;
-    right: 0.4rem;
-    background-color: var(--white);
-    border-radius: 15px;
-    border: none;
 }
 
-.meny .search-icon {
+/* icon */
+#search-icon{
+    color: var(--black);
     width: 30px;
     height: 30px;
+    padding: 0.5rem;
     cursor: pointer;
+
 }
 
-.auth-user-name,
-.auth-logout-button{
+.user-header-section li{
+    list-style: none;
+}
+.user-header-section li a{
     color: var(--white);
-}
-
-.auth-logout-button{
-    background: none;
-    border: 0;
-    cursor: pointer;
-    font: inherit;
-}
-
-.auth-logout-button:disabled{
-    cursor: wait;
-    opacity: 0.7;
-}
-
-.auth-navigation-error{
-    color: var(--white);
-    margin: 0;
-}
-
-@media (max-width: 1100px) {
-    .meny {
-        grid-template-columns: auto 1fr;
-        gap: 0.5rem 1rem;
-        margin-bottom: 2rem;
-    }
-
-    .meny > .search-felte,
-    .meny > .auth-navigation {
-        grid-column: 1 / -1;
-    }
-
-    .meny > .search-felte {
-        grid-row: 2;
-    }
-
-    .meny > .auth-navigation {
-        grid-row: 3;
-    }
-
-    .meny .auth-navigation .user-header-section {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 600px) {
-    .meny {
-        grid-template-columns: 1fr;
-        justify-items: center;
-    }
-
-    .meny > .search-felte,
-    .meny > .auth-navigation {
-        grid-column: 1;
-    }
-
-    .meny > .search-felte {
-        grid-row: auto;
-    }
-
-    .meny > .auth-navigation {
-        grid-row: auto;
-    }
-
-    .meny .main-navigation ul,
-    .meny .user-header-section {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .meny-text {
-        padding: 0.5rem 0.75rem;
-    }
 }

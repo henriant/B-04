@@ -13,6 +13,7 @@ body{
     background-image: url('/bakgrunn.jpg');
     background-size: contain;
     font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 
