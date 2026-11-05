@@ -3,7 +3,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin: 2rem ;
+    margin: 3rem ;
 }
 
 
@@ -52,6 +52,8 @@
 .my-games{
     display: flex;
     flex-wrap: wrap;
+    align-items: start;
+   
 }
 
 .game{
@@ -77,6 +79,7 @@
 .library-game-card{
     color: var(--white);
     text-decoration: none;
+    max-width: 200px;
 }
 
 .library-game-cover{
