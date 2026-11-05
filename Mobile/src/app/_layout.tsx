@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import colors from "@/theme";
 
 export const unstable_settings = {
     anchor: "(tabs)",
@@ -6,7 +7,13 @@ export const unstable_settings = {
 
 export default function RootLayout() {
     return (
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack screenOptions={{
+                headerShown: false,
+                headerStyle: { backgroundColor: colors.black },
+                headerTintColor: colors.white,
+                headerShadowVisible: false,
+                contentStyle: { backgroundColor: colors.black },
+            }}>
             <Stack.Screen name="index" />
             <Stack.Screen
                 name="LogIn"
