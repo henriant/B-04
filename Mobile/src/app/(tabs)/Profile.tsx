@@ -4,11 +4,17 @@ import colors from "@/theme";
 import { CircleQuestionMark, Settings } from "lucide-react-native";
 import MenuRow from "@/components/shared/MenuRow";
 import Button from "@/components/shared/Button";
+import { authClient } from "@/auth-client";
 
 const Profile = () => {
+
+    const { data: session } = authClient.useSession()
+
     return (
         <SafeAreaView edges={["top"]} style={styles.container}>
             <Text style={styles.title}>Profile</Text>
+            <Text style={styles.name}>{session?.user.name}</Text>
+            <Text style={styles.email}>{session?.user.email}</Text>
 
             <View style={styles.card}>
                 <MenuRow icon={Settings} label="Settings" />
@@ -48,7 +54,16 @@ const styles = StyleSheet.create({
     actionButtons: {
         marginTop: 24,
         gap: 15,
-    }
+    },
+    name: {
+        color: colors.white,
+        fontSize: 20,
+        fontWeight: '600',
+    },
+    email: {
+        color: colors.muted,
+        marginBottom: 16,
+    },
 });
 
 export default Profile;
