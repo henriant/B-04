@@ -61,6 +61,10 @@
 }
 
 /* SearchResults */
+#add-button{
+        width: 100%;
+}
+
 .add-remove-button{
     display: flex;
     justify-content: center;

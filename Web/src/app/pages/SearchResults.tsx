@@ -193,7 +193,7 @@ return (
                             </select>
                         </label>
                         <button
-                            className="add-remove-button"
+                            className="add-remove-button" id="add-button"
                             type="button"
                             onClick={() => void handleSaveStatus(game)}
                             disabled={savingGameIds.has(game.id) || !libraryLoaded || Boolean(libraryLoadError)}

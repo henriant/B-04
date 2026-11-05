@@ -112,6 +112,8 @@
     gap: 0.5rem;
     margin-top: 0.75rem;
     color: var(--white);
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
 }
 
 .search-result-status select{
