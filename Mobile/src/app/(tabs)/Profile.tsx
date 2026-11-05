@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "@/theme";
 import { CircleQuestionMark, Settings } from "lucide-react-native";
 import MenuRow from "@/components/shared/MenuRow";
+import Button from "@/components/shared/Button";
 
 const Profile = () => {
     return (
@@ -12,7 +13,12 @@ const Profile = () => {
             <View style={styles.card}>
                 <MenuRow icon={Settings} label="Settings" />
                 <View style={styles.divider} />
-                <MenuRow icon={CircleQuestionMark} label="Help & support"  />
+                <MenuRow icon={CircleQuestionMark} label="Help & support" />
+            </View>
+
+            <View style={styles.actionButtons}>
+                <Button label="Delete account" variant="outlined" />
+                <Button label="Log out" variant="filled" />
             </View>
         </SafeAreaView>
     );
@@ -38,6 +44,10 @@ const styles = StyleSheet.create({
     divider: {
         backgroundColor: colors.muted,
         height: StyleSheet.hairlineWidth,
+    },
+    actionButtons: {
+        marginTop: 24,
+        gap: 15,
     }
 });
 
