@@ -5,9 +5,19 @@ on:
     branches: [main, develop]
     paths:
       - "Web/**"
+      - "Tests/web/**"
+      - "Tests/backend/**"
+      - "backend/api/d1-http/**"
+      - "backend/src/db/**"
+      - "packages/api-client/**"
   pull_request:
     paths:
       - "Web/**"
+      - "Tests/web/**"
+      - "Tests/backend/**"
+      - "backend/api/d1-http/**"
+      - "backend/src/db/**"
+      - "packages/api-client/**"
 
 jobs:
   build:
@@ -27,6 +37,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm --dir Web install --frozen-lockfile
+
+      - name: Test
+        run: pnpm test
 
       - name: Type check
         run: pnpm --dir Web run types 2>/dev/null || pnpm --dir Web exec tsc --noEmit

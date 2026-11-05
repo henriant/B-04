@@ -3,11 +3,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
 import { createAuth } from "./auth.js";
-import {
-	createLibraryQueries,
-	type LibraryEntryRow,
-	type LibraryStatus,
-} from "../../../src/db/library.js";
+import { createLibraryQueries, type LibraryEntryRow, type LibraryStatus, } from "../../../src/db/library.js";
 
 export interface Bindings {
 	DB: D1Database;
