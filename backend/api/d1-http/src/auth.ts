@@ -2,12 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { drizzle } from "drizzle-orm/d1";
 import { expo } from "@better-auth/expo";
-import {
-	account,
-	session,
-	user,
-	verification,
-} from "../../../src/db/schema.js";
+import { account, session, user, verification, } from "../../../src/db/schema.js";
 import { ensureUserLibraryId } from "./library.js";
 import type { Bindings } from "./index.js";
 
