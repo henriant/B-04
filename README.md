@@ -11,7 +11,7 @@ pnpm install i rot
 opprette lokal database:
 - pnpm db:local:migrate
 
-start api i egen terminal:
+start lokalt api i egen terminal:
 - pnpm dev:api:local
 
 start web i egen terminal
