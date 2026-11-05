@@ -8,8 +8,7 @@ import { Link } from 'expo-router'
 import colors from '@/theme'
 import { useState } from 'react'
 import { router } from 'expo-router'
-import { ApiError } from '@backlog-defeater/api-client'
-import { apiClient } from '@/api'
+import { authClient } from '@/auth-client'
 import { signUpSchema, type UserSignUpInput } from '@/schemas/auth'
 import { AuthInput } from '@/components/shared/AuthInput'
 
@@ -46,19 +45,19 @@ const SignUp = () => {
         setErrors({})
         setIsSubmitting(true)
         try {
-            await apiClient.register({
+            const { error } = await authClient.signUp.email({
                 name: result.data.name,
                 email: result.data.email,
                 password: result.data.password,
             })
+            if (error) {
+                setRequestError(error.message ?? 'Could not create your account. Please try again.')
+                return
+            }
             router.replace('/Home')
         } catch (cause: unknown) {
             console.error('Sign-up failed:', cause)
-            setRequestError(
-                cause instanceof ApiError
-                    ? cause.message
-                    : 'Could not create your account. Please try again.',
-            )
+            setRequestError('Could not create your account. Please try again.')
         } finally {
             setIsSubmitting(false)
         }
