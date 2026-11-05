@@ -21,21 +21,14 @@
 /* Knapper */
 @import "./button.css";
 
-/* Spill kort */
-@import "./gameCard.css";
 
 /* Spill info */
 @import "./gameInfo.css";
 
 
-/* Mkini spill kort */
-@import "./hoverGameCard.css";
-
 /* Søkefelte */
 @import "./search.css";
 
-/* Tekst */
-@import "./text.css";
 
 /* Footer */
 @import "./layout/footer.css"
