@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
+    fontWeight: '600'
   },
   textOutlined: {
     color: colors.wineRed,
