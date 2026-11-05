@@ -35,7 +35,6 @@ export function Library() {
         <>
             <section id="my-games-start">
                 <h1 id="my-games-title">My games</h1>
-                <h2 className="library-greeting">What have you played today?</h2>
                 <div id="top-library">
                     <section className='search-felte'>
                         {/* Oppdater søketeksten hver gang brukeren skriver. */}
