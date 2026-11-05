@@ -35,51 +35,6 @@ Web-testene ligger i `Tests/web/`:
 
 Vitest-konfigurasjon og oppsett ligger også i `Tests/web/`. Web-testene bruker testdata og trenger ikke IGDB-credentials eller Cloudflare-tilgang. API-integrasjonstesten og dens konfigurasjon ligger i `Tests/backend/` og bruker Cloudflare Vitest-runtime med lokal D1. Ingen Playwright E2E-test er satt opp ennå.
 
-For å opprette eller oppdatere den lokale testdatabasen:
-- pnpm db:test:migrate
-
-For å kjøre Backlog Defeater API (d1-http worker: IGDB-søk, innlogging og bibliotek) må du:
-- Cd inn i `.\backend\api\d1-http\`
-- Kjør `pnpm dev`
-- Stopp med `CTRL+C`
-
-`pnpm dev` bruker Cloudflare D1 remote og leser/skriver derfor til databasen
-`backlog-defeater-db`. For lokal utvikling brukes i stedet `pnpm dev:api:local`,
-som kobler til den lokale utviklingsdatabasen opprettet med `pnpm db:local:migrate`.
-Den separate lokale testdatabasen opprettes/migreres med `pnpm db:test:migrate`.
-Testdatabasen heter `backlog-defeater-test`; den er adskilt fra både utviklingsdatabasen
-og Cloudflare-databasen. API-integrasjonstesten bruker en lokal D1 via konfigurasjonen
-i `Tests/backend/`.
-
-Web- og mobilappen skal bruke denne Worker-en for IGDB-søk, registrering, innlogging
-og bibliotek. Mobilens API-adresse settes med `EXPO_PUBLIC_API_URL` og
-`EXPO_PUBLIC_API_URL_ANDROID`; webappens adresse settes med `VITE_API_BASE_URL`.
-Under lokal utvikling skal disse adressene peke på Worker-en på port `8790`.
-
-`pnpm dev` bruker Wranglers lokale Cloudflare-autentisering. `CLOUDFLARE_D1_TOKEN`
-i rotens `.env` brukes av Drizzle Kit for D1-operasjoner, men er ikke automatisk
-det samme som `CLOUDFLARE_API_TOKEN` som Cloudflare Vitest-pluginen kan kreve for
-remote bindinger.
-
-For å kjøre webappen må du:
-- cd inn i ./Web/
-- pnpm run dev
-For å slutte den må du:
-- CTRL+C
-
-For å kjøre mobilappen må du:
-- cd inn i ./Mobile/
-- npx expo start (--android eller --IOS for å velge emulator)
-For å slutte den må du:
-- CTRL+C
-
-Ikke start den eldre Worker-en fra `backend/` for spill- eller bibliotek-API-et.
-Ikke kjør `drizzle-kit push` mot Cloudflare som del av vanlig utvikling; databasen
-administreres separat, og skjemaendringer må gjøres som en kontrollert migrering.
-
-For å teste appene, opprett en bruker, eller logg inn med den allerede eksisterende brukeren laget spesifikt for Marius:
-email: supermarius@letsago.com
-passord: test12345678
 
 --------------------------- Kravspekk ---------------------------
 
